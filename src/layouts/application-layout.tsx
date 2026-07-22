@@ -96,7 +96,7 @@ export function ApplicationLayout({
     <AppLayout
       brand={{
         ...brand,
-        href: "/app",
+        href: brand?.href ?? "/app",
         subtitle: brand?.subtitle ?? "application workspace",
         title: brand?.title ?? "Application Desk"
       }}
