@@ -48,3 +48,7 @@ AppearanceSettings is the shared card-based mode/palette control used by UIUX Se
 Public component modules are available at @workspace/ui/components/<file>. The package root retains existing exports and adds the imported reference components; ToastToaster disambiguates the Radix delivery component from Sonner Toaster, and StatusToneBadge is an alias for the tone-based StatusBadge.
 
 DesignPreferences.componentDefaults stores stable component/flavor IDs under each consuming app's existing provider key. useDesignSystemComponentDefault reads a saved composition preference. Gallery setters update this map, with Button/Badge also updating their existing typed defaults. Accordion accepts variant="default" or "contained"; an explicit prop takes priority over the stored Accordion default. A flavor such as a disabled input or a multi-panel layout is a gallery composition preference, not a global prop change. Reset restores the empty preference map.
+
+## Shared scrolling and feedback
+
+The shared stylesheet owns slim native scrollbars and ScrollArea dimensions; avoid app overrides. Native size support is browser/OS dependent. Use Toaster and toast from @workspace/ui/components/sonner, mounting one host below DesignSystemProvider. Defaults: bottom-right, 4s, 3 visible, close button and 8px gap. Root notify is the Sonner alias; legacy root toast/useToast retain their Radix contract. See UIUX Shared Blocks / Toast Feedback for typed usage and central frontend-design-system.md for ownership/error-content rules.

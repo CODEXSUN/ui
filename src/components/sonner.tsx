@@ -1,41 +1,20 @@
 "use client";
 
-import { useDesignSystem } from "../design-system/provider.js";
-import { Toaster as Sonner } from "sonner";
+import type { ComponentProps } from 'react';
+import { Toaster as Sonner } from 'sonner';
+import { useDesignSystem } from '../design-system/provider.js';
+import { cn } from '../lib/utils.js';
 
-type ToasterProps = React.ComponentProps<typeof Sonner>;
-
-const Toaster = ({ ...props }: ToasterProps) => {
+export type ToasterProps = ComponentProps<typeof Sonner>;
+/** Mount once below DesignSystemProvider. Apps own operations and feedback text. */
+export function Toaster({ className, toastOptions, ...props }: ToasterProps) {
   const { preferences } = useDesignSystem();
-  const theme = preferences.mode;
-
-  return (
-    <Sonner
-      richColors
-      closeButton
-      theme={(theme ?? "system") as NonNullable<ToasterProps["theme"]>}
-      className="toaster group"
-      position="bottom-right"
-      toastOptions={{
-        classNames: {
-          toast:
-            "group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg",
-          description: "group-[.toast]:text-muted-foreground",
-          error:
-            "group-[.toaster]:border-red-200 group-[.toaster]:bg-red-50 group-[.toaster]:text-red-900",
-          info: "group-[.toaster]:border-blue-200 group-[.toaster]:bg-blue-50 group-[.toaster]:text-blue-900",
-          success:
-            "group-[.toaster]:border-emerald-200 group-[.toaster]:bg-emerald-50 group-[.toaster]:text-emerald-900",
-          warning:
-            "group-[.toaster]:border-amber-200 group-[.toaster]:bg-amber-50 group-[.toaster]:text-amber-900",
-          closeButton: "workspace-toast-close",
-          actionButton: "group-[.toast]:bg-primary group-[.toast]:text-primary-foreground",
-          cancelButton: "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground"
-        }
-      }}
-      {...props}
-    />
-  );
-};
-
-export { Toaster };
+  return <Sonner theme={preferences.mode} position="bottom-right" duration={4000} gap={8} visibleToasts={3}
+    closeButton richColors={false} containerAriaLabel="Notifications" {...props}
+    className={cn('workspace-toaster', className)}
+    toastOptions={{ ...toastOptions, classNames: {
+      ...toastOptions?.classNames,
+      toast: cn('workspace-toast', toastOptions?.classNames?.toast),
+    } }}/>;
+}
+export { toast } from 'sonner';

@@ -221,3 +221,15 @@ Verified shared build/tests, UIUX typecheck/build/16 tests and four generator te
 
 - Added public blocks/agent-chat with a bottom composer, starter prompts, project/mode controls, Markdown messages, copy feedback, live activity and Stop, plus a saved-history drawer. Uses existing shared controls, MarkdownContent, RecordList, ActivityFeed and clipboard hook.
 - Apps own connection, read-only policy, context and SQLite records. UIUX includes a labelled demo and typed usage; Codeitz uses the actual local Codex session. Shared build and 33 tests passed; consumer browser checks covered a real reply, activity and restored saved messages.
+
+## Slim scrolling and notification feedback — 2026-11-16
+
+Shared styles now use 4px native scrollbars on supporting desktop browsers, Firefox thin fallback, theme-aware thumbs and transparent tracks. Sidebar reuses this rule; ScrollArea uses a 6px track/4px thumb. Coarse pointers retain wider native tracks and forced-colors uses system scrollbar colors. Pixel-perfect native sizing remains OS/browser dependent.
+
+Sonner now has compact neutral surfaces, semantic icons, visible in-card close controls and light/dark support. Defaults: bottom-right, four seconds, three visible, 8px gap. Public components/sonner exports toast; root notify aliases Sonner while legacy root toast/useToast stay compatible. Legacy toast close is labelled and visible; dismissed state is removed after 1s rather than 1,000s, and its subscription no longer restarts per update.
+
+UIUX mounts one Sonner host under the shared provider. Toast Feedback is a dedicated Shared Blocks page with typed usage for success/error/info/warning, promise loading/completion, actions and dismissal. Component Sonner previews cover the same six cases without mounting another host. New app template v18 includes a single root host and optional typed usage. Existing apps were not edited for notification migration; shared stylesheet consumers inherit shared scrollbar changes when rebuilt.
+
+Checks: shared build/full tests plus two focused feedback tests, UIUX typecheck/build/tests and ten generator/routing/release-tool tests passed. Browser checked one host, native canvas/sidebar 4px styles, all notification states/actions, dark/light computed colors, legacy close and copy-success feedback. The appearance setting was restored to Light. Clipboard content could not be independently confirmed through the browser clipboard read API, despite the page reporting Copied. The ScrollArea viewport rendered; auto-hiding custom-bar width was verified in source, not as a visible browser measurement. No new device-wide or backend integration certification. Existing dependency build warnings remain. A transient UIUX server outage recovered during testing; no other process was stopped.
+
+Project Manager was not changed or rebuilt. Concurrent Agent Chat, Master List and server-startup work was preserved.

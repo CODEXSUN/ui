@@ -1,0 +1,14 @@
+/* Shared native scrollbars; Firefox uses its supported thin size. */
+@layer base {
+  :root { --scrollbar-size: 4px; --scrollbar-thumb: color-mix(in oklab, var(--foreground) 28%, transparent); }
+  * { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) transparent; }
+  *::-webkit-scrollbar { width: var(--scrollbar-size); height: var(--scrollbar-size); }
+  *::-webkit-scrollbar-track, *::-webkit-scrollbar-corner { background: transparent; }
+  *::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 999px; }
+  *::-webkit-scrollbar-thumb:hover { background: color-mix(in oklab, var(--foreground) 45%, transparent); }
+  *::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+  /* Chromium's standard thin setting overrides pixel-sized pseudo elements. */
+  @supports selector(::-webkit-scrollbar) { * { scrollbar-width: auto; } }
+}
+@media (pointer: coarse) { :root { --scrollbar-size: 8px; } }
+@media (forced-colors: active) { * { scrollbar-color: auto; } }

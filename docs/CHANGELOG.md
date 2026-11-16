@@ -2,13 +2,28 @@
 
 ## Version State
 
-Current version: 0.1.1
+Current version: 0.1.2
 
-Release tag: v-0.1.1
+Release tag: v-0.1.2
 
-Changelog label: v 0.1.1
+Changelog label: v 0.1.2
 
 Local version baseline; no release or Git tag has been published.
+
+## v-0.1.2
+
+### [v 0.1.2] 2026-11-16 - Slim scrollbars and clean notification feedback
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.2.
+- Add shared 4px native scrollbars and slimmer ScrollArea styling.
+- Refine Sonner surfaces, theme support and public toast API; preserve legacy exports and fix toast dismissal cleanup.
+- Verify shared builds, feedback lifecycle tests and repository release checks.
 
 ## v-0.1.1
 

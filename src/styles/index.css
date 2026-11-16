@@ -9,3 +9,6 @@
 
 @import "./global-loader.css";
 @import "./upsert-form.css";
+
+@import "./scrollbars.css";
+@import "./toasts.css";
