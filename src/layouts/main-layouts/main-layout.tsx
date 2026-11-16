@@ -76,12 +76,13 @@ function MainLayoutShell({
   showOverview,
   user
 }: MainLayoutProps) {
-  const { open: sidebarOpen, toggleSidebar } = useSidebar();
+  const { open: sidebarOpen, toggleSidebar, setOpenMobile } = useSidebar();
   const [searchOpen, setSearchOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [localSelected, setSelected] = useState(initialSelection ?? workspaceTitle);
   const selected = selectedPage ?? localSelected;
   function selectPage(label: string) {
+    setOpenMobile(false);
     setSelected(label);
     if (label === 'Settings') onSettingsSelect?.();
     if (label === workspaceTitle) onOverviewSelect?.();
@@ -98,7 +99,7 @@ function MainLayoutShell({
         label: `Go to ${item.label}`,
         description: `Open ${section.label}`,
         icon: item.icon ?? section.icon ?? PanelsTopLeftIcon,
-        onSelect: () => { setSelected(item.label); item.onSelect?.(); },
+        onSelect: () => { selectPage(item.label); item.onSelect?.(); },
       }]),
       ...navigationCommands(item.children ?? [], section),
     ]);

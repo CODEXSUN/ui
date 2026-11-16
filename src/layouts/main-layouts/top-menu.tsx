@@ -115,6 +115,8 @@ export function TopMenu({
           {searchLeadingAction}
           <Button
             className="h-8 gap-2 rounded-full shadow-sm"
+            aria-label="Search workspace"
+            aria-keyshortcuts="Control+K Meta+K"
             onClick={onOpenSearch}
             size="sm"
             type="button"
