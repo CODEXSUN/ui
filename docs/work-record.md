@@ -136,3 +136,88 @@ MasterListV1 now uses shared shadcn Select and defaults to 100 rows. UIUX verifi
 - Re-ran verify: typecheck, build, existing tests, tool tests, and version consistency passed.
 - GitHub helper audit and patch dry-run passed; current version remains 0.1.0 and preview is 0.1.1.
 - User requested local-only work; GitHub repository creation and push are deferred. The helper combines commit/push, so local Git commit uses its audited subject directly.
+
+## Upsert Form v1 — 2026-11-16
+
+Added UpsertForm, UpsertFormSave, UpsertFormHeader and UpsertFormSection public blocks with header-associated submit, native validation, Ctrl/Cmd+S, saving guard, error/status and optional related panels. Shared build passes; browser verifies create/edit submits and validation through UIUX.
+
+## CRM form control blocks — 2026-11-16
+
+Added FormLookup, FormSelect, FormDatePicker and FormAnimatedTabs public blocks. Lookup/date/select adapted from Codexsun workspace references; shared theme backgrounds, Select Create/name/required, measured animated underline with reduced motion. Declared existing date-fns dependency. Shared build and two focused form-control tests pass.
+
+## 2026-11-16 — Reference workspace editor
+
+- Added exported WorkspaceEditor adapted from E:/Workspace/codexsun/devkit/packages/ui/src/workspace/editor.tsx at the user's request. MIT attribution is retained in docs/licenses/codexsun-editor.txt. Existing RichTextEditor is preserved.
+- Updated imports for this package, matched installed Tiptap 3.34 dependencies, disabled duplicate StarterKit extensions, kept sandboxed HTML preview, and removed an unsupported attachment prompt. Project Manager reuses the public export for notes and modules.
+- UI build and all 20 shared UI tests passed; browser verified rich text entry and SQLite save/reload in Project Manager.
+
+## Default form pattern — 2026-11-16
+
+Promoted UpsertFormField, UpsertFormValidationSummary and light-red validation CSS into shared public UI; removed preview-only copies. Field/summary association tests and shared build pass.
+
+## Select creation removed — 2026-11-16
+
+Removed Create from FormSelect API and preview/usage. Fixed choices only; Create new stays in FormLookup. Updated form standard. Shared UI build and UIUX typecheck/build pass. Project Manager untouched.
+
+## Animated tab strip overflow — 2026-11-16
+
+Removed vertical overflow/scrollbar from tab strip and hid scrollbar chrome while retaining horizontal scrolling on narrow screens. Shared UI and UIUX builds pass. Project Manager untouched.
+
+## Named form-control public entries — 2026-11-16
+
+Audited four control pages and added form-lookup, form-select, form-date-picker and form-animated-tabs public exports with TS declarations. Barrel remains compatible. Node import smoke test verifies every named entry equals its barrel export. Shared build passes.
+
+## 2026-11-16 — WorkspaceEditor reader mode
+
+- Added optional readOnly support: render parsed content without the toolbar, disable content editing, and suppress update emission when changing editability. Added Tailwind typography utilities for headings/lists/quotes/code/links.
+- Shared UI build and all 20 tests passed; Project Manager browser verification confirmed contenteditable=false in note reader and normal editing/save behavior.
+
+## App UI reuse migration — 2026-11-16
+
+Extracted settings nav, progress/stages, activity feed, check output, master/detail record selector, information panel, preview/code copy and import copy blocks; centralized clipboard hook. Public exports added, shared build and 24 tests pass.
+
+## 2026-11-16 — Shared TodoWorkspace
+
+- Added public blocks/todo-workspace with shared shadcn menus, inputs, checkboxes, badges and confirmation dialog; compact themed composition, project initials, inline draft handling and async save feedback.
+- Includes pointer-capture drag ordering and Alt+Arrow keyboard movement; persistence and business data remain app-owned. Added documented props and a typed UIUX preview/usage. Shared build and Codeitz consumer checks pass; browser ordering and metadata flows verified against isolated SQLite records.
+
+## 2026-11-16 — Todo category and edit stability
+
+- Category typing applies to the todo draft without an extra check click; selected categories remain visible in the menu. Save controls persistence and Cancel retains saved data.
+- Stabilized status spacing and row height, and prevented edit autofocus scrolling. Verified category Save/refresh and unchanged row position in an isolated Codeitz browser session. Shared build and 27 tests passed.
+
+## Shared auth and frontend delivery — 2026-11-16
+
+Added public Codexsun-derived auth pages, AsyncState/ContentBoundary, ConfirmAction and early theme initializer. Fixed Progress value/max forwarding and accessible code panels. Shared build and 27 tests passed; UIUX verified consuming routes. Apps own auth/persistence callbacks. See central frontend-delivery.md and UIUX frontend-audit-2026-11-16.md. Project Manager excluded.
+
+
+## 2026-11-16 — Category menu and timer
+
+- TodoWorkspace lists saved categories and shows + Add category at the bottom with inline Save/Cancel and async error handling. Added optional onCreateCategory adapter.
+- Added a separate shared timer popover for local date/time scheduling, draft-safe submission and saved-row callbacks. Scheduled/due display reads supplied app data; SQLite and reminder delivery remain Codeitz-owned. Shared build, 27 tests and consuming browser checks passed.
+
+## Password lifecycle templates — 2026-11-16
+
+Added separate Reset Password, Change Password and Email Verification pages with public shared auth imports, helper text, busy/error state and typed usage. Password confirmation blocks mismatches and uses the shared light-red invalid ring. Verification supports app-owned resend and cooldown. Gallery callbacks only demonstrate behavior; no real credentials, tokens or accounts are changed.
+
+Shared build and 28 tests passed. UIUX typecheck/build and 15 tests passed. Browser checked all three direct routes and usage panels, mismatch prevention, successful sample submissions and resend feedback. Generator v13 passed four tests including generated examples for all six distinct auth blocks. Production builds retain existing dependency directive warnings. Project Manager was not edited or rebuilt.
+
+## 2026-11-16 — Inline record editing
+
+- Added public blocks/inline-edit exports InlineEdit and InlineDetails, with shared inputs/selects, explicit async Save/Cancel, error feedback, keyboard cancellation and named edit actions.
+- Added UIUX catalog preview/usage and semantic rendering tests. Shared UI build and 32 tests passed; UIUX typecheck/build passed. Project Manager modules consume the public controls.
+
+## Page Template consistency audit — 2026-11-16
+
+Unified shared auth helpers/inline validation, required indicators, unique IDs, autocomplete and primary button tone. Added registration confirmation and configurable login/register password length. Fixed role/variant usage, embedded landmarks and preview error/loading/clear controls. New app template v14 mirrors the compiled examples; governance documents the full matrix. Shared build/32 tests, UIUX typecheck/build/16 tests and four generator tests pass. All nine desktop template routes and supported split variants checked. See UIUX docs/page-template-audit.md. Project Manager not edited/rebuilt.
+
+## App logo and auth role badges — 2026-11-16
+
+All nine Page Templates now show the app logo used by the shell, with fixed image dimensions and light/dark sources. Shared AuthBrandProps exposes logoSrc/logoDarkSrc/logoAlt/role across all six auth blocks. User access uses a person badge, Admin access a shield and Super admin access a crown, each labelled accessibly with a distinct tone. Classic and split variants share the branding. Usage and new app v15 examples pass real logo paths and explicit roles; governance documents visual-only role identity.
+
+Verified shared build/tests, UIUX typecheck/build/16 tests and four generator tests. Browser checked loaded logos, expected badges and usage on all nine routes, plus all five split configurations. No desktop document overflow. Evidence: UIUX docs/auth-role-branding.jpg. Project Manager not changed or rebuilt.
+
+## 2026-11-16 — Shared AgentChatWorkspace
+
+- Added public blocks/agent-chat with a bottom composer, starter prompts, project/mode controls, Markdown messages, copy feedback, live activity and Stop, plus a saved-history drawer. Uses existing shared controls, MarkdownContent, RecordList, ActivityFeed and clipboard hook.
+- Apps own connection, read-only policy, context and SQLite records. UIUX includes a labelled demo and typed usage; Codeitz uses the actual local Codex session. Shared build and 33 tests passed; consumer browser checks covered a real reply, activity and restored saved messages.

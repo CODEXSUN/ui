@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "sideEffects": [
     "**/*.css"
   ],
@@ -62,6 +62,114 @@
     "./blocks/data-table": {
       "types": "./dist/src/blocks/data-table/master-list-v1.d.ts",
       "import": "./dist/src/blocks/data-table/master-list-v1.js"
+    },
+    "./blocks/upsert-form": {
+      "types": "./dist/src/blocks/upsert-form.d.ts",
+      "import": "./dist/src/blocks/upsert-form.js"
+    },
+    "./blocks/form-controls": {
+      "types": "./dist/src/blocks/form-controls/index.d.ts",
+      "import": "./dist/src/blocks/form-controls/index.js"
+    },
+    "./blocks/form-controls/lookup": {
+      "types": "./dist/src/blocks/form-controls/form-lookup.d.ts",
+      "import": "./dist/src/blocks/form-controls/form-lookup.js"
+    },
+    "./blocks/form-controls/select": {
+      "types": "./dist/src/blocks/form-controls/form-select.d.ts",
+      "import": "./dist/src/blocks/form-controls/form-select.js"
+    },
+    "./blocks/form-controls/date-picker": {
+      "types": "./dist/src/blocks/form-controls/form-date-picker.d.ts",
+      "import": "./dist/src/blocks/form-controls/form-date-picker.js"
+    },
+    "./blocks/form-controls/animated-tabs": {
+      "types": "./dist/src/blocks/form-controls/form-animated-tabs.d.ts",
+      "import": "./dist/src/blocks/form-controls/form-animated-tabs.js"
+    },
+    "./blocks/settings-nav": {
+      "types": "./dist/src/blocks/settings-nav.d.ts",
+      "import": "./dist/src/blocks/settings-nav.js"
+    },
+    "./blocks/work-progress": {
+      "types": "./dist/src/blocks/work-progress.d.ts",
+      "import": "./dist/src/blocks/work-progress.js"
+    },
+    "./blocks/activity-feed": {
+      "types": "./dist/src/blocks/activity-feed.d.ts",
+      "import": "./dist/src/blocks/activity-feed.js"
+    },
+    "./blocks/check-results": {
+      "types": "./dist/src/blocks/check-results.d.ts",
+      "import": "./dist/src/blocks/check-results.js"
+    },
+    "./blocks/preview-frame": {
+      "types": "./dist/src/blocks/preview-frame.d.ts",
+      "import": "./dist/src/blocks/preview-frame.js"
+    },
+    "./blocks/record-list": {
+      "types": "./dist/src/blocks/record-list.d.ts",
+      "import": "./dist/src/blocks/record-list.js"
+    },
+    "./blocks/information-panel": {
+      "types": "./dist/src/blocks/information-panel.d.ts",
+      "import": "./dist/src/blocks/information-panel.js"
+    },
+    "./blocks/import-path-action": {
+      "types": "./dist/src/blocks/import-path-action.d.ts",
+      "import": "./dist/src/blocks/import-path-action.js"
+    },
+    "./blocks/todo-workspace": {
+      "types": "./dist/src/blocks/todo-workspace.d.ts",
+      "import": "./dist/src/blocks/todo-workspace.js"
+    },
+    "./blocks/auth/login-page": {
+      "types": "./dist/src/blocks/auth/login-page.d.ts",
+      "import": "./dist/src/blocks/auth/login-page.js"
+    },
+    "./blocks/auth/register-page": {
+      "types": "./dist/src/blocks/auth/register-page.d.ts",
+      "import": "./dist/src/blocks/auth/register-page.js"
+    },
+    "./blocks/auth/password-forgot-page": {
+      "types": "./dist/src/blocks/auth/password-forgot-page.d.ts",
+      "import": "./dist/src/blocks/auth/password-forgot-page.js"
+    },
+    "./blocks/auth/auth-page-layout": {
+      "types": "./dist/src/blocks/auth/auth-page-layout.d.ts",
+      "import": "./dist/src/blocks/auth/auth-page-layout.js"
+    },
+    "./blocks/async-state": {
+      "types": "./dist/src/blocks/async-state.d.ts",
+      "import": "./dist/src/blocks/async-state.js"
+    },
+    "./blocks/confirm-action": {
+      "types": "./dist/src/blocks/confirm-action.d.ts",
+      "import": "./dist/src/blocks/confirm-action.js"
+    },
+    "./design-system/bootstrap": {
+      "types": "./dist/src/design-system/bootstrap.d.ts",
+      "import": "./dist/src/design-system/bootstrap.js"
+    },
+    "./blocks/inline-edit": {
+      "types": "./dist/src/blocks/inline-edit.d.ts",
+      "import": "./dist/src/blocks/inline-edit.js"
+    },
+    "./blocks/auth/password-reset-page": {
+      "types": "./dist/src/blocks/auth/password-reset-page.d.ts",
+      "import": "./dist/src/blocks/auth/password-reset-page.js"
+    },
+    "./blocks/auth/password-change-page": {
+      "types": "./dist/src/blocks/auth/password-change-page.d.ts",
+      "import": "./dist/src/blocks/auth/password-change-page.js"
+    },
+    "./blocks/auth/email-verification-page": {
+      "types": "./dist/src/blocks/auth/email-verification-page.d.ts",
+      "import": "./dist/src/blocks/auth/email-verification-page.js"
+    },
+    "./blocks/agent-chat": {
+      "types": "./dist/src/blocks/agent-chat.d.ts",
+      "import": "./dist/src/blocks/agent-chat.js"
     }
   },
   "dependencies": {
@@ -84,9 +192,11 @@
     "@radix-ui/react-toast": "^1.3.1",
     "@radix-ui/react-toggle": "^1.2.1",
     "@radix-ui/react-toggle-group": "^1.2.1",
+    "@tiptap/core": "3.34.0",
     "@tiptap/extension-highlight": "^3.32.0",
     "@tiptap/extension-image": "^3.32.0",
     "@tiptap/extension-link": "^3.32.0",
+    "@tiptap/extension-mention": "3.34.0",
     "@tiptap/extension-placeholder": "^3.32.0",
     "@tiptap/extension-subscript": "^3.32.0",
     "@tiptap/extension-superscript": "^3.32.0",
@@ -97,6 +207,7 @@
     "@tiptap/extension-underline": "^3.32.0",
     "@tiptap/react": "^3.32.0",
     "@tiptap/starter-kit": "^3.32.0",
+    "@tiptap/suggestion": "3.34.0",
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "cmdk": "1.1.1",
@@ -112,7 +223,8 @@
     "remark-gfm": "^4.0.1",
     "sonner": "^2.0.8",
     "tailwind-merge": "3.7.0",
-    "vaul": "^1.1.2"
+    "vaul": "^1.1.2",
+    "date-fns": "4.4.0"
   },
   "files": [
     "dist",

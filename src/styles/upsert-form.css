@@ -1,0 +1,15 @@
+:root {
+  --form-invalid-border: #ff656e;
+  --form-invalid-ring: rgb(255 101 110 / 20%);
+}
+
+.upsert-form-field[data-invalid="true"] :is(
+  input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+  textarea,
+  button[role="combobox"],
+  button[role="checkbox"]
+) {
+  border-color: var(--form-invalid-border);
+  --tw-ring-color: var(--form-invalid-ring);
+  box-shadow: 0 0 0 2px var(--form-invalid-ring);
+}

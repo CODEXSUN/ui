@@ -1,0 +1,6 @@
+import type { ReactNode } from 'react';
+import { Button } from '../components/button.js';
+export type RecordListItem = { id: string; title: ReactNode; eyebrow?: ReactNode; status?: ReactNode; time?: ReactNode };
+export function RecordList({ items, selected, onSelect, emptyMessage = 'No records in this view.' }: { items: readonly RecordListItem[]; selected?: string; onSelect: (id: string) => void; emptyMessage?: string }) {
+  return <div className="space-y-2">{!items.length && <p className="py-6 text-center text-sm text-muted-foreground">{emptyMessage}</p>}{items.map(item => <Button key={item.id} variant={selected === item.id ? 'secondary' : 'ghost'} aria-current={selected === item.id ? 'true' : undefined} className="h-auto w-full flex-col items-start gap-2 whitespace-normal p-3 text-left" onClick={() => onSelect(item.id)}><span className="flex w-full items-center justify-between gap-2"><span className="text-xs text-muted-foreground">{item.eyebrow}</span><span className="text-[10px] uppercase tracking-wide">{item.status}</span></span><span className="line-clamp-2 text-sm font-medium">{item.title}</span>{item.time && <time className="text-[11px] text-muted-foreground">{item.time}</time>}</Button>)}</div>;
+}

@@ -1,0 +1,50 @@
+import { useEffect, useRef, useState } from 'react';
+import { ArrowUp, Bot, Check, Copy, Folder, History, LoaderCircle, Plus, Square, Wrench } from 'lucide-react';
+import { Button } from '../components/button.js';
+import { Badge } from '../components/badge.js';
+import { Textarea } from '../components/textarea.js';
+import { NativeSelect, NativeSelectOption } from '../components/native-select.js';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetDescription } from '../components/sheet.js';
+import { MarkdownContent } from '../components/markdown-content.js';
+import { ActivityFeed } from './activity-feed.js';
+import { RecordList } from './record-list.js';
+import { useClipboard } from '../lib/use-clipboard.js';
+export type AgentChatMode = 'explore' | 'plan' | 'review';
+export type AgentChatMessage = { id:string; role:'user' | 'assistant'; content:string; status:string; createdAt:string };
+export type AgentChatProps = {
+  projects: readonly { id:string; name:string }[]; project:string; onProjectChange:(id:string)=>void;
+  conversations: readonly { id:string; owner:string; title:string; updatedAt:string }[];
+  conversationId?:string; onConversationChange:(id:string)=>void; onNew:()=>void;
+  messages:readonly AgentChatMessage[]; activities:readonly { id:string|number; kind:string; message:string; time:string }[];
+  mode:AgentChatMode; onModeChange:(mode:AgentChatMode)=>void;
+  running:boolean; loading?:boolean; connected:boolean; connectionLabel:string; error?:string;
+  onSettings:()=>void; onSend:(message:string,mode:AgentChatMode)=>Promise<boolean|void>; onStop:()=>Promise<void>;
+};
+export function AgentChatWorkspace({ projects, project, onProjectChange, conversations, conversationId, onConversationChange, onNew, messages, activities, mode, onModeChange, running, loading=false, connected, connectionLabel, error, onSettings, onSend, onStop }: AgentChatProps) {
+  const [draft,setDraft] = useState(''); const [sending,setSending] = useState(false); const [stopping,setStopping] = useState(false); const [historyOpen,setHistoryOpen] = useState(false); const [localError,setLocalError] = useState('');
+  const [copiedId,setCopiedId] = useState(''); const clipboard = useClipboard();
+  const composer = useRef<HTMLTextAreaElement>(null); const feed = useRef<HTMLDivElement>(null); const nearBottom = useRef(true); const sendingRef = useRef(false);
+  useEffect(() => { nearBottom.current = true; },[conversationId]);
+  useEffect(() => { if (nearBottom.current && feed.current) feed.current.scrollTop = feed.current.scrollHeight; },[messages,activities]);
+  async function send() {
+    if (!draft.trim() || !project || !connected || running || loading || sendingRef.current) return;
+    sendingRef.current=true; setSending(true); setLocalError('');
+    try { if (await onSend(draft.trim(),mode) !== false) { setDraft(''); nearBottom.current=true; composer.current?.focus({preventScroll:true}); } }
+    catch (reason) { setLocalError(reason instanceof Error ? reason.message : 'Message could not be sent.'); }
+    finally { sendingRef.current=false; setSending(false); }
+  }
+  async function stop() { setStopping(true); setLocalError(''); try { await onStop(); } catch (reason) { setLocalError(reason instanceof Error ? reason.message : 'Reply could not be stopped.'); } finally { setStopping(false); } }
+  const projectName = projects.find(item=>item.id===project)?.name ?? project;
+  return <section className="flex h-full min-h-0 flex-col bg-background" aria-label="Agent chat">
+    <header className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-border px-4 py-3"><div className="flex items-center gap-2"><Button variant="ghost" size="sm" onClick={()=>setHistoryOpen(true)}><History className="size-4"/>Chats</Button><Badge variant="outline">{connectionLabel}</Badge></div><Button variant="outline" size="sm" disabled={sending} onClick={()=>{setDraft('');setLocalError('');onNew();}}><Plus className="size-4"/>New chat</Button></header>
+    <div className="min-h-0 flex-1 overflow-y-auto px-4 py-6 sm:px-8" ref={feed} onScroll={()=>{const element=feed.current;if(element)nearBottom.current=element.scrollHeight-element.scrollTop-element.clientHeight<100;}}>
+      {loading ? <p role="status" className="py-16 text-center text-sm text-muted-foreground">Loading conversation…</p> : !messages.length ? <div className="mx-auto flex h-full max-w-3xl flex-col items-center justify-center gap-5 py-4 text-center"><span className="rounded-xl bg-primary p-3 text-primary-foreground"><Bot className="size-6"/></span><h1 className="text-2xl font-semibold tracking-tight">Agent space</h1><p className="text-sm text-muted-foreground">Explore, plan, and review {projectName || 'a workspace project'}.</p><p className="flex items-center gap-2 text-xs text-muted-foreground"><Wrench className="size-3.5"/>Read-only project tools</p><div className="flex flex-wrap justify-center gap-2">{['Explore an idea','Organize into tasks','Review this project','Plan implementation'].map(prompt=><Button key={prompt} variant="outline" size="sm" onClick={()=>{setDraft(prompt);composer.current?.focus({preventScroll:true});}}>{prompt}</Button>)}</div></div> : <div className="mx-auto max-w-3xl space-y-8" role="log" aria-label="Chat messages" aria-live="polite">{messages.map(message=><article key={message.id} className={message.role==='user'?'ml-auto max-w-[90%] rounded-2xl bg-muted px-4 py-3':'space-y-3'} aria-label={message.role==='user'?'Your message':'Codex reply'}><div className="flex items-center justify-between gap-3 text-xs text-muted-foreground"><span className="inline-flex items-center gap-2">{message.role==='assistant'&&<Bot className="size-4"/>}{message.role==='user'?'You':'Codex'}</span><time dateTime={message.createdAt}>{new Date(message.createdAt).toLocaleTimeString()}</time></div>{message.content?<MarkdownContent content={message.content}/>:message.status==='running'?<p className="flex items-center gap-2 text-sm text-muted-foreground"><LoaderCircle className="size-4 animate-spin"/>Working…</p>:null}{message.role==='assistant'&&message.status!=='running'&&<div className="flex items-center gap-2"><Badge variant={['failed','interrupted'].includes(message.status)?'destructive':'secondary'}>{message.status}</Badge>{message.content&&<Button variant="ghost" size="sm" aria-label="Copy reply" onClick={async()=>{if(await clipboard.copyText(message.content))setCopiedId(message.id);}}>{clipboard.copied&&copiedId===message.id?<Check className="size-3.5"/>:<Copy className="size-3.5"/>}{clipboard.copied&&copiedId===message.id?'Copied':'Copy'}</Button>}</div>}</article>)}
+      {!!activities.length&&<details open={running} className="rounded-lg border border-border p-3"><summary className="text-xs text-muted-foreground">{running?'Live activity':'Activity record'} · {activities.length} events</summary><div className="mt-4"><ActivityFeed items={activities.map(item=>({...item,time:new Date(item.time).toLocaleTimeString()}))} label="Codex activity"/></div></details>}
+      </div>}
+    </div>
+    <footer className="shrink-0 px-3 pb-3 pt-2 sm:px-6"><div className="mx-auto max-w-4xl space-y-2">{(error||localError||clipboard.error)&&<p role="alert" className="text-sm text-destructive">{error||localError||clipboard.error}</p>}{!connected&&!loading&&<p className="text-xs text-muted-foreground">{connectionLabel} <Button variant="link" size="sm" onClick={onSettings}>Codex settings</Button></p>}
+      <form className="rounded-2xl border border-border bg-card p-3 shadow-sm" onSubmit={event=>{event.preventDefault();void send();}}><Textarea ref={composer} aria-label="Message Codex" placeholder="Ask Codex about this project" className="min-h-24 resize-none border-0 bg-transparent px-0 shadow-none focus-visible:ring-0" value={draft} maxLength={8000} disabled={loading||sending} onChange={event=>setDraft(event.target.value)} onKeyDown={event=>{if(event.key==='Enter'&&!event.shiftKey&&!event.nativeEvent.isComposing){event.preventDefault();void send();}}}/><div className="mt-2 flex flex-wrap items-center justify-between gap-2"><div className="flex min-w-0 flex-wrap items-center gap-2"><Folder className="size-4 text-muted-foreground"/><NativeSelect aria-label="Chat project" value={project} disabled={!!conversationId||sending||loading} onChange={event=>onProjectChange(event.target.value)} className="h-8 max-w-60 border-0 bg-transparent text-xs"><NativeSelectOption value="" disabled>Choose project</NativeSelectOption>{projects.map(item=><NativeSelectOption key={item.id} value={item.id}>{item.name}</NativeSelectOption>)}</NativeSelect><NativeSelect aria-label="Chat mode" value={mode} onChange={event=>onModeChange(event.target.value as AgentChatMode)} className="h-8 w-28 border-0 bg-transparent text-xs"><NativeSelectOption value="explore">Explore</NativeSelectOption><NativeSelectOption value="plan">Plan</NativeSelectOption><NativeSelectOption value="review">Review</NativeSelectOption></NativeSelect><span className="text-[11px] text-muted-foreground">Read-only</span></div>{running?<Button type="button" variant="outline" size="icon" aria-label="Stop reply" disabled={stopping} onClick={()=>void stop()}><Square className="size-4"/></Button>:<Button type="submit" size="icon" aria-label="Send message" disabled={loading||sending||!connected||!project||!draft.trim()}>{sending?<LoaderCircle className="size-4 animate-spin"/>:<ArrowUp className="size-4"/>}</Button>}</div></form>
+    </div></footer>
+    <Sheet open={historyOpen} onOpenChange={setHistoryOpen}><SheetContent side="left" className="overflow-y-auto"><SheetHeader><SheetTitle>Saved chats</SheetTitle><SheetDescription>Recent project conversations</SheetDescription></SheetHeader><div className="mt-5"><RecordList items={conversations.map(item=>({id:item.id,title:item.title,eyebrow:item.owner,time:new Date(item.updatedAt).toLocaleString()}))} selected={conversationId} onSelect={id=>{setHistoryOpen(false);setDraft('');setLocalError('');onConversationChange(id);}} emptyMessage="No saved chats yet."/></div></SheetContent></Sheet>
+  </section>;
+}
