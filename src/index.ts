@@ -1,3 +1,4 @@
+export * from './blocks/overview-dashboard.js';
 export * from './components/button.js';
 export * from './components/badge.js';
 export * from './components/card.js';
