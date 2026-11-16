@@ -15,3 +15,12 @@ Browser verified all five dashboards and all 20 module pages: card links, direct
 Workspace governance audit passed: 10 products, 24 owners, no violations. That audit verifies structure rather than implemented business behavior.
 
 Metrics/activity stay unavailable until real business data is connected. No business writes, authentication or tenant claims, migrations, runtime MCP execution or cloud publishing were introduced. Other in-progress shared UI/UIUX work is excluded from this commit.
+
+## 2026-11-16 — Dashboard re-audit
+
+- Updated module action names to include the visible Open module label and its destination, supporting speech and screen-reader navigation.
+- Replaced the fixed module heading ID with React useId so multiple dashboards have distinct, correctly referenced headings. Added a composition regression test.
+- Shared UI build and 34 tests passed; current UIUX typecheck/build and 16 tests passed. Five app typecheck/build suites and eight tests each passed (90 tests total across these owners).
+- Rechecked all dashboard/module routes, Settings, Records, recovery, direct refresh, history, breadcrumbs, keyboard commands, cursors, app switching and dark reload. At 390px, all 20 module pages retain visible headings and no page overflow; Records/Settings and drawer dismissal passed in every app. No captured console errors.
+- Refreshed app lockfiles to record installed local UI 0.1.1. All five dependency audits report zero vulnerabilities. Structural governance audit: 10 products, 24 owners, zero violations.
+- Disconnected business data and existing client-directive build warnings remain. No business operations or cloud publication were introduced. Unrelated agent-chat work was preserved.
