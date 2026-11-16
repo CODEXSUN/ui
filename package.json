@@ -1,0 +1,121 @@
+{
+  "type": "module",
+  "version": "0.1.0",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "private": true,
+  "name": "@workspace/ui",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "build": "tsc -p tsconfig.json && node scripts/copy-styles.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "github:now": "node tools/github-helper.mjs",
+    "github:audit": "node tools/github-helper.mjs --dry-run",
+    "github:ssh-key": "node tools/github-ssh-key.mjs",
+    "version:show": "node tools/check-versions.mjs",
+    "check:versions": "node tools/check-versions.mjs",
+    "version:preview": "node tools/version-bump.mjs --dry-run",
+    "version:update": "node tools/version-bump.mjs",
+    "version:bump": "node tools/version-bump.mjs",
+    "test:tools": "node --test tools/*.test.mjs",
+    "verify": "npm run typecheck && npm run build && npm test && npm run test:tools && npm run check:versions"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "typescript": "7.0.2"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/src/index.js",
+      "types": "./dist/src/index.d.ts"
+    },
+    "./styles.css": "./dist/styles/index.css",
+    "./layouts/main-layouts": {
+      "types": "./dist/src/layouts/main-layouts/index.d.ts",
+      "import": "./dist/src/layouts/main-layouts/index.js"
+    },
+    "./layouts/main-workspace": {
+      "types": "./dist/src/layouts/main-workspace/index.d.ts",
+      "import": "./dist/src/layouts/main-workspace/index.js"
+    },
+    "./layouts/agent-workspace": {
+      "types": "./dist/src/layouts/agent-workspace/index.d.ts",
+      "import": "./dist/src/layouts/agent-workspace/index.js"
+    },
+    "./components/*": {
+      "types": "./dist/src/components/*.d.ts",
+      "import": "./dist/src/components/*.js"
+    },
+    "./layouts/main-layout": {
+      "types": "./dist/src/layouts/main-layouts/index.d.ts",
+      "import": "./dist/src/layouts/main-layouts/index.js"
+    },
+    "./blocks/data-table": {
+      "types": "./dist/src/blocks/data-table/master-list-v1.d.ts",
+      "import": "./dist/src/blocks/data-table/master-list-v1.js"
+    }
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.9.0",
+    "@radix-ui/react-alert-dialog": "^1.2.1",
+    "@radix-ui/react-aspect-ratio": "^1.2.0",
+    "@radix-ui/react-context-menu": "^2.4.1",
+    "@radix-ui/react-hover-card": "^1.2.1",
+    "@radix-ui/react-label": "^2.1.17",
+    "@radix-ui/react-menubar": "^1.2.1",
+    "@radix-ui/react-navigation-menu": "^1.4.1",
+    "@radix-ui/react-popover": "^1.3.1",
+    "@radix-ui/react-progress": "^1.2.1",
+    "@radix-ui/react-radio-group": "^1.5.1",
+    "@radix-ui/react-scroll-area": "^1.4.0",
+    "@radix-ui/react-select": "^2.4.1",
+    "@radix-ui/react-slider": "^1.6.1",
+    "@radix-ui/react-slot": "^1.5.0",
+    "@radix-ui/react-switch": "^1.4.1",
+    "@radix-ui/react-toast": "^1.3.1",
+    "@radix-ui/react-toggle": "^1.2.1",
+    "@radix-ui/react-toggle-group": "^1.2.1",
+    "@tiptap/extension-highlight": "^3.32.0",
+    "@tiptap/extension-image": "^3.32.0",
+    "@tiptap/extension-link": "^3.32.0",
+    "@tiptap/extension-placeholder": "^3.32.0",
+    "@tiptap/extension-subscript": "^3.32.0",
+    "@tiptap/extension-superscript": "^3.32.0",
+    "@tiptap/extension-task-item": "^3.32.0",
+    "@tiptap/extension-task-list": "^3.32.0",
+    "@tiptap/extension-text-align": "^3.32.0",
+    "@tiptap/extension-text-style": "^3.32.0",
+    "@tiptap/extension-underline": "^3.32.0",
+    "@tiptap/react": "^3.32.0",
+    "@tiptap/starter-kit": "^3.32.0",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "cmdk": "1.1.1",
+    "embla-carousel-react": "^8.6.0",
+    "input-otp": "^1.5.0",
+    "lucide-react": "1.73.0",
+    "mermaid": "12.2.0",
+    "radix-ui": "1.8.1",
+    "react-day-picker": "^10.0.2",
+    "react-markdown": "^10.1.0",
+    "react-resizable-panels": "^4.15.0",
+    "recharts": "^3.10.1",
+    "remark-gfm": "^4.0.1",
+    "sonner": "^2.0.8",
+    "tailwind-merge": "3.7.0",
+    "vaul": "^1.1.2"
+  },
+  "files": [
+    "dist",
+    "components.json"
+  ]
+}

@@ -1,0 +1,10 @@
+@import "./tailwind.css";
+@import "./tokens.css";
+@import "./themes.css";
+@import "./components.css";
+
+@import "./top-menu-notifications.css";
+@import "./sidebar.css";
+@import "./palettes.css";
+
+@import "./global-loader.css";

@@ -1,0 +1,16 @@
+@layer components {
+  .sidebar-scroll {
+    scrollbar-color: color-mix(in oklab, var(--sidebar-foreground) 32%, transparent) transparent;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+  }
+  .sidebar-scroll::-webkit-scrollbar { height: 4px; width: 4px; }
+  .sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
+  .sidebar-scroll::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--sidebar-foreground) 24%, transparent);
+    border-radius: 999px;
+  }
+  .sidebar-scroll:hover::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--sidebar-foreground) 38%, transparent);
+  }
+}
