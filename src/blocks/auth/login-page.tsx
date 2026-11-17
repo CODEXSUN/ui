@@ -11,6 +11,10 @@ import { AuthField } from './auth-field.js'
 import { AuthPageLayout, AuthVisualPanel, type AuthPageVariant, type AuthBrandProps } from './auth-page-layout.js'
 
 export type LoginPageProps = AuthBrandProps & {
+  workspace?: boolean | undefined
+  /** Host context is supplied by the app; this component grants no tenant access. */
+  tenantContext?: { mode: 'shared'; corporateId: string; onCorporateIdChange(value: string): void } | { mode: 'domain'; tenantName: string } | undefined
+  disabled?: boolean | undefined
   brandName?: string | undefined
   minLength?: number | undefined
   busy?: boolean | undefined
@@ -30,6 +34,9 @@ export type LoginPageProps = AuthBrandProps & {
 export function LoginPage({
   brandName,
   logoSrc, logoDarkSrc, logoAlt, role,
+  workspace,
+  tenantContext,
+  disabled = false,
   busy = false,
   minLength = 8,
   description,
@@ -49,7 +56,7 @@ export function LoginPage({
 
   function submit(event: FormEvent) {
     event.preventDefault()
-    if (!busy) onSubmit(identifier.trim(), password)
+    if (!busy && !disabled) onSubmit(identifier.trim(), password)
   }
 
   return (
@@ -60,7 +67,7 @@ export function LoginPage({
           title="One workspace. Every application."
         />
       }
-      brandName={brandName} logoSrc={logoSrc} logoDarkSrc={logoDarkSrc} logoAlt={logoAlt} role={role}
+      brandName={brandName} logoSrc={logoSrc} logoDarkSrc={logoDarkSrc} logoAlt={logoAlt} role={role} workspace={workspace}
       embedded={embedded}
       variant={variant}
     >
@@ -77,12 +84,14 @@ export function LoginPage({
           </p>
         </header>
         {variant === 'v1' ? <div className="border-t" /> : null}
-        <FieldGroup>
-          <AuthField label="Username or email" helper="Enter the username or email linked to your account." disabled={busy} autoComplete="username" required pattern={String.raw`.*\S.*`} value={identifier} onChange={event => setIdentifier(event.target.value)}/>
+        <FieldGroup className={workspace ? 'gap-4' : undefined}>
+          {tenantContext?.mode === 'shared' && <AuthField label="Corporate ID" helper="Enter your organization's Corporate ID." helperHidden={workspace} compact={workspace} className={workspace ? 'bg-card dark:bg-card' : undefined} style={workspace ? {backgroundColor:'var(--card)'} : undefined} name="corporateId" disabled={busy || disabled} autoComplete="organization" required minLength={3} maxLength={63} pattern="[A-Za-z][A-Za-z0-9_-]{2,62}" value={tenantContext.corporateId} onChange={event => tenantContext.onCorporateIdChange(event.target.value)}/>}
+          {tenantContext?.mode === 'domain' && <p aria-label="Workspace" className="text-sm font-medium">{tenantContext.tenantName}</p>}
+          <AuthField label="Username or email" helper="Enter the username or email linked to your account." helperHidden={workspace} compact={workspace} className={workspace ? 'bg-card dark:bg-card' : undefined} style={workspace ? {backgroundColor:'var(--card)'} : undefined} disabled={busy || disabled} autoComplete="username" required pattern={String.raw`.*\S.*`} value={identifier} onChange={event => setIdentifier(event.target.value)}/>
           {devLoginEnabled && onDevLogin ? (
             <Button
               className="w-full"
-              disabled={busy}
+              disabled={busy || disabled}
               onClick={onDevLogin}
               type="button"
               variant="outline"
@@ -90,21 +99,21 @@ export function LoginPage({
               Development sign in
             </Button>
           ) : null}
-          <AuthField label="Password" helper={`Enter your account password (at least ${minLength} characters).`} disabled={busy} autoComplete="current-password" type="password" required minLength={minLength} value={password} onChange={event => setPassword(event.target.value)}/>
+          <AuthField label="Password" helper={`Enter your account password (at least ${minLength} characters).`} helperHidden={workspace} compact={workspace} className={workspace ? 'bg-card dark:bg-card' : undefined} style={workspace ? {backgroundColor:'var(--card)'} : undefined} disabled={busy || disabled} autoComplete="current-password" type="password" required minLength={minLength} value={password} onChange={event => setPassword(event.target.value)}/>
           {error ? (
             <p className="text-sm text-destructive" role="alert">
               {error}
             </p>
           ) : null}
           {(
-            <a className="text-center text-sm font-medium hover:underline" href={forgotHref}>
+            <a className={`${workspace ? 'my-2 ' : ''}text-center text-sm font-medium hover:underline`} href={forgotHref}>
               Forgot password?
             </a>
           )}
           <Field>
             <Button
-              className="w-full"
-              disabled={busy}
+              className={workspace ? 'h-11 w-full' : 'w-full'}
+              disabled={busy || disabled}
               type="submit"
               variant="default"
             >
@@ -112,7 +121,7 @@ export function LoginPage({
               {busy ? 'Signing in…' : variant === 'v2' ? 'Login' : 'Sign in'}
             </Button>
           </Field>
-          {variant === 'v2' ? <ProviderActions onSelect={onProviderLogin} busy={busy}/> : null}
+          {variant === 'v2' ? <ProviderActions onSelect={onProviderLogin} busy={busy || disabled}/> : null}
           {registerHref ? (
             <FieldDescription className="text-center">
               Don&apos;t have an account? <a href={registerHref}>Sign up</a>

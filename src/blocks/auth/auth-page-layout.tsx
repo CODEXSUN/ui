@@ -1,4 +1,4 @@
-import { CrownIcon, ShieldCheckIcon, UserRoundIcon } from 'lucide-react'
+import { Building2Icon, CrownIcon, ShieldCheckIcon, UserRoundIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { Card, CardContent } from '../../components/card.js'
 import { cn } from '../../lib/utils.js'
@@ -19,12 +19,12 @@ const roleBadges = {
   'super-admin': { label: 'Super admin access', Icon: CrownIcon, tone: 'border-violet-300 bg-violet-50 text-violet-700 dark:border-violet-700 dark:bg-violet-950 dark:text-violet-300' },
 } as const;
 
-export function AuthBrand({ name = 'Codexsun', logoSrc = '/logo/logo.svg', logoDarkSrc, logoAlt, role = 'user' }: Omit<AuthBrandProps, 'brandName'> & { name?: string | undefined }) {
-  const badge = roleBadges[role];
+export function AuthBrand({ name = 'Codexsun', logoSrc = '/logo/logo.svg', logoDarkSrc, logoAlt, role = 'user', workspace = false }: Omit<AuthBrandProps, 'brandName'> & { name?: string | undefined; workspace?: boolean | undefined }) {
+  const badge = workspace ? { label: 'Workspace', Icon: Building2Icon, tone: 'border-primary/30 bg-card text-primary' } : roleBadges[role];
   return <div className="flex flex-col items-center gap-2" aria-label={name}>
-    <span className="relative grid size-12 place-items-center rounded-xl border bg-background">
-      <img src={logoSrc} alt={logoAlt ?? `${name} logo`} width={32} height={32} className="size-8 object-contain dark:hidden"/>
-      <img src={logoDarkSrc ?? logoSrc} alt={logoAlt ?? `${name} logo`} width={32} height={32} className="hidden size-8 object-contain dark:block"/>
+    <span className={cn('relative grid place-items-center', workspace ? 'size-13' : 'size-12 rounded-xl border bg-background')}>
+      <img src={logoSrc} alt={logoAlt ?? `${name} logo`} width={workspace ? 52 : 32} height={workspace ? 52 : 32} className={cn('object-contain dark:hidden', workspace ? 'size-13' : 'size-8')}/>
+      <img src={logoDarkSrc ?? logoSrc} alt={logoAlt ?? `${name} logo`} width={workspace ? 52 : 32} height={workspace ? 52 : 32} className={cn('hidden object-contain dark:block', workspace ? 'size-13' : 'size-8')}/>
       <span role="img" aria-label={badge.label} title={badge.label} className={cn('absolute -right-2 -bottom-1 grid size-5 place-items-center rounded-full border', badge.tone)}>
         <badge.Icon aria-hidden="true" className="size-3"/>
       </span>
@@ -40,11 +40,13 @@ export function AuthPageLayout({
   logoDarkSrc,
   logoAlt,
   role,
+  workspace,
   children,
   className,
   embedded = false,
   variant,
 }: AuthBrandProps & {
+  workspace?: boolean | undefined
   aside?: ReactNode | undefined
   brandName?: string | undefined
   children: ReactNode
@@ -63,7 +65,7 @@ export function AuthPageLayout({
         )}
       >
         <div className="grid w-full max-w-4xl gap-5">
-          <AuthBrand name={brandName} logoSrc={logoSrc} logoDarkSrc={logoDarkSrc} logoAlt={logoAlt} role={role} />
+          <AuthBrand name={brandName} logoSrc={logoSrc} logoDarkSrc={logoDarkSrc} logoAlt={logoAlt} role={role} workspace={workspace} />
           <Card className="overflow-hidden p-0 shadow-lg">
             <CardContent className="grid p-0 md:grid-cols-2">
               <div className="p-7 md:p-9">{children}</div>
@@ -86,8 +88,8 @@ export function AuthPageLayout({
       )}
     >
       <div className="grid w-full max-w-[520px] gap-5">
-        <AuthBrand name={brandName} logoSrc={logoSrc} logoDarkSrc={logoDarkSrc} logoAlt={logoAlt} role={role} />
-        <Card className="border border-orange-200/70 p-1 shadow-xl shadow-foreground/10 ring-1 ring-border">
+        <AuthBrand name={brandName} logoSrc={logoSrc} logoDarkSrc={logoDarkSrc} logoAlt={logoAlt} role={role} workspace={workspace} />
+        <Card className={cn('border p-1 shadow-xl shadow-foreground/10 ring-1 ring-border', workspace ? 'border-primary/25' : 'border-orange-200/70')}>
           <CardContent className="rounded-lg border bg-card p-5 sm:p-9">{children}</CardContent>
         </Card>
       </div>
