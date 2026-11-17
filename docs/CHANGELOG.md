@@ -2,13 +2,28 @@
 
 ## Version State
 
-Current version: 0.1.3
+Current version: 0.1.4
 
-Release tag: v-0.1.3
+Release tag: v-0.1.4
 
-Changelog label: v 0.1.3
+Changelog label: v 0.1.4
 
 Local version baseline; no release or Git tag has been published.
+
+## v-0.1.4
+
+### [v 0.1.4] 2026-11-17 - Add Record Detail v1 and unsaved changes guard
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.4.
+- Add typed RecordDetailV1 fields, status/actions, related panels, activity and load/error/empty handling.
+- Add dirty/busy navigation guard with Stay/Discard, focus restoration and native unload warnings.
+- Verify shared public imports, rendering states and navigation decisions.
 
 ## v-0.1.3
 

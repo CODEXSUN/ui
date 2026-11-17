@@ -243,3 +243,13 @@ Select and Lookup now share semantic border/background/radius, popup surfaces, t
 Verification: shared/UIUX builds and UIUX typecheck pass. Shared tests (36), UIUX tests (16) and current governance/generator tests (18) pass. Browser measured 44px across the upsert fields, individual form controls, table search/pagination, Input/NativeSelect/Combobox/InputGroup, auth fields and workspace search dialog. No document overflow on checked routes. Select/Lookup popup backgrounds, borders and radii matched; invalid fields kept 44px and red rings. Screenshot: UIUX docs/uniform-control-height.jpg. Browser checks cover the desktop viewport used, not every device.
 
 Project Manager was not changed or rebuilt; unrelated local work was preserved. Existing apps inherit the shared standard when they rebuild; no business-app rebuild or publication was performed in this task.
+
+## Record Detail v1 and Unsaved Changes Guard — 2026-11-17
+
+Added public blocks/record-detail-v1 (typed sections/fields, status/actions, activity/aside, loading/error/empty/retry) and blocks/unsaved-changes-guard (dirty/busy, app-owned navigation request, Stay/Discard dialog, focus restore and native beforeunload listener). Root exports are also available. Values stay app-owned; zero/missing/escaped text render correctly and stale fields/actions are suppressed while unavailable.
+
+UIUX has distinct Shared Blocks pages with real import paths, live previews and compiled usage. Template v21 includes public-import detail and guarded form adapters plus optional examples. Central record-detail-and-navigation.md defines shell/header placement, save/dirty lifecycle, router integration and browser limits. Existing apps were not migrated.
+
+Verified shared build and 39 tests, UIUX typecheck/build and 16 tests, governance/generator 18 tests. A freshly generated v21 app passed its file audit, TypeScript check and production build using existing shared dependencies; no install or business-app build was performed. Browser checked all detail states/retry/action feedback, separate routes/imports/code, no detail-page horizontal overflow, guard focus on Stay, preserved values/focus return, discard, clean leave and busy-disabled leave. Native reload/tab-close prompts and router history blocking were not browser-certified; history/anchors are explicitly app integration responsibilities. Screenshots are UIUX docs/record-detail-v1.jpg and unsaved-changes-guard.jpg. Existing bundler directive warnings remain nonfatal.
+
+Project Manager was not edited or rebuilt. Other pending work was preserved; no commit/push was performed for this task.

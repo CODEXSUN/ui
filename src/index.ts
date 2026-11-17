@@ -115,3 +115,6 @@ export * from './lib/use-clipboard.js';
 
 export * from './blocks/async-state.js';
 export * from './blocks/confirm-action.js';
+
+export * from './blocks/record-detail-v1.js';
+export * from './blocks/unsaved-changes-guard.js';
