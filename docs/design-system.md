@@ -52,3 +52,7 @@ DesignPreferences.componentDefaults stores stable component/flavor IDs under eac
 ## Shared scrolling and feedback
 
 The shared stylesheet owns slim native scrollbars and ScrollArea dimensions; avoid app overrides. Native size support is browser/OS dependent. Use Toaster and toast from @workspace/ui/components/sonner, mounting one host below DesignSystemProvider. Defaults: bottom-right, 4s, 3 visible, close button and 8px gap. Root notify is the Sonner alias; legacy root toast/useToast retain their Radix contract. See UIUX Shared Blocks / Toast Feedback for typed usage and central frontend-design-system.md for ownership/error-content rules.
+
+## Uniform single-line controls
+
+--control-height defaults to 44px and is shared by Input, NativeSelect, SelectTrigger, Lookup, search, date triggers and single-line InputGroup/Combobox. Shared controls.css owns their geometry, semantic field/popup surfaces and focus/invalid rules. Do not fork heights or select/lookup skins in apps. Multiline inputs, wrapping chips, calendar day cells and choice controls keep appropriate sizing. See the central Shared Frontend guide and UIUX upsert preview.

@@ -233,3 +233,13 @@ UIUX mounts one Sonner host under the shared provider. Toast Feedback is a dedic
 Checks: shared build/full tests plus two focused feedback tests, UIUX typecheck/build/tests and ten generator/routing/release-tool tests passed. Browser checked one host, native canvas/sidebar 4px styles, all notification states/actions, dark/light computed colors, legacy close and copy-success feedback. The appearance setting was restored to Light. Clipboard content could not be independently confirmed through the browser clipboard read API, despite the page reporting Copied. The ScrollArea viewport rendered; auto-hiding custom-bar width was verified in source, not as a visible browser measurement. No new device-wide or backend integration certification. Existing dependency build warnings remain. A transient UIUX server outage recovered during testing; no other process was stopped.
 
 Project Manager was not changed or rebuilt. Concurrent Agent Chat, Master List and server-startup work was preserved.
+
+## Uniform single-line controls — 2026-11-17
+
+Added the shared --control-height:44px token and controls.css so text/password/email/number/file inputs, native/shared Select, autocomplete Lookup, date triggers, search/column filters and single-line InputGroup/Combobox surfaces keep the same height. Central styles outrank local Tailwind size utilities; multiline/grouped editor layouts, choice controls and wrapping chips retain their proper dimensions. Updated primitive defaults, centered the Master List search icon and preserved native-select arrow clearance.
+
+Select and Lookup now share semantic border/background/radius, popup surfaces, typography and focus/error states. Added semantic slots to Select and date/lookup markers for shared styling. Invalid fields retain the existing tight light-red 2px ring. Mobile single-line control text remains 16px. Governance and generated forms guidance prohibit per-app height/skin forks.
+
+Verification: shared/UIUX builds and UIUX typecheck pass. Shared tests (36), UIUX tests (16) and current governance/generator tests (18) pass. Browser measured 44px across the upsert fields, individual form controls, table search/pagination, Input/NativeSelect/Combobox/InputGroup, auth fields and workspace search dialog. No document overflow on checked routes. Select/Lookup popup backgrounds, borders and radii matched; invalid fields kept 44px and red rings. Screenshot: UIUX docs/uniform-control-height.jpg. Browser checks cover the desktop viewport used, not every device.
+
+Project Manager was not changed or rebuilt; unrelated local work was preserved. Existing apps inherit the shared standard when they rebuild; no business-app rebuild or publication was performed in this task.

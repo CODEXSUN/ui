@@ -59,7 +59,7 @@ export function MasterListV1<T>({ data, columns, getRowId, label, actions = [], 
   function setFilter(column: string, value: string) { setFilters(current => ({ ...current, [column]: value })); setPage(0); }
   return <section aria-label={label} aria-busy={loading} className={cn('w-full space-y-4', className)}>
     <div className="flex flex-wrap items-center gap-2 rounded-md border border-border bg-card p-1.5 shadow-sm">
-      <div className="relative min-w-48 flex-1 sm:max-w-xl"><Search aria-hidden="true" className="pointer-events-none absolute left-3 top-2.5 size-4 text-muted-foreground"/><Input aria-label={`Search ${label}`} value={search} onChange={event => { setSearch(event.target.value); setPage(0); }} placeholder={searchPlaceholder} className="h-8 pl-9"/></div>
+      <div className="relative min-w-48 flex-1 sm:max-w-xl"><Search aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted-foreground"/><Input aria-label={`Search ${label}`} value={search} onChange={event => { setSearch(event.target.value); setPage(0); }} placeholder={searchPlaceholder} className="h-8 pl-9"/></div>
       <div className="ml-auto flex flex-wrap items-center gap-2">
         {toolbarActions}
         <TooltipProvider delayDuration={200}><Tooltip><TooltipTrigger asChild><Button type="button" size="icon-sm" variant={inlineFilters ? 'default' : 'outline'} aria-label="Toggle column filters" aria-pressed={inlineFilters} aria-controls={`${id}-table`} onClick={() => setInlineFilters(value => !value)}><SlidersHorizontal className="size-4"/></Button></TooltipTrigger><TooltipContent side="top">{inlineFilters ? 'Hide column filters' : 'Show column filters'}</TooltipContent></Tooltip></TooltipProvider>

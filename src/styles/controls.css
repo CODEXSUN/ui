@@ -1,0 +1,48 @@
+/* Single-line control geometry is shared, including compact toolbars and examples.
+   Unlayered rules intentionally outrank per-page Tailwind height utilities. */
+:where(input[data-slot="input"], select[data-slot="native-select"], [data-slot="select-trigger"], [data-ui-control="date-picker"], input[cmdk-input]) {
+  box-sizing: border-box;
+  height: var(--control-height);
+  min-height: var(--control-height);
+  max-height: var(--control-height);
+}
+:where([data-slot="input-group"]):not(:has(textarea, [data-align="block-start"], [data-align="block-end"])) {
+  height: var(--control-height); min-height: var(--control-height); max-height: var(--control-height);
+}
+:where([data-slot="input-group"]:not(:has(textarea, [data-align="block-start"], [data-align="block-end"])) > input) {
+  height: 100%; min-height: 0;
+}
+:where(input[data-slot="input"], select[data-slot="native-select"], [data-slot="select-trigger"], [data-ui-control="date-picker"], [data-slot="input-group"]) {
+  border-color: var(--input); border-radius: var(--radius); background-color: var(--background); color: var(--foreground);
+}
+:where([data-slot="select-trigger"], select[data-slot="native-select"], [data-ui-control="date-picker"]) {
+  padding-inline: 12px; font-size: 14px; font-weight: 400; line-height: 20px;
+}
+:where([data-slot="select-trigger"], [data-ui-control="date-picker"]) { gap: 8px; }
+:where([data-slot="select-trigger"]) > svg, :where([data-ui-control="date-picker"]) > svg { width: 16px; height: 16px; flex-shrink: 0; }
+:where(input[data-slot="input"], select[data-slot="native-select"], [data-slot="select-trigger"], [data-ui-control="date-picker"]):focus-visible {
+  outline: none; border-color: var(--ring); box-shadow: 0 0 0 2px color-mix(in oklab, var(--ring) 25%, transparent);
+}
+:where([data-slot="input-group"]):has(input:focus-visible) { border-color: var(--ring); box-shadow: 0 0 0 2px color-mix(in oklab, var(--ring) 25%, transparent); }
+:where([data-slot="select-content"], [data-ui-control-popup="lookup"]) {
+  border: 1px solid var(--border); border-radius: var(--radius); background: var(--popover); color: var(--popover-foreground);
+  box-shadow: 0 8px 24px color-mix(in oklab, var(--foreground) 12%, transparent);
+}
+:where([data-slot="select-item"], [data-ui-control-popup="lookup"] [role="option"]) {
+  min-height: 36px; border-radius: 4px; font-size: 14px;
+}
+:where([data-slot="select-item"])[data-highlighted], :where([data-ui-control-popup="lookup"] [role="option"])[aria-selected="true"] { background: var(--accent); color: var(--accent-foreground); }
+/* InputGroup controls are borderless children of the shared outer surface. */
+[data-slot="input-group"] > input[data-slot="input-group-control"] { background: transparent; box-shadow: none; }
+
+:where(select[data-slot="native-select"]) { padding-inline-end: 36px; }
+:where([data-slot="select-trigger"])[data-placeholder], :where([data-ui-control="date-picker"])[data-empty="true"] { color: var(--muted-foreground); }
+@media (max-width: 767px) {
+  :where(input[data-slot="input"], select[data-slot="native-select"], [data-slot="select-trigger"], [data-ui-control="date-picker"], input[cmdk-input], [data-slot="input-group"] input) { font-size: 16px; }
+}
+
+:where(input[data-slot="input"], [data-slot="select-trigger"], [data-ui-control="date-picker"])[aria-invalid="true"],
+:where([data-slot="input-group"]):has([aria-invalid="true"]) {
+  border-color: var(--form-invalid-border);
+  box-shadow: 0 0 0 2px var(--form-invalid-ring);
+}

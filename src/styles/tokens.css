@@ -1,4 +1,5 @@
 :root {
+  --control-height: 44px;
   --background: #f7f8fa;
   --foreground: #192427;
   --card: #ffffff;

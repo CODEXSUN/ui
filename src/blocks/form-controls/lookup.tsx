@@ -595,6 +595,7 @@ const LookupList = forwardRef<
   ) => (
     <div
       ref={ref}
+      data-ui-control-popup="lookup"
       role="listbox"
       style={style}
       className={cn(

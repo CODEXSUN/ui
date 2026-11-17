@@ -60,6 +60,8 @@ export function WorkspaceDatePicker({
       {allowManualInput ? (
         <div className="relative">
           <Input
+            data-ui-control="date-picker"
+            data-empty={!selectedDate}
             aria-label={ariaLabel ?? placeholder}
             autoComplete="off"
             className="h-11 rounded-md border-border/80 bg-background pr-11 text-sm shadow-sm"
@@ -95,6 +97,8 @@ export function WorkspaceDatePicker({
       ) : (
         <PopoverTrigger asChild>
           <Button
+            data-ui-control="date-picker"
+            data-empty={!selectedDate}
             aria-label={ariaLabel ?? placeholder}
             type="button"
             variant="outline"
