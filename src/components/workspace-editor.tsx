@@ -148,8 +148,8 @@ const mentionSuggestion = {
         button.className = cn(
           "flex w-full items-center gap-2 px-3 py-2 text-left text-sm transition-colors",
           index === selectedIndex
-            ? "bg-neutral-300 text-neutral-800"
-            : "text-foreground hover:bg-neutral-200"
+            ? "bg-accent text-accent-foreground"
+            : "text-foreground hover:bg-accent"
         );
         const marker = document.createElement("span");
         marker.className =
@@ -724,8 +724,8 @@ function EditorIconButton({
       className={cn(
         "inline-flex h-8 min-w-8 items-center justify-center gap-1 rounded-md px-1.5 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
         active
-          ? "bg-neutral-300 text-neutral-800 hover:bg-neutral-300"
-          : "text-muted-foreground hover:bg-neutral-200 hover:text-neutral-800",
+          ? "bg-accent text-accent-foreground hover:bg-accent"
+          : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
         disabled && "pointer-events-none opacity-40"
       )}
       disabled={disabled}
@@ -813,7 +813,7 @@ function ToolbarSelect({
       <select
         id={id}
         className={cn(
-          "h-8 appearance-none rounded-md border border-transparent bg-transparent py-0 text-xs font-medium text-foreground outline-none transition-colors hover:bg-neutral-200 focus-visible:ring-1 focus-visible:ring-ring",
+          "h-8 appearance-none rounded-md border border-transparent bg-transparent py-0 text-xs font-medium text-foreground outline-none transition-colors hover:bg-accent focus-visible:ring-1 focus-visible:ring-ring",
           icon ? "pl-7 pr-7" : "pl-2 pr-7"
         )}
         title={label}
@@ -844,7 +844,7 @@ function ColorMenu({
     <details className="group relative">
       <summary
         aria-label={label}
-        className="inline-flex h-8 min-w-8 cursor-pointer list-none items-center justify-center rounded-md px-1.5 text-muted-foreground transition-colors hover:bg-neutral-200 hover:text-neutral-800 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring [&::-webkit-details-marker]:hidden"
+        className="inline-flex h-8 min-w-8 cursor-pointer list-none items-center justify-center rounded-md px-1.5 text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring [&::-webkit-details-marker]:hidden"
         title={label}
       >
         {icon}
@@ -852,7 +852,7 @@ function ColorMenu({
       <div className="absolute right-0 top-9 z-50 grid w-52 grid-cols-6 gap-1 rounded-md border border-border bg-popover p-2 text-popover-foreground shadow-md">
         <button
           aria-label={resetLabel}
-          className="flex h-8 min-w-8 items-center justify-center rounded-md text-xs font-semibold text-muted-foreground transition-colors hover:bg-neutral-200 hover:text-neutral-800 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+          className="flex h-8 min-w-8 items-center justify-center rounded-md text-xs font-semibold text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
           title={resetLabel}
           type="button"
           onClick={() => onPick("reset")}
@@ -862,7 +862,7 @@ function ColorMenu({
         {colors.map((color) => (
           <button
             aria-label={`${label} ${color}`}
-            className="flex h-8 min-w-8 items-center justify-center rounded-md transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            className="flex h-8 min-w-8 items-center justify-center rounded-md transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
             key={color}
             title={`${label} ${color}`}
             type="button"
@@ -874,7 +874,7 @@ function ColorMenu({
             />
           </button>
         ))}
-        <label className="col-span-6 mt-1 flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-neutral-200 hover:text-neutral-800 focus-within:ring-1 focus-within:ring-ring">
+        <label className="col-span-6 mt-1 flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground focus-within:ring-1 focus-within:ring-ring">
           <span>Custom</span>
           <input
             aria-label={`Custom ${label.toLowerCase()}`}

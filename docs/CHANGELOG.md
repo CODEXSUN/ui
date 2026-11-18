@@ -2,13 +2,29 @@
 
 ## Version State
 
-Current version: 0.1.4
+Current version: 0.1.5
 
-Release tag: v-0.1.4
+Release tag: v-0.1.5
 
-Changelog label: v 0.1.4
+Changelog label: v 0.1.5
 
 Local version baseline; no release or Git tag has been published.
+
+## v-0.1.5
+
+### [v 0.1.5] 2026-11-18 - Silver visual consistency and shared app defaults
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.5.
+- White top menu, barely tinted app header, muted table header and matching Master List row hover.
+- Shared Silver rollout preserves user mode/component choices and later Appearance selections.
+- Updated shared colour guidance, verification logs and future-app defaults.
+- Verification: shared UI build and focused tests, UIUX route/form checks, and nine consumer builds passed in the development workspace. Project Manager excluded.
 
 ## v-0.1.4
 

@@ -81,7 +81,7 @@ const components: Components = {
     }
     return (
       <pre
-        className="overflow-x-auto rounded-lg bg-neutral-950 p-4 font-mono text-[13px] leading-5 text-neutral-100 [&_code]:bg-transparent [&_code]:p-0"
+        className="overflow-x-auto rounded-lg bg-muted p-4 font-mono text-[13px] leading-5 text-foreground [&_code]:bg-transparent [&_code]:p-0"
         {...withoutMarkdownNode(properties)}
       >
         {children}

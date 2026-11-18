@@ -599,7 +599,7 @@ const LookupList = forwardRef<
       role="listbox"
       style={style}
       className={cn(
-        "z-[10000] max-h-64 overflow-y-auto overscroll-contain rounded-md border border-border bg-card p-1 shadow-2xl ring-1 ring-black/5 pointer-events-auto [scrollbar-color:hsl(var(--muted-foreground)/0.42)_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground/40 [&::-webkit-scrollbar-track]:bg-transparent",
+        "z-[10000] max-h-64 overflow-y-auto overscroll-contain rounded-md border border-border bg-card p-1 shadow-2xl ring-1 ring-black/5 pointer-events-auto [scrollbar-color:color-mix(in_oklab,var(--muted-foreground)_42%,transparent)_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-muted-foreground/40 [&::-webkit-scrollbar-track]:bg-transparent",
         style
           ? "fixed"
           : dropdownPlacement === "top"

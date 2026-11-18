@@ -4,7 +4,7 @@ export const defaultPreferences: DesignPreferences = {
   componentDefaults: {},
   mode: 'light', accent: 'green', palette: 'silver', button: 'default', badge: 'default', card: 'default',
 };
-const choices = {
+export const choices = {
   palette: ['default', 'compact', 'clear', 'shadcn', 'neutral', 'orange', 'green', 'blue', 'purple', 'graphite', 'silver'],
   mode: ['light', 'dark', 'system'], accent: ['green', 'blue', 'violet'],
   button: ['default', 'secondary', 'outline', 'ghost', 'link', 'destructive', 'success', 'danger'],
@@ -31,4 +31,25 @@ export function validatePreferences(value: unknown): DesignPreferences {
     }
   }
   return result;
+}
+
+/** One-time, app-opted-in rollout; later Appearance selections remain user-owned. */
+export function readDesignPreferences(storageKey: string, migrateToSilver = false): DesignPreferences {
+  let stored: Record<string, unknown> = {};
+  try {
+    const value = JSON.parse(localStorage.getItem(storageKey) ?? 'null');
+    if (value && typeof value === 'object' && !Array.isArray(value)) stored = value;
+  } catch { /* Use defaults when storage is unavailable or malformed. */ }
+  const preferences = validatePreferences(stored);
+  if (migrateToSilver && stored.paletteMigration !== 'silver-v1') {
+    preferences.palette = 'silver';
+    persistDesignPreferences(storageKey, preferences, true);
+  }
+  return preferences;
+}
+
+export function persistDesignPreferences(storageKey: string, preferences: DesignPreferences, migrateToSilver = false) {
+  try {
+    localStorage.setItem(storageKey, JSON.stringify({ ...preferences, ...(migrateToSilver ? { paletteMigration: 'silver-v1' } : {}) }));
+  } catch { /* In-memory appearance remains usable without storage. */ }
 }

@@ -496,7 +496,16 @@
 
 
 /* Muted chrome surrounds clear white content; scoped to Silver only. */
-[data-design-system="default"][data-design-variant="silver"] [data-slot="app-header"],
+[data-design-system="default"][data-design-variant="silver"] [data-slot="status-bar"],
 [data-design-system="default"][data-design-variant="silver"] [data-slot="master-list-toolbar"] {
+  background-color: var(--muted);
+}
+
+/* Keep breadcrumb chrome barely tinted; tables retain the previous header grey. */
+[data-design-system="default"][data-design-variant="silver"] [data-slot="app-header"] {
+  background-color: color-mix(in oklab, var(--card) 75%, var(--muted) 25%);
+}
+[data-design-system="default"][data-design-variant="silver"] thead,
+[data-design-system="default"][data-design-variant="silver"] [data-slot="master-list-row"]:is(:hover, :focus-within) {
   background-color: var(--muted);
 }

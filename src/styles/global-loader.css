@@ -30,10 +30,10 @@
   .global-loader-fullscreen::before {
     animation: global-loader-aurora 18s ease-in-out infinite alternate;
     background:
-      radial-gradient(ellipse at 15% 30%, rgb(110 231 183 / 0.12), transparent 55%),
-      radial-gradient(ellipse at 70% 20%, rgb(196 181 253 / 0.14), transparent 55%),
-      radial-gradient(ellipse at 80% 75%, rgb(125 211 252 / 0.12), transparent 55%),
-      radial-gradient(ellipse at 30% 85%, rgb(249 168 212 / 0.09), transparent 50%);
+      radial-gradient(ellipse at 15% 30%, color-mix(in oklab, var(--accent) 36%, transparent), transparent 55%),
+      radial-gradient(ellipse at 70% 20%, color-mix(in oklab, var(--secondary) 38%, transparent), transparent 55%),
+      radial-gradient(ellipse at 80% 75%, color-mix(in oklab, var(--muted) 36%, transparent), transparent 55%),
+      radial-gradient(ellipse at 30% 85%, color-mix(in oklab, var(--accent) 24%, transparent), transparent 50%);
     content: "";
     filter: blur(36px);
     inset: -15%;

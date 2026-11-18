@@ -29,6 +29,25 @@ test('all eleven reference palettes are valid persisted preferences', () => {
   assert.equal(validatePreferences({ accent: 'violet' }).palette, 'purple');
 });
 
+test('app rollout migrates only the palette once and preserves later user choices', () => {
+  const storage = new Map([['app.preferences', JSON.stringify({ palette: 'green', mode: 'dark', componentDefaults: { button: 'outline' } })]]);
+  const localStorage = { getItem: key => storage.get(key) ?? null, setItem: (key, value) => storage.set(key, value) };
+  const root = { dataset: {}, style: {}, classList: { toggle() {} } };
+  const run = () => runInNewContext(createThemeInitScript('app.preferences', { migrateToSilver: true }), {
+    localStorage, document: { documentElement: root }, matchMedia: () => ({ matches: false }),
+  });
+  run();
+  const migrated = JSON.parse(storage.get('app.preferences'));
+  assert.equal(migrated.palette, 'silver');
+  assert.equal(migrated.mode, 'dark');
+  assert.deepEqual(migrated.componentDefaults, { button: 'outline' });
+  assert.equal(migrated.paletteMigration, 'silver-v1');
+  storage.set('app.preferences', JSON.stringify({ ...migrated, palette: 'blue' }));
+  run();
+  assert.equal(root.dataset.designVariant, 'blue');
+  assert.equal(JSON.parse(storage.get('app.preferences')).palette, 'blue');
+});
+
 test('appearance controls render three modes and eleven labelled palette choices', () => {
   const html = renderToStaticMarkup(React.createElement(AppearanceSettings));
   assert.equal((html.match(/aria-pressed=/g) ?? []).length, 14);

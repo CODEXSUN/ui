@@ -82,7 +82,7 @@ export function AuthPageLayout({
   return (
     <Surface
       className={cn(
-        'flex items-center justify-center bg-success/5 px-5 py-10',
+        'flex items-center justify-center bg-muted/30 px-5 py-10',
         embedded ? 'min-h-[650px]' : 'min-h-screen',
         className,
       )}

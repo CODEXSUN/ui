@@ -71,7 +71,7 @@ export function TopMenu({
 
   return (
     <>
-      <header className="flex h-12 shrink-0 items-center justify-between border-b">
+      <header data-slot="top-menu" className="bg-card flex h-12 shrink-0 items-center justify-between border-b">
         <div className="flex h-full min-w-0 items-center">
           <Button
             aria-label="Toggle application navigation"

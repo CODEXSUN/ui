@@ -59,5 +59,12 @@ The shared stylesheet owns slim native scrollbars and ScrollArea dimensions; avo
 
 ## Silver palette
 
-
 Select Settings > Appearance > Design theme > Silver for white content areas, muted silver headers and toolbars, neutral selection and graphite primary actions. Dark mode uses matching neutral greys. Calm and Workspace trials are removed; saved trial selections migrate to Silver during first paint and preference loading. Silver is the shared default for fresh preferences and Reset. Existing explicit palette selections remain saved. Its selection/hover accent has a subtle cool-grey brightness; headers stay muted and content stays white.
+
+## Opt-in Silver rollout for existing apps
+
+For an authorized existing-app rollout, use `<DesignSystemProvider migrateToSilver storageKey="app.ui.preferences">` and `createThemeInitScript('app.ui.preferences', { migrateToSilver: true })` together. Shared preference loading changes only the palette once and saves `paletteMigration: 'silver-v1'` in the same preference record. Mode and component defaults are preserved. Subsequent Appearance selections remain user-owned; updates retain the migration marker. Storage failures fall back safely. Omit the migration option for excluded apps. New apps already inherit Silver without migration.
+
+Top menu uses the card surface (white in Silver light mode); app headers use a very light tint (75% card / 25% muted), table headers use muted, and list toolbar/status bar use muted Silver surfaces; content stays white. Editors, code blocks, switches, storefronts and loaders use shared semantic tokens. Keep status/priority/validation, chart series, brand assets, editor swatches and dialog scrims meaningful rather than flattening them into grey.
+
+Silver Master List data-row hover and keyboard focus-within use the exact table-header muted background. The shared rule targets data rows only; keep empty/filter rows unchanged and avoid app-local hover overrides.
