@@ -2,13 +2,26 @@
 
 ## Version State
 
-Current version: 0.1.6
+Current version: 0.1.7
 
-Release tag: v-0.1.6
+Release tag: v-0.1.7
 
-Changelog label: v 0.1.6
+Changelog label: v 0.1.7
 
 Local version baseline; no release or Git tag has been published.
+
+## v-0.1.7
+
+### [v 0.1.7] 2026-11-18 - Canonical release files and guarded tagged publishing
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.7.
+- Normalize release source line endings across Windows/Linux, preserve scoped publishing safeguards, and reject staged whitespace errors or hook-modified release trees. Earlier tags remain unchanged. No database/schema or application behavior changes.
 
 ## v-0.1.6
 

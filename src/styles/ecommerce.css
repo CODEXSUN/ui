@@ -498,3 +498,71 @@
   .ec-header-search-inner .ec-wordmark { font-size:18px; gap:6px; }
   .ec-header-search-inner .ec-wordmark img { width:25px; height:25px; }
 }
+
+/* Opt-in aligned storefront: one bounded content rail across every section. */
+.ec-aligned-layout { container-type:inline-size; --ec-page-gutter:clamp(16px,2.5cqi,40px); --ec-section-space:clamp(28px,3cqi,48px); }
+.ec-aligned-layout :is(.ec-container,.ec-announcement-banner,.ec-category-rail,.ec-hero-carousel) { width:min(1600px,calc(100% - 2 * var(--ec-page-gutter))); max-width:none; margin-inline:auto; min-width:0; }
+.ec-aligned-layout .ec-home-sections { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--ec-section-space); padding-block:24px 56px; }
+.ec-aligned-layout .ec-home-sections > :is(.ec-merchandising,.ec-editorial-rail,.ec-announcement-banner,.ec-hero-carousel,.ec-category-rail) { margin-block:0; }
+.ec-aligned-layout .ec-home-sections > :is(.ec-merchandising,.ec-editorial-rail) { padding-block:0; }
+.ec-aligned-layout .ec-home-sections .ec-section-heading { align-items:end; gap:16px; margin-bottom:24px; }
+.ec-aligned-layout .ec-home-sections .ec-section-heading h2 { font-size:clamp(25px,2.2cqi,34px); line-height:1.2; letter-spacing:-.04em; text-wrap:balance; }
+.ec-aligned-layout .ec-hero-carousel { border-radius:20px; background:var(--muted); }
+.ec-aligned-layout .ec-hero-carousel .ec-container { width:100%; margin-inline:0; }
+.ec-aligned-layout .ec-hero-carousel .ec-hero-grid { min-height:360px; padding-inline:32px; gap:24px; grid-template-columns:minmax(0,1fr) minmax(0,1fr); }
+.ec-aligned-layout .ec-hero-carousel .ec-hero-media img { height:320px; padding:20px; background:transparent; }
+.ec-aligned-layout .ec-hero-carousel .ec-carousel-bar { padding-inline:32px; }
+.ec-aligned-layout .ec-category-rail { justify-content:space-evenly; padding:20px; gap:24px; border:1px solid var(--border); border-radius:16px; }
+.ec-aligned-layout .ec-announcement-banner { min-height:320px; }
+.ec-aligned-layout .ec-bordered-card .ec-product-image img { aspect-ratio:1.2; }
+.ec-aligned-layout .ec-editorial-item .ec-bordered-card .ec-product-image img { aspect-ratio:4 / 5; }
+.ec-aligned-layout .ec-promotion-image img { height:240px; }
+.ec-aligned-layout .ec-header-search-inner { gap:20px; }
+.ec-aligned-layout .ec-shop-results-toolbar { min-height:44px; }
+@container (max-width:900px) {
+  .ec-aligned-layout .ec-header-search-inner { gap:12px; }
+  .ec-aligned-layout .ec-hero-carousel .ec-hero-grid { padding-inline:24px; gap:16px; }
+  .ec-aligned-layout .ec-hero-carousel .ec-hero-copy h2 { font-size:40px; }
+  .ec-aligned-layout .ec-promotion-image img { height:200px; }
+}
+@container (max-width:760px) {
+  .ec-aligned-layout .ec-hero-carousel .ec-hero-grid { grid-template-columns:minmax(0,1fr); min-height:0; padding-inline:24px; }
+  .ec-aligned-layout .ec-hero-carousel .ec-hero-copy { padding-block:28px 0; }
+  .ec-aligned-layout .ec-hero-carousel .ec-hero-media { height:auto; margin:0; }
+  .ec-aligned-layout .ec-hero-carousel .ec-hero-media img { height:240px; }
+  .ec-aligned-layout .ec-hero-carousel .ec-carousel-bar { padding-inline:24px; }
+  .ec-aligned-layout .ec-category-rail { justify-content:flex-start; overflow-x:auto; gap:24px; padding:16px; }
+  .ec-aligned-layout .ec-announcement-banner { grid-template-columns:minmax(0,1fr) minmax(0,3fr) minmax(0,1fr); }
+  .ec-aligned-layout .ec-home-sections .ec-section-heading h2 { font-size:26px; }
+}
+@container (max-width:560px) {
+  .ec-aligned-layout .ec-announcement-banner { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .ec-aligned-layout .ec-announcement-copy { grid-column:1 / -1; grid-row:1; }
+  .ec-aligned-layout .ec-announcement-art { grid-row:2; }
+  .ec-aligned-layout .ec-home-sections { padding-block:20px 40px; }
+  .ec-aligned-layout .ec-home-sections .ec-section-heading { gap:12px; margin-bottom:20px; }
+  .ec-aligned-layout .ec-header-search-inner { gap:8px; }
+  .ec-aligned-layout .ec-hero-carousel .ec-hero-copy h2 { font-size:36px; }
+  .ec-aligned-layout .ec-hero-carousel .ec-hero-grid { padding-inline:20px; }
+  .ec-aligned-layout .ec-hero-carousel .ec-carousel-bar { padding-inline:20px; }
+  .ec-aligned-layout .ec-footer-groups { gap:24px; }
+}
+@media (max-width:380px) {
+  .ec-aligned-layout .ec-header-search-inner .ec-wordmark { font-size:16px; gap:4px; }
+  .ec-aligned-layout .ec-header-search-inner .ec-wordmark img { width:22px; height:22px; }
+  .ec-aligned-layout .ec-header-customer-action { width:32px; }
+}
+@container (max-width:560px) {
+  .ec-aligned-layout .ec-category-rail { padding:12px; gap:20px; }
+  .ec-aligned-layout .ec-category-rail a { flex:0 0 64px; align-self:start; text-align:center; font-size:10px; }
+  .ec-aligned-layout .ec-category-rail img { width:52px; height:42px; object-fit:contain; }
+  .ec-aligned-layout .ec-hero-carousel .ec-hero-copy { padding-top:24px; }
+  .ec-aligned-layout .ec-hero-carousel .ec-hero-copy h2 { font-size:32px; margin-bottom:14px; }
+  .ec-aligned-layout .ec-hero-carousel .ec-hero-copy .ec-eyebrow { margin-bottom:12px; }
+  .ec-aligned-layout .ec-hero-carousel .ec-hero-description { font-size:13px; line-height:1.6; }
+  .ec-aligned-layout .ec-hero-carousel .ec-hero-actions { margin-top:18px; }
+  .ec-aligned-layout .ec-hero-carousel .ec-hero-media img { height:180px; padding:12px; }
+  .ec-aligned-layout .ec-hero-carousel .ec-carousel-bar { min-height:48px; }
+}
+.ec-aligned-layout .ec-editorial-carousel > .ec-editorial-previous { left:8px; }
+.ec-aligned-layout .ec-editorial-carousel > .ec-editorial-next { right:8px; }

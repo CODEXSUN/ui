@@ -399,3 +399,8 @@ Project Manager was not changed or rebuilt. Other pending work was preserved; no
 - Prepared 0.1.6 with the user-authorized current changes after audit.
 - Shared Silver defaults, form/navigation/card/ring components, file upload and ecommerce presentation updates. Typecheck/build, 60 component/behavior tests and four repository-tool tests passed.
 - GitHub helper publication/tag and tagged CI/runtime outcomes are recorded by their actual later stages; no unexecuted deployment is claimed here.
+
+
+## 2026-11-18 — Release portability correction
+
+- Prepared 0.1.7 after identifying Windows CRLF bytes in the earlier source release. Canonical LF attributes and a staged whitespace check prevent recurrence; scoped publishing and commit-tree safeguards are retained. Earlier tags were not moved. No database changes or running app replacement.

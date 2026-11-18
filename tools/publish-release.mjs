@@ -14,6 +14,8 @@ export function publishRelease(root,{confirm=false,initial=false}={}) {
   if(git(['diff','--name-only']).length) throw new Error('Unstaged tracked changes remain; audit and stage explicitly.');
   if(git(['ls-files','--others','--exclude-standard']).length) throw new Error('Untracked files remain; audit and stage explicitly.');
   if(!git(['diff','--cached','--name-only'])) throw new Error('No staged release changes.');
+  git(['diff','--cached','--check']);
+  const reviewedTree=git(['write-tree']);
   const branch=git(['symbolic-ref','--short','HEAD']);
   if(initial) {
     if(git(['ls-remote','--heads','origin']))throw new Error('Initial publishing requires an empty remote.');
@@ -25,7 +27,10 @@ export function publishRelease(root,{confirm=false,initial=false}={}) {
     if(git(['rev-parse','HEAD'])!==git(['rev-parse',upstream])) throw new Error('Upstream changed or unpublished commits exist; review before releasing.');
   }
   if(git(['tag','--list',tag])||git(['ls-remote','--tags','origin','refs/tags/'+tag])) throw new Error('Release tag already exists; never move it.');
+  const parent=initial?null:git(['rev-parse','HEAD']);
+  if(git(['write-tree'])!==reviewedTree||git(['diff','--name-only'])||git(['ls-files','--others','--exclude-standard']))throw new Error('Release content changed during review.');
   git(['commit','-m',formatChangelogCommitSubject(entry)]);
+  if(git(['rev-parse','HEAD^{tree}'])!==reviewedTree||(parent&&git(['rev-parse','HEAD^'])!==parent))throw new Error('Commit hooks changed the reviewed release; push stopped.');
   git(['tag','-a',tag,'-m',formatChangelogCommitSubject(entry)]);
   // Atomic push prevents publishing a branch without its release tag, or vice versa.
   git(['push','--atomic','--set-upstream','origin','HEAD:refs/heads/'+branch,'refs/tags/'+tag]);
