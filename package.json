@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "sideEffects": [
     "**/*.css"
   ],
@@ -194,10 +194,32 @@
     "./blocks/auth/workspace-access-gate": {
       "types": "./dist/src/blocks/auth/workspace-access-gate.d.ts",
       "import": "./dist/src/blocks/auth/workspace-access-gate.js"
-    }
+    },
+    "./blocks/detail-table": {
+      "types": "./dist/src/blocks/detail-table.d.ts",
+      "import": "./dist/src/blocks/detail-table.js"
+    },
+    "./blocks/diagram-editor": {
+      "types": "./dist/src/blocks/diagram-editor.d.ts",
+      "import": "./dist/src/blocks/diagram-editor.js"
+    },
+    "./blocks/schema-fields-editor": {
+      "types": "./dist/src/blocks/schema-fields-editor.d.ts",
+      "import": "./dist/src/blocks/schema-fields-editor.js"
+    },
+    "./blocks/whiteboard": {
+      "types": "./dist/src/blocks/whiteboard.d.ts",
+      "import": "./dist/src/blocks/whiteboard.js"
+    },
+    "./public-controls": {
+      "types": "./dist/src/public-controls.d.ts",
+      "import": "./dist/src/public-controls.js"
+    },
+    "./public-controls.css": "./dist/styles/public-controls.css"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",
+    "@excalidraw/excalidraw": "0.18.1",
     "@radix-ui/react-alert-dialog": "^1.2.1",
     "@radix-ui/react-aspect-ratio": "^1.2.0",
     "@radix-ui/react-context-menu": "^2.4.1",
@@ -235,20 +257,21 @@
     "class-variance-authority": "0.7.1",
     "clsx": "2.1.1",
     "cmdk": "1.1.1",
+    "date-fns": "4.4.0",
     "embla-carousel-react": "^8.6.0",
     "input-otp": "^1.5.0",
     "lucide-react": "1.73.0",
     "mermaid": "12.2.0",
     "radix-ui": "1.8.1",
     "react-day-picker": "^10.0.2",
+    "react-is": "19.3.1",
     "react-markdown": "^10.1.0",
     "react-resizable-panels": "^4.15.0",
     "recharts": "^3.10.1",
     "remark-gfm": "^4.0.1",
     "sonner": "^2.0.8",
     "tailwind-merge": "3.7.0",
-    "vaul": "^1.1.2",
-    "date-fns": "4.4.0"
+    "vaul": "^1.1.2"
   },
   "files": [
     "dist",

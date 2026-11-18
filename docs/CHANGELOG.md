@@ -2,13 +2,31 @@
 
 ## Version State
 
-Current version: 0.1.10
+Current version: 0.1.11
 
-Release tag: v-0.1.10
+Release tag: v-0.1.11
 
-Changelog label: v 0.1.10
+Changelog label: v 0.1.11
 
 Local version baseline; no release or Git tag has been published.
+
+## v-0.1.11
+
+### [v 0.1.11] 2026-11-18 - Shared application blocks and reusable templates
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.11.
+- Extract shared Detail Table, Diagram Editor, Schema Fields Editor, lazy Whiteboard and static Public Site Controls.
+- Add separate UIUX previews and current public-import usage; new app template v25 reuses shared blocks and controls.
+- Keep app data, permissions, validation and persistence app-owned.
+- UIUX Docker update target: loopback 14315 to internal 4315; requires successful tagged CI and CodeShip verification.
+- No database migration, Ecommerce change or Project Manager rebuild.
+- Verified 64 UI tests, shared build and clean-install lock consistency.
 
 ## v-0.1.10
 

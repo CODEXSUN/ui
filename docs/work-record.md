@@ -429,3 +429,7 @@ Project Manager was not changed or rebuilt. Other pending work was preserved; no
 ## 2026-11-18 - Password gate compatibility release
 
 Released the existing reviewed eight-character password-form correction so Platform's single-entry build can pin a published compatible UI commit. Build and all 60 UI tests passed. No authentication or permission bypass; Platform remains authoritative for password policy.
+
+- 2026-11-18: Prepared scoped release for shared blocks and new-app template v25; includes latest imports/examples and extraction verification. User authorized GitHub helper publication and UIUX-only CodeShip update to 127.0.0.1:14315:4315. CI/deployment readiness will be recorded from actual outcomes; no database change or excluded-app update.
+
+- Release verification: shared UI build, clean-install dry run and 64 tests passed. Initial parallel test execution had transient local worker/Git-fixture errors; sequential verification passed without source changes.
