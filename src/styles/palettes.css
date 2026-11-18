@@ -420,3 +420,83 @@
     --sidebar-ring: var(--ring);
   }
 
+
+/* Silver: neutral white content with quiet grey chrome. */
+[data-design-system="default"][data-design-variant="silver"] {
+  --radius: 0.5rem;
+  --background: #ffffff;
+  --foreground: #1d1d1f;
+  --card: #ffffff;
+  --card-foreground: var(--foreground);
+  --popover: var(--card);
+  --popover-foreground: var(--foreground);
+  --primary: #323236;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f7;
+  --secondary-foreground: #424245;
+  --muted: #f5f5f7;
+  --muted-foreground: #6e6e73;
+  --accent: #e9edf5;
+  --accent-foreground: #1d1d1f;
+  --border: #dedee3;
+  --input: #a1a1a6;
+  --ring: #86868b;
+  --surface: var(--card);
+  --surface-soft: #f5f5f7;
+  --success: #137333;
+  --warning: #895500;
+  --warning-surface: #fff8e1;
+  --destructive: #c5221f;
+  --chart-1: #323236;
+  --chart-2: #188038;
+  --chart-3: #b06000;
+  --chart-4: #7e57c2;
+  --chart-5: #007b83;
+  --cx-bg: var(--background);
+  --cx-panel: var(--card);
+  --cx-text: var(--foreground);
+  --cx-muted: var(--muted-foreground);
+  --cx-border: var(--border);
+  --cx-primary: var(--primary);
+  --sidebar: var(--card);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: var(--primary-foreground);
+  --sidebar-accent: var(--accent);
+  --sidebar-accent-foreground: var(--accent-foreground);
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
+}
+.dark[data-design-system="default"][data-design-variant="silver"] {
+  --background: #1c1c1e;
+  --foreground: #f5f5f7;
+  --card: #242426;
+  --primary: #e8e8ed;
+  --primary-foreground: #1d1d1f;
+  --secondary: #2c2c2e;
+  --secondary-foreground: #f5f5f7;
+  --muted: #2c2c2e;
+  --muted-foreground: #aeaeb2;
+  --accent: #383e49;
+  --accent-foreground: #f5f5f7;
+  --border: #48484a;
+  --input: #8e8e93;
+  --ring: #b0b0b5;
+  --surface-soft: #2c2c2e;
+  --success: #81c995;
+  --warning: #fdd663;
+  --warning-surface: #3b321d;
+  --destructive: #f28b82;
+  --chart-1: #b0b0b5;
+  --chart-2: #81c995;
+  --chart-3: #fdd663;
+  --chart-4: #c4a7ef;
+  --chart-5: #78d9dc;
+}
+
+
+/* Muted chrome surrounds clear white content; scoped to Silver only. */
+[data-design-system="default"][data-design-variant="silver"] [data-slot="app-header"],
+[data-design-system="default"][data-design-variant="silver"] [data-slot="master-list-toolbar"] {
+  background-color: var(--muted);
+}

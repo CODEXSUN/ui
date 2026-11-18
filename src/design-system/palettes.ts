@@ -88,5 +88,14 @@ export const designPalettes = [
   radius: "8px",
   density: "Balanced",
   palette: ["#f8fafc", "#111827", "#0f766e", "#cbd5e1"]
+},
+{
+  id: "silver",
+  name: "Silver",
+  description: "Default white content, muted silver headers and a subtle cool-grey accent.",
+  marker: "cx-design-silver",
+  radius: "8px",
+  density: "Comfortable",
+  palette: ["#ffffff", "#f5f5f7", "#e9edf5", "#1d1d1f"]
 }
 ] as const;

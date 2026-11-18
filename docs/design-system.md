@@ -41,7 +41,7 @@ Import MainLayout and its shell parts from @workspace/ui/layouts/main-layouts. T
 
 ## Appearance settings and palettes
 
-AppearanceSettings is the shared card-based mode/palette control used by UIUX Settings. It reads and updates the existing DesignSystemProvider. DesignPreferences now includes palette: default, compact, clear, shadcn, neutral, orange, green, blue, purple or graphite. designPalettes supplies the reference metadata/swatches; src/styles/palettes.css supplies reference token rules, scoped to the current design-system marker and active palette. These are token palettes of the existing system, not alternate component implementations. Fresh preferences retain light mode; reset restores light/default. Stored accent-only preferences migrate to matching palettes (violet to purple); explicit legacy accent updates select a corresponding palette. ThemeSelector exposes these same choices.
+AppearanceSettings is the shared card-based mode/palette control used by UIUX Settings. It reads and updates the existing DesignSystemProvider. DesignPreferences now includes palette: default, compact, clear, shadcn, neutral, orange, green, blue, purple, graphite or silver. designPalettes supplies the reference metadata/swatches; src/styles/palettes.css supplies reference token rules, scoped to the current design-system marker and active palette. These are token palettes of the existing system, not alternate component implementations. Fresh preferences retain light mode; reset restores light/Silver. Stored accent-only preferences migrate to matching palettes (violet to purple); explicit legacy accent updates select a corresponding palette. ThemeSelector exposes these same choices.
 
 ## Component catalog preferences
 
@@ -56,3 +56,8 @@ The shared stylesheet owns slim native scrollbars and ScrollArea dimensions; avo
 ## Uniform single-line controls
 
 --control-height defaults to 44px and is shared by Input, NativeSelect, SelectTrigger, Lookup, search, date triggers and single-line InputGroup/Combobox. Shared controls.css owns their geometry, semantic field/popup surfaces and focus/invalid rules. Do not fork heights or select/lookup skins in apps. Multiline inputs, wrapping chips, calendar day cells and choice controls keep appropriate sizing. See the central Shared Frontend guide and UIUX upsert preview.
+
+## Silver palette
+
+
+Select Settings > Appearance > Design theme > Silver for white content areas, muted silver headers and toolbars, neutral selection and graphite primary actions. Dark mode uses matching neutral greys. Calm and Workspace trials are removed; saved trial selections migrate to Silver during first paint and preference loading. Silver is the shared default for fresh preferences and Reset. Existing explicit palette selections remain saved. Its selection/hover accent has a subtle cool-grey brightness; headers stay muted and content stays white.

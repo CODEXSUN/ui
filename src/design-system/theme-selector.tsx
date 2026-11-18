@@ -8,7 +8,7 @@ export function ThemeSelector() {
   const id = useId();
   const fields: { key: Exclude<keyof DesignPreferences, "componentDefaults">; label: string; values: string[] }[] = [
     { key: 'mode', label: 'Appearance', values: ['light', 'dark', 'system'] },
-    { key: 'palette', label: 'Design theme', values: ['default', 'compact', 'clear', 'shadcn', 'neutral', 'orange', 'green', 'blue', 'purple', 'graphite'] },
+    { key: 'palette', label: 'Design theme', values: ['default', 'compact', 'clear', 'shadcn', 'neutral', 'orange', 'green', 'blue', 'purple', 'graphite', 'silver'] },
     { key: 'button', label: 'Buttons', values: ['default', 'secondary', 'outline', 'ghost'] },
     { key: 'badge', label: 'Badges', values: ['default', 'secondary', 'outline', 'ghost'] },
     { key: 'card', label: 'Cards', values: ['default', 'outline', 'soft'] },
