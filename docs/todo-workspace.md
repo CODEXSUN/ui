@@ -17,3 +17,7 @@ UIUX → Blocks → Shared Patterns → Todo Workspace provides a live preview a
 Supply onCreateCategory(name) to persist an independent category. The menu lists existing categories, then + Add category, which opens an inline name field, Save and Cancel. Failed creation retains the field and displays its error. Codeitz supplies a SQLite-backed callback; UIUX supplies a labelled demo callback.
 
 TodoValues supports optional scheduledAt (UTC ISO string or empty), and TodoItem supports optional remindedAt. A separate timer icon uses the shared popover, date/time input and actions. The composer/editor sets draft values; an existing row calls onUpdate directly. The block displays Reminder due from supplied delivery metadata. Apps own scheduling, persistence, revision conflicts and refresh; shared UI never runs background jobs.
+
+The composer receives focus once initial loading completes and after successful creation, including Enter submission. Focus waits until the input is enabled and does not scroll the page. Background refreshes and unrelated saves do not repeatedly focus it.
+
+`showHeading` defaults to true. Apps displaying Todos in their app-header breadcrumb pass `showHeading={false}` to avoid duplicating the page title and description; visibility/project filters and the inline composer remain available.

@@ -57,6 +57,22 @@ The shared stylesheet owns slim native scrollbars and ScrollArea dimensions; avo
 
 --control-height defaults to 44px and is shared by Input, NativeSelect, SelectTrigger, Lookup, search, date triggers and single-line InputGroup/Combobox. Shared controls.css owns their geometry, semantic field/popup surfaces and focus/invalid rules. Do not fork heights or select/lookup skins in apps. Multiline inputs, wrapping chips, calendar day cells and choice controls keep appropriate sizing. See the central Shared Frontend guide and UIUX upsert preview.
 
+## File Upload
+
+Use FileUpload from @workspace/ui/blocks/file-upload for browse/drop selection, client validation, raster preview, real upload progress, cancellation and retry. Apps supply authorized onUpload/onFilesChange callbacks and server validation. UIUX Shared Blocks / File Upload provides typed usage and a local-only demo. See central file-upload-standard.md for defaults, states and storage/idempotency limits.
+
+
+## Workspace login context
+
+`LoginPage` adds opt-in `workspace`, `disabled`, and `tenantContext` props.
+Workspace presentation uses the Codexsun-style compact card, workspace badge,
+44px controls and helper descriptions retained for assistive technology. Existing
+auth templates keep their defaults. Shared context is `{ mode: 'shared',
+corporateId, onCorporateIdChange }`; domain context is `{ mode: 'domain',
+tenantName }`. The app supplies verified host context and owns authentication;
+these presentation props grant no role or tenant permissions. UIUX Login preview
+shows both modes and its typed usage. No client-side host inference is built into UI.
+
 ## Silver palette
 
 Select Settings > Appearance > Design theme > Silver for white content areas, muted silver headers and toolbars, neutral selection and graphite primary actions. Dark mode uses matching neutral greys. Calm and Workspace trials are removed; saved trial selections migrate to Silver during first paint and preference loading. Silver is the shared default for fresh preferences and Reset. Existing explicit palette selections remain saved. Its selection/hover accent has a subtle cool-grey brightness; headers stay muted and content stays white.

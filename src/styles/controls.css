@@ -46,3 +46,12 @@
   border-color: var(--form-invalid-border);
   box-shadow: 0 0 0 2px var(--form-invalid-ring);
 }
+
+/* Approved compact list search strip; form controls elsewhere remain 44px. */
+[data-slot="master-list-toolbar"] { --control-height: 36px; padding: 4px; }
+
+/* App-header actions fit the 40px rail; shared list content uses the same 5% edge. */
+[data-slot="app-header"] [data-slot="button"] { height: 32px; min-height: 32px; max-height: 32px; transition: transform 200ms ease-out, box-shadow 200ms ease-out, background-color 150ms ease-out; }
+[data-slot="app-header"] [data-slot="button"]:is(:hover, :focus-visible):not(:disabled):not([aria-disabled="true"]) { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.12); }
+@media (prefers-reduced-motion: reduce) { [data-slot="app-header"] [data-slot="button"] { transition: none; transform: none !important; } }
+.workspace-list-content { width: 90%; min-width: 0; margin-inline: auto; padding-block: 12px 32px; }

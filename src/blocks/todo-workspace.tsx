@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import { CalendarDays, Check, Eye, Folder, GripVertical, ListTodo, Lock, Pencil, Plus, Save, Tag, Timer, Trash2, X } from 'lucide-react';
 import { TodoSchedule } from './todo-schedule.js';
 import { Button } from '../components/button.js';
@@ -11,6 +11,7 @@ export type TodoValues = { title: string; priority: 'low' | 'medium' | 'high' | 
 export type TodoItem = TodoValues & { id: string; remindedAt?: string };
 export type TodoProjectOption = { id: string; name: string; icon?: string };
 export type TodoWorkspaceProps = {
+  showHeading?: boolean;
   items: readonly TodoItem[]; projects: readonly TodoProjectOption[]; categories?: readonly string[];
   loading?: boolean; error?: string; onRetry?: () => void;
   visibility?: 'all' | 'private' | 'public'; project?: string;
@@ -59,7 +60,9 @@ function TodoOptions({ value, onChange, projects, categories, busy, onCreateCate
     <Button type="button" variant="outline" size="icon" disabled={busy} aria-label={value.visibility === 'private' ? 'Make public' : 'Make private'} title={value.visibility === 'private' ? 'Private' : 'Public'} onClick={() => onChange({ visibility: value.visibility === 'private' ? 'public' : 'private' })}>{value.visibility === 'private' ? <Lock className="size-4"/> : <Eye className="size-4"/>}</Button>
   </>;
 }
-export function TodoWorkspace({ items, projects, categories = [], loading = false, error, onRetry, visibility = 'all', project = '', onVisibilityChange, onProjectChange, onCreateCategory, onCreate, onUpdate, onDelete, onReorder }: TodoWorkspaceProps) {
+export function TodoWorkspace({ showHeading = true, items, projects, categories = [], loading = false, error, onRetry, visibility = 'all', project = '', onVisibilityChange, onProjectChange, onCreateCategory, onCreate, onUpdate, onDelete, onReorder }: TodoWorkspaceProps) {
+  const composer = useRef<HTMLInputElement>(null);
+  const focusComposer = useRef(true);
   const focusEdit = useCallback((element: HTMLInputElement | null) => { element?.focus({ preventScroll: true }); }, []);
   const [draft, setDraft] = useState<TodoValues>({ ...defaults });
   const [editing, setEditing] = useState(''); const [edit, setEdit] = useState<TodoValues>({ ...defaults });
@@ -69,6 +72,12 @@ export function TodoWorkspace({ items, projects, categories = [], loading = fals
   const [pendingDelete, setPendingDelete] = useState<TodoItem | null>(null);
   const visible = items.filter(item => (visibility === 'all' || item.visibility === visibility) && (!project || item.projectId === project));
   const disabled = busy || loading || !!error;
+  useEffect(() => {
+    if (!disabled && focusComposer.current) {
+      composer.current?.focus({ preventScroll: true });
+      focusComposer.current = false;
+    }
+  }, [disabled]);
   async function run(work: () => Promise<void>, success: string) {
     if (disabled) return false; setBusy(true); setMessage('Saving…');
     try { await work(); setMessage(success); return true; } catch (reason) { setMessage(reason instanceof Error ? reason.message : 'Save failed. Please retry.'); return false; }
@@ -82,9 +91,9 @@ export function TodoWorkspace({ items, projects, categories = [], loading = fals
     void run(() => onReorder(ids), 'Order saved.');
   }
   return <section className="space-y-5" aria-label="Todos">
-    <header className="flex flex-wrap items-end justify-between gap-4"><div><h1 className="text-2xl font-semibold tracking-tight">Todos</h1><p className="mt-2 text-sm text-muted-foreground">Private by default. Visibility stays in this local workspace.</p></div><div className="flex flex-wrap items-center gap-3"><span className="text-xs text-muted-foreground">{visible.filter(item => item.status !== 'done').length} open</span><div className="inline-flex rounded-lg bg-muted p-1" role="group" aria-label="Visibility filter">{(['all','private','public'] as const).map(filter => <Button key={filter} type="button" size="sm" variant={visibility === filter ? 'secondary' : 'ghost'} aria-pressed={visibility === filter} onClick={() => onVisibilityChange(filter)}>{filter === 'all' ? <ListTodo className="size-3.5"/> : filter === 'private' ? <Lock className="size-3.5"/> : <Eye className="size-3.5"/>}<span className="capitalize">{filter}</span></Button>)}</div><OptionMenu label="Filter by project" icon={<ProjectIcon project={projects.find(item => item.id === project)}/>}><DropdownMenuItem onSelect={() => onProjectChange('')}>All projects</DropdownMenuItem>{projects.map(item => <DropdownMenuItem key={item.id} onSelect={() => onProjectChange(item.id)}><ProjectIcon project={item}/>{item.name}{project === item.id && <Check className="ml-auto size-4"/>}</DropdownMenuItem>)}</OptionMenu></div></header>
-    <form className="flex flex-wrap items-center gap-2" onSubmit={event => { event.preventDefault(); if (!draft.title.trim()) return; void run(async () => { await onCreate(draft); setDraft({ ...defaults }); }, 'Todo saved.'); }}>
-      <Input className="min-w-48 flex-1" aria-label="New todo" placeholder="Add a todo" maxLength={500} value={draft.title} disabled={disabled} onChange={event => setDraft({ ...draft, title: event.target.value })}/>
+    <header className="flex flex-wrap items-end justify-between gap-4">{showHeading && <div><h1 className="text-2xl font-semibold tracking-tight">Todos</h1><p className="mt-2 text-sm text-muted-foreground">Private by default. Visibility stays in this local workspace.</p></div>}<div className="flex flex-wrap items-center gap-3"><span className="text-xs text-muted-foreground">{visible.filter(item => item.status !== 'done').length} open</span><div className="inline-flex rounded-lg bg-muted p-1" role="group" aria-label="Visibility filter">{(['all','private','public'] as const).map(filter => <Button key={filter} type="button" size="sm" variant={visibility === filter ? 'secondary' : 'ghost'} aria-pressed={visibility === filter} onClick={() => onVisibilityChange(filter)}>{filter === 'all' ? <ListTodo className="size-3.5"/> : filter === 'private' ? <Lock className="size-3.5"/> : <Eye className="size-3.5"/>}<span className="capitalize">{filter}</span></Button>)}</div><OptionMenu label="Filter by project" icon={<ProjectIcon project={projects.find(item => item.id === project)}/>}><DropdownMenuItem onSelect={() => onProjectChange('')}>All projects</DropdownMenuItem>{projects.map(item => <DropdownMenuItem key={item.id} onSelect={() => onProjectChange(item.id)}><ProjectIcon project={item}/>{item.name}{project === item.id && <Check className="ml-auto size-4"/>}</DropdownMenuItem>)}</OptionMenu></div></header>
+    <form className="flex flex-wrap items-center gap-2" onSubmit={event => { event.preventDefault(); if (!draft.title.trim()) return; void run(async () => { await onCreate(draft); focusComposer.current = true; setDraft({ ...defaults }); }, 'Todo saved.'); }}>
+      <Input ref={composer} className="min-w-48 flex-1" aria-label="New todo" placeholder="Add a todo" maxLength={500} value={draft.title} disabled={disabled} onChange={event => setDraft({ ...draft, title: event.target.value })}/>
       <TodoOptions value={draft} onChange={changes => setDraft({ ...draft, ...changes })} projects={projects} categories={categories} busy={disabled} onCreateCategory={onCreateCategory}/>
       <Button type="submit" size="icon" disabled={disabled || !draft.title.trim()} aria-label="Add todo"><Plus className="size-4"/></Button>
     </form>

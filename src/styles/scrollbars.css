@@ -12,3 +12,15 @@
 }
 @media (pointer: coarse) { :root { --scrollbar-size: 8px; } }
 @media (forced-colors: active) { * { scrollbar-color: auto; } }
+
+/* Opt-in slim textareas retain native scrolling and use shared theme colors. */
+textarea[data-scrollbar="slim"] { --scrollbar-size: 3px; scrollbar-width: thin; }
+@supports selector(::-webkit-scrollbar) {
+  textarea[data-scrollbar="slim"] { scrollbar-width: auto; scrollbar-color: auto; }
+  textarea[data-scrollbar="slim"]::-webkit-scrollbar { width: var(--scrollbar-size); height: var(--scrollbar-size); }
+  textarea[data-scrollbar="slim"]::-webkit-scrollbar-track { background: transparent; }
+  textarea[data-scrollbar="slim"]::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 999px; }
+  textarea[data-scrollbar="slim"]::-webkit-scrollbar-button { display: none; width: 0; height: 0; }
+}
+@media (pointer: coarse) { textarea[data-scrollbar="slim"] { --scrollbar-size: 8px; } }
+@media (forced-colors: active) { textarea[data-scrollbar="slim"]::-webkit-scrollbar-thumb { background: CanvasText; } }

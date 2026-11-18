@@ -21,6 +21,11 @@ function Card({ className, variant, title, description, action, size, children, 
   )
 }
 
+/** A single native link around a card; children must not contain interactive controls. */
+function CardLink({href,onNavigate,className,...props}:React.ComponentProps<typeof Card>&{href:string;onNavigate?:(href:string)=>void}){
+  return <a href={href} onClick={event=>{if(onNavigate&&!event.defaultPrevented&&event.button===0&&!event.metaKey&&!event.ctrlKey&&!event.shiftKey&&!event.altKey){event.preventDefault();onNavigate(href);}}} className="group block min-w-0 rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"><Card {...props} className={cn('h-full transition-[transform,box-shadow,border-color] duration-200 ease-out group-hover:border-primary/40 group-hover:shadow-md motion-safe:group-hover:-translate-y-0.5 motion-reduce:transition-none',className)}/></a>;
+}
+
 function CardHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
@@ -88,6 +93,7 @@ function CardFooter({ className, ...props }: React.ComponentProps<"div">) {
 }
 
 export {
+  CardLink,
   Card,
   CardHeader,
   CardFooter,

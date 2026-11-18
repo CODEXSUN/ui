@@ -4,3 +4,4 @@ export { WorkspaceSelect as FormSelect } from './select.js';
 export type { WorkspaceSelectOption as FormSelectOption } from './select.js';
 export { WorkspaceDatePicker as FormDatePicker } from './date-picker.js';
 export * from './animated-tabs.js';
+export * from './date-range-filter.js';

@@ -9,6 +9,7 @@ import { formatChangelogCommitSubject, readLatestVersionedChangelogEntry } from 
 import { checkVersions } from "./check-versions.mjs";
 import { bumpNextVersion } from "./version-bump.mjs";
 
+
 const ROOT = resolve(import.meta.dirname, "..");
 
 function runGit(args, opts = {}) {
@@ -112,6 +113,11 @@ function isYes(value) {
 
 async function main() {
   const options = process.argv.slice(2);
+  if(options.includes('--release')) {
+    const {publishRelease}=await import('./publish-release.mjs');
+    if(options.length!==2||!options.includes('--yes'))throw new Error('Use --release --yes only for an audited staged release.');
+    return publishRelease(ROOT,{confirm:true});
+  }
   if (options.some(option => !['--dry-run', '--publish'].includes(option)) || (options.includes('--dry-run') && options.includes('--publish'))) throw new Error('Use --dry-run for audit or --publish for a separately authorized interactive publish.');
   const dryRun = !options.includes('--publish');
   const versionAudit = checkVersions(ROOT);

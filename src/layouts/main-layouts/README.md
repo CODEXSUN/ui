@@ -57,3 +57,5 @@ second `Add-ons` grid for add-on tiles. Both lists use the same
 
 The Apps grid places Application first, CODEXSUN second, and Billing third
 when those apps are available. Other apps retain their host-supplied order.
+
+List construction: MainLayout headerActions align to the shared 90% workspace-list-content width. AppHeader actions are 32px within the 40px rail and share motion-safe hover/focus feedback. Current breadcrumb is semibold. Put list names there; omit duplicate list titles/descriptions. Standalone AppHeader supports actionsAlignment="workspace".

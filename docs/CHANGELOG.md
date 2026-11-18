@@ -2,13 +2,26 @@
 
 ## Version State
 
-Current version: 0.1.5
+Current version: 0.1.6
 
-Release tag: v-0.1.5
+Release tag: v-0.1.6
 
-Changelog label: v 0.1.5
+Changelog label: v 0.1.6
 
 Local version baseline; no release or Git tag has been published.
+
+## v-0.1.6
+
+### [v 0.1.6] 2026-11-18 - Shared controls, Silver theme and release support
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.6.
+- Shared Silver defaults, form/navigation/card/ring components, file upload and ecommerce presentation updates. Typecheck/build, 60 component/behavior tests and four repository-tool tests passed.
 
 ## v-0.1.5
 
@@ -25,35 +38,6 @@ Local version baseline; no release or Git tag has been published.
 - Shared Silver rollout preserves user mode/component choices and later Appearance selections.
 - Updated shared colour guidance, verification logs and future-app defaults.
 - Verification: shared UI build and focused tests, UIUX route/form checks, and nine consumer builds passed in the development workspace. Project Manager excluded.
-
-## v-0.1.4
-
-### [v 0.1.4] 2026-11-17 - Add Record Detail v1 and unsaved changes guard
-
-#### Database Changes
-
-- Database update: No (manual).
-
-#### App Codebase Changes
-
-- Bumped @workspace/ui version to 0.1.4.
-- Add typed RecordDetailV1 fields, status/actions, related panels, activity and load/error/empty handling.
-- Add dirty/busy navigation guard with Stay/Discard, focus restoration and native unload warnings.
-- Verify shared public imports, rendering states and navigation decisions.
-
-## v-0.1.3
-
-### [v 0.1.3] 2026-11-17 - Standardize 44px fields and shared select lookup styling
-
-#### Database Changes
-
-- Database update: No (manual).
-
-#### App Codebase Changes
-
-- Bumped @workspace/ui version to 0.1.3.
-- Standardize single-line fields at 44px using the shared control-height token.
-- Align Select/Lookup surfaces, focus and validation styling; center search icons and preserve multiline layouts.
 
 ## v-0.1.2
 

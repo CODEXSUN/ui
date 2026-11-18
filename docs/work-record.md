@@ -222,6 +222,15 @@ Verified shared build/tests, UIUX typecheck/build/16 tests and four generator te
 - Added public blocks/agent-chat with a bottom composer, starter prompts, project/mode controls, Markdown messages, copy feedback, live activity and Stop, plus a saved-history drawer. Uses existing shared controls, MarkdownContent, RecordList, ActivityFeed and clipboard hook.
 - Apps own connection, read-only policy, context and SQLite records. UIUX includes a labelled demo and typed usage; Codeitz uses the actual local Codex session. Shared build and 33 tests passed; consumer browser checks covered a real reply, activity and restored saved messages.
 
+## 2026-11-16 — Chat plan task handoff controls
+
+- Added optional plan-approval and open-task callbacks to AgentChatWorkspace, with message mode and pending/ready task-link metadata. Completed plans show explicit approval; pending creation can retry and ready links open the task. Business validation, database links and coding approval stay app-owned.
+- Shared build/34 tests passed; Codeitz browser checks verified the shared controls and separate coding step. Existing UIUX usage demonstrates a labelled demo handoff.
+
+## 2026-11-16 — Reusable master-list search strip
+
+Extracted public MasterListToolbar and MasterListFilterMenu from the table. MasterListV1 retains its existing search/filter behavior through these controls; card collections can consume the same strip without table-only column controls. Added UIUX live preview and usage. Shared build and 34 tests passed; UIUX typecheck passed.
+
 ## Slim scrolling and notification feedback — 2026-11-16
 
 Shared styles now use 4px native scrollbars on supporting desktop browsers, Firefox thin fallback, theme-aware thumbs and transparent tracks. Sidebar reuses this rule; ScrollArea uses a 6px track/4px thumb. Coarse pointers retain wider native tracks and forced-colors uses system scrollbar colors. Pixel-perfect native sizing remains OS/browser dependent.
@@ -234,6 +243,15 @@ Checks: shared build/full tests plus two focused feedback tests, UIUX typecheck/
 
 Project Manager was not changed or rebuilt. Concurrent Agent Chat, Master List and server-startup work was preserved.
 
+## 2026-11-17 — Todo composer focus
+
+- Shared TodoWorkspace focuses the composer after initial loading and successful creation, waiting for save completion before restoring focus. Enter can be used to add consecutive todos; existing values and persistence are unchanged.
+
+## 2026-11-17 — Optional Master List row navigation
+
+- Added opt-in openOnRowClick to MasterListV1. Noninteractive row cells invoke the existing onOpen callback; embedded buttons/inputs and action menus remain independent. Existing first-cell keyboard action and default behavior remain unchanged.
+- Wired Codeitz Tasks and UIUX preview/usage; updated the public governance contract.
+
 ## Uniform single-line controls — 2026-11-17
 
 Added the shared --control-height:44px token and controls.css so text/password/email/number/file inputs, native/shared Select, autocomplete Lookup, date triggers, search/column filters and single-line InputGroup/Combobox surfaces keep the same height. Central styles outrank local Tailwind size utilities; multiline/grouped editor layouts, choice controls and wrapping chips retain their proper dimensions. Updated primitive defaults, centered the Master List search icon and preserved native-select arrow clearance.
@@ -243,6 +261,32 @@ Select and Lookup now share semantic border/background/radius, popup surfaces, t
 Verification: shared/UIUX builds and UIUX typecheck pass. Shared tests (36), UIUX tests (16) and current governance/generator tests (18) pass. Browser measured 44px across the upsert fields, individual form controls, table search/pagination, Input/NativeSelect/Combobox/InputGroup, auth fields and workspace search dialog. No document overflow on checked routes. Select/Lookup popup backgrounds, borders and radii matched; invalid fields kept 44px and red rings. Screenshot: UIUX docs/uniform-control-height.jpg. Browser checks cover the desktop viewport used, not every device.
 
 Project Manager was not changed or rebuilt; unrelated local work was preserved. Existing apps inherit the shared standard when they rebuild; no business-app rebuild or publication was performed in this task.
+
+## 2026-11-17 — Compact form and keyboard options
+
+- Added opt-in UpsertForm keyboardNavigation and uniformControlHeight; helper text can be omitted without dangling accessibility references. Added Textarea fixedRows for bounded multiline inputs.
+- Codeitz Tasks and UIUX upsert preview/usage use the public form options. Browser verified 44px controls, five-line fixed textarea with internal overflow, Enter forward, first Escape text selection and repeated Escape backward, without submission. Other form defaults remain unchanged.
+
+## 2026-11-17 — Created-date filter dropdown
+
+- Added public FormDateRangeFilter with a calendar-range icon, paired shared date inputs, active indication and Clear dates. Codeitz Tasks replaces its exposed date controls with this dropdown; URL filtering is preserved. UIUX includes preview and usage.
+- Shared UI build, Codeitz typecheck/build and UIUX typecheck passed. Browser verified popover layout, date selection updating the URL and clearing the filter. No record changes.
+
+## 2026-11-17 — Compact Master List pagination
+
+- Reduced shared pagination padding/gaps and scoped the single-line control token to 32px within the footer. Kept page-size options, navigation and normal form input sizing unchanged.
+
+## 2026-11-17 — Aligned search strip tools
+
+- Added the shared hover/focus tooltip to the created-date filter. Master List toolbar icon buttons now match the search input's control-height token and align evenly at the right with consistent spacing. Popup controls and pagination retain their own sizing.
+
+## 2026-11-17 — Slim task details scrollbar
+
+- Added opt-in shared Textarea slimScrollbar styling and enabled it on task details. Uses a 3px themed scrollbar on Chromium, thin on Firefox and a wider touch fallback; fixed five-line scrolling is preserved. UIUX demonstrates the option.
+
+## 2026-11-17 — Compact task form density
+
+- Added opt-in shared compact form density with 12px form/section padding and gaps. Tasks uses 16px page side margins and 12px vertical spacing; input geometry remains unchanged. UIUX demonstrates the shared option.
 
 ## Record Detail v1 and Unsaved Changes Guard — 2026-11-17
 
@@ -254,4 +298,104 @@ Verified shared build and 39 tests, UIUX typecheck/build and 16 tests, governanc
 
 Project Manager was not edited or rebuilt. Other pending work was preserved; no commit/push was performed for this task.
 
-- 2026-11-18: Prepared scoped Silver release with patch version, changelog and verification notes. Shared neutral styling/default/migration changes only; unrelated pending product features excluded. No database update.
+## Shared File Upload — 2026-11-17
+
+Added public blocks/file-upload with typed app-owned upload callback/result, manual file queue, browse/drag-drop selection, duplicate/type/size/count validation, safe local raster preview, real progress reports or indeterminate wait, cancel, retry, local removal and disabled states. Reuses shared Attachment/Button/Dialog/Progress. Default accept PNG/JPEG/PDF, five files, 5 MB each. Rejected files never upload; completed results require a nonblank saved ID. Aborted/unmounted/removed attempts suppress late results; preview URLs revoke on cleanup. Apps still own actual storage, permissions, idempotency, record links and server content checks.
+
+UIUX File Upload is a distinct Shared Blocks page with real import path, compiled callback adapter and a labelled local-only simulation. Initial failure demonstrates retry. Template v22 adds records/file-upload.tsx without enabling an API or simulated persistence. Central file-upload-standard.md and generated forms guidance document state/default/security/navigation boundaries.
+
+Checks: shared/UIUX builds and UIUX typecheck passed; 41 shared UI tests, 16 UIUX tests and 18 governance/generator/tool tests passed (75 total). A fresh v22 generated app passed its file audit, typecheck and production build with existing shared dependencies. Browser exercised synthetic PNG/PDF selection, type/size errors, duplicate and five-file limits, loaded blob-image preview, reported progress, failure/retry to completion, cancellation/retry, local removal, real import path and usage panel; no document overflow at the checked desktop size. Screenshot: UIUX docs/file-upload-retry.jpg. Native drag/drop gesture, noncooperative backend cancellation and URL lifecycle were reviewed in source but not independently browser-certified; no production transport/storage was tested. Existing dependency directive warnings remain nonfatal.
+
+Project Manager was not changed or rebuilt. Other pending work was preserved; no publication was performed in this task.
+
+## 2026-11-17 — Reusable ecommerce storefront blocks
+
+- Added public @workspace/ui/blocks/ecommerce and contracts/ecommerce.ts: scoped Neutral layout, header/search/mobile menu, hero, collection/product card, editorial feature, values/footer, controlled product details and bag. Reused Button/Input/Dialog/Sheet and the existing DesignSystemProvider/palette. Shared styles stay in src/styles/ecommerce.css.
+- Catalog records, price calculation, transactions, API calls and fixture data stay outside the package. Apps may handle same-store links through the optional navigation callback. Preview mode keeps checkout unavailable.
+- Added UIUX preview and typed usage at /blocks/shared-patterns/ecommerce, then wired apps/ecommerce at /storefront. Light/dark/system modes and portal surfaces verified without rewriting saved palette preferences.
+- Shared build and 44 tests passed. App typecheck/build/11 tests and UIUX typecheck/build/16 tests passed. Browser checks covered desktop, 390px mobile, history, search, keyboard focus, product details, bag totals/removal and gallery preview. No captured browser warnings/errors.
+- Preserved all pre-existing package/UIUX/app work. No version bump, commit, push or deployment in this task. UIUX retains its existing dependency directive/config build warnings; ecommerce build is warning-free.
+
+## 2026-11-17 — Expanded storefront sections
+
+- Added reusable hero/product carousels using the existing Carousel primitive, benefit strip, category tiles, journal and guide dialog, FAQs using Accordion, closing CTA, light/dark logo slots and grouped footer.
+- Hero has manual controls, selector dots and pause/play; reduced motion, hover/focus and open overlays prevent automatic rotation as applicable. Inactive slides are inert. Pointer selection pauses autoplay.
+- Codexsun app passes original brand assets and content; shared blocks own no sample catalog or commerce persistence. App retains sample-only/disabled checkout boundaries.
+- Build and 46 shared tests passed; focused five ecommerce tests rechecked after final carousel changes. App typecheck/build/14 tests and UIUX typecheck/build/16 tests passed. Fixed mobile journal intrinsic sizing after browser inspection. No unrelated work, version or Git publication changed.
+
+## 2026-11-17 — Compact white hero carousel
+
+- Reduced shared hero carousel to a 460px desktop content area plus 60px control bar (520px total at 1920px), with smaller headings, spacing and contained 400px product imagery. Mobile uses smaller type/spacing and 250px imagery.
+- Switched the carousel surface to the existing background token: white in light mode while retaining dark-mode support. Interpreted the user's "backend white based" as background styling; no backend code changed.
+- Shared UI, ecommerce and UIUX builds passed. Browser verified white rgb(255,255,255), 520px desktop hero, about 640px mobile hero and no horizontal overflow at 390px. No captured browser warnings/errors. Snapshot: apps/ecommerce/docs/storefront-compact-white-hero.jpg. No commit/push.
+
+## 2026-11-17 — Customer journey views
+
+- Added public image rail/story, Shop, Product, Cart, Checkout, Receipt and Tracking lookup views plus shared quantity, cart-line and summary composition under blocks/ecommerce. Delivery and receipt contracts remain in contracts/ecommerce.ts.
+- Simplified carousel copy/actions and optional description rendering; app home now prioritizes pictures. Reused existing Carousel, Button, Input, NativeSelect and UpsertForm/field mechanisms. Shared UI owns no catalog data, payment execution, receipt storage or carrier status.
+- Shared build/49 tests passed, including empty-cart checkout protection, accessible inline errors, absence of card/password inputs and honest unstarted shipping stages. Final focused eight ecommerce tests passed after quantity accessibility wording adjustment. App/UIUX builds and 19/16 tests passed. Browser checks covered desktop/mobile customer journey, validation, totals, refresh and recovery.
+- All unrelated work preserved; no version bump or Git publication.
+
+
+## 2026-11-17 — Workspace login presentation
+
+- Added opt-in LoginPage workspace branding, Corporate ID/domain-name context and
+  disabled state, preserving existing template defaults and other ongoing UI work.
+  Reused shared AuthField validation; visually hidden helpers remain accessible.
+- Package build and three focused SSR checks passed: shared form/role-choice
+  absence, fixed-domain tenant escaping/no Corporate ID input, disabled submit.
+- UIUX adds both host-context previews and typed usage. Platform owns host lookup,
+  membership checks and authentication; no business rules moved into shared UI.
+
+## 2026-11-17 — Compact Master List search strip
+
+- Scoped the shared Master List toolbar to 36px search and icon controls with 4px padding (46px overall). Form controls elsewhere retain 44px.
+- UI build and UIUX typecheck/build passed. Live UIUX measurement confirmed aligned 36px controls and a 46px strip. Governance and new-app guidance document this approved exception. Project Manager was not changed or rebuilt.
+
+
+## 2026-11-17 — Consistent list header construction
+
+- Shared AppHeader now keeps actions at 32px inside a 40px rail, uses the Tasks hover/focus lift with reduced-motion support, and makes the current breadcrumb semibold. MainLayout defaults to workspace action alignment; gallery import actions explicitly retain edge alignment. Shared workspace-list-content aligns list/table right edges with the header.
+- Existing list shells and duplicate list headings were audited and adapted, including Billing financial lists, Codeship operations lists and Codeitz Todo Categories. UIUX live preview and typed usage use the shared content class. Governance and new-app template capture the construction rule. No Project Manager changes/builds.
+- Shared UI build, nine app typechecks/builds, 13 governance tests and two Master List tests passed. UIUX browser measured header 40px and New 32px with table outer-edge alignment. UIUX suite has 15 passes and one unrelated Login example parity failure from ongoing auth-template work; those auth files were preserved.
+
+## 2026-11-17 — Codeitz list audit support
+
+- MainLayout measures the canvas scrollbar gutter with ResizeObserver so workspace-aligned header actions stay aligned as overflow changes; no hardcoded per-app offsets. TodoWorkspace now offers opt-in showHeading=false for breadcrumb-owned page naming, preserving standalone defaults.
+- Shared UI build and Codeitz typecheck/build passed. Browser measurements on Projects and Tasks matched content/header action right edges within 0.02px.
+
+- 2026-11-18: Added opt-in Calm light/dark palette with neutral surfaces and blue emphasis; wired Appearance, ThemeSelector, preference validation and first-paint bootstrap. Existing palettes/defaults preserved. Project Manager untouched.
+
+
+- 2026-11-18: Added separate Workspace palette at user request, including four-colour swatches, pale shell/white content hierarchy, light/dark tokens and all theme selection/persistence entry points.
+
+
+- 2026-11-18: Replaced Calm/Workspace trials with Silver: white canvas, muted grey chrome and graphite accents; migrated saved trial preferences including first paint. Other themes preserved.
+
+
+- 2026-11-18: Made Silver/light the shared fresh/reset default; brightened selection accent to a restrained cool-grey, preserving white content and muted chrome. Updated first-paint fallback (including blocked storage), UIUX/template HTML, governance and generated-app guidance. Verified UI build, UIUX typecheck/build, 3 Appearance/default-persistence tests and 3 template route tests. Project Manager untouched and not rebuilt.
+
+- 2026-11-18: Audited component/block/layout and UIUX rendering sources for Silver consistency. Fixed editor neutral literals, dark code surface, fixed green switch/login tint, loader pastels, invalid HSL token composition and forced Neutral storefront palette. Muted top/status bars added through shared slots. Shared one-time Silver migration keeps later selections and form/component preferences. UI build and 14 focused tests passed; 9 consumer typechecks/builds and 13 UIUX route/validation tests passed. Seven representative Chrome previews inspected.
+
+- 2026-11-18: User refinement: top menu uses shared card surface (white in Silver light mode); removed muted top-menu override. App header/status bar retain muted surfaces.
+
+- 2026-11-18: User refinement: Silver app header now blends 75% card with 25% muted for a very light tint; table thead uses previous app-header muted tone. White top menu and existing toolbar/status tones retained. Shared styling covers Master List and other tables.
+
+- 2026-11-18: Silver Master List data-row hover and focus-within use exactly the table-header muted tone via one shared CSS rule; empty/filter rows are excluded.
+
+- 2026-11-18: Published scoped Silver release 0.1.5 using GitHub helper from an isolated checkout; origin/main verified at 3b7b835. Release metadata mirrored locally without replacing pending product work. Project Manager excluded.
+
+- 2026-11-18: Added public ecommerce presentation options (3–6 columns, card style/spacing), soft-bordered product cards and StorefrontMerchandisingSection for product grids, offer labels, image-led promotions and accessible carousels. Data and publishing stay app-owned. UIUX typed usage/live preview added; shared UI build and all 60 tests passed; ecommerce typecheck/build and 29 tests passed.
+
+- 2026-11-18: Added opt-in StorefrontShop sidebar layout with full-width results, sticky filters, shared responsive filter sheet and trigger focus restoration. Ecommerce and UIUX journey adopt the public prop. Shared UI build and 12 ecommerce tests passed; desktop/mobile browser filtering and refresh verified.
+- 2026-11-18: Extended public StorefrontHeader with opt-in search layout and onSearchSubmit callback. Full-width inline search uses local input until submit; hamburger Sheet navigation works at all widths and the mobile search occupies a separate row. Standard layout remains available. UIUX typed usage updated; shared UI build/12 ecommerce tests and consuming app/gallery checks passed.
+- 2026-11-18: Added opt-in editorial carouselStyle to StorefrontMerchandisingSection: responsive image-led rail using existing product cards, side arrows, Shop all and See more. Shared UI build and 12 ecommerce tests, app build/typecheck and 29 tests, UIUX typecheck passed. Live product links/navigation and 390px mobile verified.
+- 2026-11-18: Added public StorefrontAnnouncementBanner and merchandising announcement kind with 80% desktop width, responsive stacked image/copy layout and app-owned action. Exported through blocks/ecommerce and added UIUX usage. Shared UI build/12 ecommerce tests, app typecheck/build/29 tests and gallery typecheck passed; browser measured exactly 80% desktop width and verified mobile/CTA.
+- 2026-11-18: Added public StorefrontHeaderMenu/MenuItem contracts and optional account/More dropdown content to the search header; Cart displays its label on desktop and uses an accessible compact icon on phones. Shared dropdown primitives own interactions. Apps own destinations and disabled capabilities. UIUX usage updated; UI build/12 ecommerce tests and app/gallery checks passed, with desktop/mobile browser verification.
+
+
+## 2026-11-18 — Shared controls, Silver theme and release support
+
+- Prepared 0.1.6 with the user-authorized current changes after audit.
+- Shared Silver defaults, form/navigation/card/ring components, file upload and ecommerce presentation updates. Typecheck/build, 60 component/behavior tests and four repository-tool tests passed.
+- GitHub helper publication/tag and tagged CI/runtime outcomes are recorded by their actual later stages; no unexecuted deployment is claimed here.

@@ -5,7 +5,7 @@ import { Textarea } from '../components/textarea.js';
 export type UpsertFormFieldProps = {
   name: string;
   label: string;
-  helper: string;
+  helper?: string;
   error?: string;
   required?: boolean;
   children: ReactNode;
@@ -15,13 +15,13 @@ export type UpsertFormFieldProps = {
 
 export function UpsertFormField({ name, label, helper, error, required = false, children, idPrefix = 'field' }: UpsertFormFieldProps) {
   const id = `${idPrefix}-${name}`;
-  const description = `${id}-helper${error ? ` ${id}-error` : ''}`;
+  const description = [helper ? `${id}-helper` : '', error ? `${id}-error` : ''].filter(Boolean).join(' ') || undefined;
   const content = Children.map(children, child => isValidElement(child) && (child.type === Input || child.type === Textarea)
     ? cloneElement(child as ReactElement<Record<string, unknown>>, { id: `${id}-input`, 'aria-describedby': description, 'aria-invalid': !!error, required }) : child);
   return <div id={id} tabIndex={-1} role="group" aria-labelledby={`${id}-label`} aria-describedby={description} data-invalid={!!error} className="upsert-form-field space-y-1.5 rounded-sm outline-offset-2 focus-visible:outline-2 focus-visible:outline-ring">
     <label id={`${id}-label`} htmlFor={`${id}-input`} className="block text-sm font-medium">{label}{required && <span className="ml-1 text-destructive">*</span>}</label>
     {content}
-    <p id={`${id}-helper`} className="text-xs leading-snug text-muted-foreground">{helper}</p>
+    {helper && <p id={`${id}-helper`} className="text-xs leading-snug text-muted-foreground">{helper}</p>}
     {error && <p id={`${id}-error`} className="text-xs text-destructive">{error}</p>}
   </div>;
 }

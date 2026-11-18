@@ -118,3 +118,5 @@ export * from './blocks/confirm-action.js';
 
 export * from './blocks/record-detail-v1.js';
 export * from './blocks/unsaved-changes-guard.js';
+
+export * from './blocks/file-upload.js';

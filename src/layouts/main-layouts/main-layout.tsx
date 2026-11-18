@@ -1,7 +1,7 @@
-import { useState, type CSSProperties, type ReactNode } from "react";
+import { useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { LayoutDashboardIcon, PanelLeftIcon, PanelsTopLeftIcon, Settings2Icon } from "lucide-react";
 import { AppLayout } from "./app-layout.js";
-import { AppHeader, type AppHeaderBreadcrumb } from "./app-header.js";
+import { AppHeader, type AppHeaderBreadcrumb, type AppHeaderProps } from "./app-header.js";
 import { SideMenu } from "./side-menu.js";
 import { StatusBar } from "./status-bar.js";
 import { TopMenu, type TopMenuProps } from "./top-menu.js";
@@ -31,6 +31,7 @@ export type MainLayoutProps = {
   selectedPage?: string;
   headerBreadcrumbs?: AppHeaderBreadcrumb[];
   headerActions?: ReactNode;
+  headerActionsAlignment?: AppHeaderProps["actionsAlignment"];
   headerName?: string | null;
   headerClassName?: string;
   profileHref?: string;
@@ -66,6 +67,7 @@ function MainLayoutShell({
   selectedPage,
   headerBreadcrumbs,
   headerActions,
+  headerActionsAlignment = "workspace",
   headerName,
   headerClassName,
   profileHref,
@@ -76,6 +78,16 @@ function MainLayoutShell({
   showOverview,
   user
 }: MainLayoutProps) {
+  const canvasRef = useRef<HTMLDivElement>(null);
+  useLayoutEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const align = () => canvas.parentElement?.style.setProperty("--workspace-scrollbar-inset", `${Math.max(0, canvas.offsetWidth - canvas.clientWidth) * 0.95}px`);
+    align();
+    const observer = new ResizeObserver(align);
+    observer.observe(canvas);
+    return () => observer.disconnect();
+  }, []);
   const { open: sidebarOpen, toggleSidebar, setOpenMobile } = useSidebar();
   const [searchOpen, setSearchOpen] = useState(false);
   const [search, setSearch] = useState("");
@@ -161,13 +173,14 @@ function MainLayoutShell({
           />
         <SidebarInset className="min-h-0 min-w-0 overflow-hidden md:peer-data-[variant=inset]:m-1 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:mt-0 md:peer-data-[variant=inset]:mb-0.5">
           <AppHeader
+            actionsAlignment={headerActionsAlignment}
             breadcrumbs={headerBreadcrumbs ?? [{ label: selected }]}
             homeHref={homeHref ?? appItems.find((item) => item.active)?.url ?? "/"}
             name={headerName === null ? undefined : headerName ?? user.name}
             actions={headerActions}
             className={headerClassName}
           />
-          <div aria-label="Workspace canvas" className="min-h-0 flex-1 overflow-y-auto">{children}</div>
+          <div ref={canvasRef} aria-label="Workspace canvas" className="min-h-0 flex-1 overflow-y-auto">{children}</div>
         </SidebarInset>
       </div>
       <StatusBar status={statusLabel} workspace={selected} versionLabel={versionLabel} />

@@ -13,6 +13,7 @@ import { cn } from "../../lib/utils.js";
 export type AppHeaderBreadcrumb = {
   label: string;
   href?: string;
+  emphasis?: boolean;
 };
 
 export type AppHeaderProps = {
@@ -34,8 +35,10 @@ export function AppHeader({
 }: AppHeaderProps) {
   return (
     <header
+      data-slot="app-header"
       className={cn(
-        "flex min-h-10 shrink-0 items-center justify-between gap-4 border-b bg-background px-4",
+        "flex min-h-10 shrink-0 items-center justify-between gap-4 border-b bg-background px-4 py-0",
+        actionsAlignment === "workspace" && "pr-[calc(5%+var(--workspace-scrollbar-inset,0px))]",
         className
       )}
     >
@@ -51,13 +54,13 @@ export function AppHeader({
               <BreadcrumbSeparator className="shrink-0" />
               <BreadcrumbItem className="min-w-0 flex-nowrap">
                 {crumb.href ? (
-                  <BreadcrumbLink className="truncate" href={crumb.href}>
+                  <BreadcrumbLink className={cn("truncate", index === breadcrumbs.length - 1 && "font-semibold", crumb.emphasis && "text-base font-semibold")} href={crumb.href}>
                     {crumb.label}
                   </BreadcrumbLink>
                 ) : index < breadcrumbs.length - 1 ? (
-                  <span className="truncate">{crumb.label}</span>
+                  <span className={cn("truncate", crumb.emphasis && "text-base font-semibold")}>{crumb.label}</span>
                 ) : (
-                  <BreadcrumbPage className="truncate font-medium">{crumb.label}</BreadcrumbPage>
+                  <BreadcrumbPage className={cn("truncate", crumb.emphasis ? "text-base font-semibold" : "font-semibold")}>{crumb.label}</BreadcrumbPage>
                 )}
               </BreadcrumbItem>
             </Fragment>
@@ -68,8 +71,6 @@ export function AppHeader({
         <div
           className={cn(
             "flex shrink-0 items-center gap-2",
-            actionsAlignment === "workspace" &&
-              "mr-4 lg:mr-[max(2rem,calc((100%-92rem)/2+0.5rem))]",
             actionsAlignment === "form" && "mr-4 lg:mr-[max(2rem,calc((100%-72rem)/2))]"
           )}
         >
