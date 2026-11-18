@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "sideEffects": [
     "**/*.css"
   ],
@@ -190,6 +190,10 @@
     "./blocks/file-upload": {
       "types": "./dist/src/blocks/file-upload.d.ts",
       "import": "./dist/src/blocks/file-upload.js"
+    },
+    "./blocks/auth/workspace-access-gate": {
+      "types": "./dist/src/blocks/auth/workspace-access-gate.d.ts",
+      "import": "./dist/src/blocks/auth/workspace-access-gate.js"
     }
   },
   "dependencies": {

@@ -12,11 +12,11 @@ import { useStorefrontTheme } from './theme.js';
 type NavigationLink = { label: string; href: string };
 export type StorefrontHeaderMenuItem = { id: string; label: string; icon?: ReactNode; href?: string; onSelect?: () => void; disabled?: boolean };
 export type StorefrontHeaderMenu = { title: string; notice?: string; items: readonly StorefrontHeaderMenuItem[] };
-export function StorefrontHeader({ brand, homeHref, logoSrc, logoDarkSrc, links, search, onSearchChange, onSearchSubmit, onBagOpen, bagCount = 0, announcement, previewLabel, layout = 'standard', accountMenu, moreMenu }: StorefrontBranding & {
+export function StorefrontHeader({ brand, homeHref, logoSrc, logoDarkSrc, links, search, onSearchChange, onSearchSubmit, onBagOpen, bagCount = 0, announcement, previewLabel, layout = 'standard', accountLabel = 'Login', accountMenu, moreMenu }: StorefrontBranding & {
   brand: string; homeHref: string; links: readonly NavigationLink[]; search: string; onSearchChange: (value: string) => void;
   onBagOpen: () => void; bagCount?: number; announcement?: string; previewLabel?: string;
   layout?: 'standard' | 'search'; onSearchSubmit?: (value: string) => void;
-  accountMenu?: StorefrontHeaderMenu; moreMenu?: StorefrontHeaderMenu;
+  accountLabel?: string; accountMenu?: StorefrontHeaderMenu; moreMenu?: StorefrontHeaderMenu;
 }) {
   const [searchOpen, setSearchOpen] = useState(false);
   const submitted = useRef(false);
@@ -44,7 +44,7 @@ export function StorefrontHeader({ brand, homeHref, logoSrc, logoDarkSrc, links,
         <Button type="submit" variant="default" className="ec-header-search-submit" aria-label="Search"><Search size={20}/></Button>
       </form>
       <div className="ec-customer-actions">
-        {accountMenu && customerMenu(accountMenu, 'Login', <CircleUserRound size={20}/>)}
+        {accountMenu && customerMenu(accountMenu, accountLabel, <CircleUserRound size={20}/>)}
         {moreMenu && customerMenu(moreMenu, 'More', <Ellipsis size={20}/>, 'ec-header-more-icon')}
         <Button type="button" variant="ghost" data-storefront-bag-trigger aria-label={`Cart, ${bagCount} ${bagCount === 1 ? 'item' : 'items'}`} onClick={onBagOpen} className="ec-bag-trigger ec-header-customer-action"><ShoppingCart size={21}/><span className="ec-header-action-label">Cart</span>{bagCount > 0 && <span className="ec-bag-count">{bagCount}</span>}</Button>
       </div>

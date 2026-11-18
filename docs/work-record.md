@@ -1,3 +1,7 @@
+## 2026-11-18 — Coordinated application release dependency
+
+- Audited current workspace access, registration and storefront changes for the authorized all-app release. Typecheck/build, sixty UI tests and four tool tests passed. Prepared 0.1.8 so consuming container builds can pin these public exports. No deployment or database change is performed by this package.
+
 ## Shared accordion
 
 Added the shadcn/Radix accordion through public @workspace/ui exports. Reuses shared semantic tokens, Tailwind animation utilities, and existing reduced-motion rules. Verified package build, typecheck, and 5 tests, including single/multiple open states, disabled semantics, and accessible relationships. UIUX files were not changed.
@@ -404,3 +408,11 @@ Project Manager was not changed or rebuilt. Other pending work was preserved; no
 ## 2026-11-18 — Release portability correction
 
 - Prepared 0.1.7 after identifying Windows CRLF bytes in the earlier source release. Canonical LF attributes and a staged whitespace check prevent recurrence; scoped publishing and commit-tree safeguards are retained. Earlier tags were not moved. No database changes or running app replacement.
+- 2026-11-18: Added opt-in StorefrontLayout contentWidth=aligned with one bounded responsive content rail, equal home-section spacing, consistent image sizing and inset carousel controls. Ecommerce storefront/designer and UIUX examples adopt the public prop. Verified 11 viewport sizes (320–2560px), matched section/header/footer edges, uniform desktop gaps and no horizontal overflow. Shared UI build/12 ecommerce tests and app/gallery checks passed.
+
+
+## 2026-11-18 — Customer storefront integration props
+
+- Added optional storefront header account label and app-supplied checkout/receipt notices/tracking hint, preserving existing defaults. Added optional registration description/name/email helper copy so customer storefronts can reuse the shared auth template without workspace-specific text. No authentication or domain rules moved into UI; Ecommerce owns callbacks and security. Shared UI build and ecommerce compatibility tests are checked in the owning app task.
+
+- Customer storefront integration validation: UI build and all 18 shared auth/ecommerce tests passed; Ecommerce typecheck/build and 41 app/tool tests passed. Existing public defaults stay compatible.
