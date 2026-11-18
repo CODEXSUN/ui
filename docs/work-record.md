@@ -416,3 +416,12 @@ Project Manager was not changed or rebuilt. Other pending work was preserved; no
 - Added optional storefront header account label and app-supplied checkout/receipt notices/tracking hint, preserving existing defaults. Added optional registration description/name/email helper copy so customer storefronts can reuse the shared auth template without workspace-specific text. No authentication or domain rules moved into UI; Ecommerce owns callbacks and security. Shared UI build and ecommerce compatibility tests are checked in the owning app task.
 
 - Customer storefront integration validation: UI build and all 18 shared auth/ecommerce tests passed; Ecommerce typecheck/build and 41 app/tool tests passed. Existing public defaults stay compatible.
+
+## 2026-11-18 — Shared workspace access verification
+
+- Verified WorkspaceAccessGate with central session/login/password/logout callbacks, neutral wording, current page titles, honest recovery and tenant-resolved context. UI build and sixty tests passed; disposable CRM browser flow verified dashboard, logout and mandatory password update without changing real credentials. Existing UI changes/release work were preserved.
+
+## 2026-11-18 — Ecommerce checkout composition
+
+- Added optional checkout extra fields, payment content, disabled/submit labels and server-total summary rows; receipt supports app-owned financial confirmation copy. Existing defaults preserved.
+- Shared UI build and all 18 auth/ecommerce tests passed. UIUX owns a typed usage example; provider and financial rules remain in ecommerce.

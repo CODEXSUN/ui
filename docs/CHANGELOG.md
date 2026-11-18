@@ -2,13 +2,26 @@
 
 ## Version State
 
-Current version: 0.1.8
+Current version: 0.1.9
 
-Release tag: v-0.1.8
+Release tag: v-0.1.9
 
-Changelog label: v 0.1.8
+Changelog label: v 0.1.9
 
 Local version baseline; no release or Git tag has been published.
+
+## v-0.1.9
+
+### [v 0.1.9] 2026-11-18 - Publish server-priced checkout presentation inputs
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.9.
+- Add optional app-owned checkout fields, payment content, summary rows, disabled/submit labels and receipt confirmation copy while preserving existing defaults. Business/provider decisions remain in Ecommerce. Full typecheck/build, sixty UI tests and four tool tests passed. No database changes.
 
 ## v-0.1.8
 
