@@ -425,3 +425,7 @@ Project Manager was not changed or rebuilt. Other pending work was preserved; no
 
 - Added optional checkout extra fields, payment content, disabled/submit labels and server-total summary rows; receipt supports app-owned financial confirmation copy. Existing defaults preserved.
 - Shared UI build and all 18 auth/ecommerce tests passed. UIUX owns a typed usage example; provider and financial rules remain in ecommerce.
+
+## 2026-11-18 - Password gate compatibility release
+
+Released the existing reviewed eight-character password-form correction so Platform's single-entry build can pin a published compatible UI commit. Build and all 60 UI tests passed. No authentication or permission bypass; Platform remains authoritative for password policy.

@@ -26,7 +26,7 @@ export function WorkspaceAccessGate<S extends SessionView>({client,brandName,log
  useEffect(()=>{if(!session||session.passwordChangeRequired)document.title=(session?'Change password':'Sign in')+' · '+brandName;},[session,brandName]);
  const logout=async()=>{setBusy(true);setError('');try{await client.logout();setSession(undefined);await refresh();}catch(cause){setError(cause instanceof Error?cause.message:'Sign out failed.');}finally{setBusy(false);}};
  if(loading)return <main className="p-8"><AsyncState loading>{null}</AsyncState></main>;
- if(session?.passwordChangeRequired)return <><PasswordChangePage brandName={brandName} logoSrc={logoSrc} logoDarkSrc={logoDarkSrc} minLength={12} backHref="/" busy={busy} error={error} onSubmit={async values=>{
+ if(session?.passwordChangeRequired)return <><PasswordChangePage brandName={brandName} logoSrc={logoSrc} logoDarkSrc={logoDarkSrc} minLength={8} backHref="/" busy={busy} error={error} onSubmit={async values=>{
   if(busy)return;setBusy(true);setError('');try{await client.changePassword(values.currentPassword,values.newPassword);setNotice('Password updated. Sign in again.');await refresh();}catch(cause){setError(cause instanceof Error?cause.message:'Password update failed.');}finally{setBusy(false);}
  }}/><div className="text-center"><Button variant="link" disabled={busy} onClick={()=>void logout()}>Sign out</Button></div></>;
  if(session)return <>{error&&<p role="alert">{error}</p>}{children(session,logout)}</>;

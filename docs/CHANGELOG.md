@@ -2,13 +2,26 @@
 
 ## Version State
 
-Current version: 0.1.9
+Current version: 0.1.10
 
-Release tag: v-0.1.9
+Release tag: v-0.1.10
 
-Changelog label: v 0.1.9
+Changelog label: v 0.1.10
 
 Local version baseline; no release or Git tag has been published.
+
+## v-0.1.10
+
+### [v 0.1.10] 2026-11-18 - Align workspace password form with Platform eight-character policy
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.10.
+- Align the workspace password-change form with the reviewed Platform minimum of eight characters. Preserve session and submission guards.
 
 ## v-0.1.9
 
