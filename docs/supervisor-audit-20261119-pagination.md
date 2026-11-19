@@ -1,6 +1,6 @@
 # Master List remote-pagination audit — 2026-11-19
 
-Status: release-ready. Public additive contract is verified for UI0.1.13 / immutable v-0.1.13. Existing local mode remains the default. Exact published SHA follows below after GitHub-helper publication; consumers must not pin dirty branches.
+Status: done (shared UI contract, implementation, tests and immutable publication). UI0.1.13 / v-0.1.13 exact commit984a9d2afd4dcfdc80bd1f940c9a94cb0dff298b. Existing local mode remains default; consumers may now pin this published SHA.
 
 ## Public contract (from @workspace/ui/blocks/data-table)
 
@@ -69,3 +69,5 @@ Evidence: docs/supervisor-audit-20261119-pagination/browser-evidence.json and pa
 Migration/data/deployment: no module or database files changed, no migrations/reset/reseed, no grants/credential/business-record changes, no Docker operation. CommentsThread and other pending owner work are excluded. UI is a library with no standalone image/manifest/workflow; downstream app owners must pin its published commit, ship their bounded HTTP/SQL/count/export implementation and let CodeShip deploy approved app images. Already-correct small local lists need no repin or conversion.
 
 Limitations and consumer prerequisites: this library release alone does not resolve CRM/Texlinks oversized API responses. Owners must enforce100-row maximum server-side, authorization, allowlisted sort/filter IDs, stable ordering+ID tie-breaker, server totals/facets, bounded full-export transport, request cancellation/generation checks and actual gateway-budget measurements. The optional mode is local-only when remote is omitted. No arbitrary business SQL, tRPC/GraphQL, batch-selection behavior or app-specific policy was introduced. Governance/template owners should add this optional controlled contract for heavy lists; this task does not edit sibling-owned guides.
+
+Published through GitHub helper --release --yes: https://github.com/CODEXSUN/ui/commit/984a9d2afd4dcfdc80bd1f940c9a94cb0dff298b ; immutable annotated tag v-0.1.13. No standalone library workflow/image/manifest. App integration, API payload measurements and CodeShip deployment remain consuming-owner stages. Task-owned temporary server was stopped and test fixture removed from UIUX source; reusable copy retained at the documented TEMP path.
