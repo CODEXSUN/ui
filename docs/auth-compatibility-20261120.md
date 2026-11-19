@@ -28,3 +28,12 @@ Fresh headless Edge, real packed UI19+SDK10, disposable HTTP fixture with HttpOn
 ## Ownership and deployment hold
 
 Source publication only. No Docker fixture, image load, replacement, migration, grant/credential change, engine action or Ubuntu connection was performed. New human-directed stop pauses ALL local Docker deployment and automatic rollout until fresh explicit authorization; Ubuntu stop remains. Running app versions are not claimed updated. UIUX has existing opt-in Platform-auth candidate14 in CodeShip's preserved clean release workspace; do not call it unaffected merely because the older editable devkit tree looked public-only. UIUX SDK10/UI19 pins are a separate source-only preparation, preserving that candidate. No competing UIUX version or deployment is created by this shared-library release.
+
+
+## Published receipt and subsequent UIUX frame integration blocker
+
+Published UI0.1.19 / v-0.1.19 /1761b9c88455a3660af7abad5d4b096eb86c3e58 through GitHub helper. SDK10 immutable sourceef7fe98371ab569fa34a91feca9bfac35c8d201c was used in the packed consumer. No app deployment was run.
+
+Additional disposable-browser reproduction found a SDK10 integration gap for same-origin frames: parent signs in and holds its selector Web Lock; a new iframe loads its own SDK module, fails to acquire the already-held selector, generates another selector and writes it into shared same-origin/top-level sessionStorage. The parent SDK client retains its old in-memory selector and session, but the catalogue launcher reads the overwritten storage selector and receives401. The iframe shows its own fresh sign-in instead of the authenticated preview. Reproduced with the real packed SDK10 and UI19, no live Platform or Docker; evidence iframe-gap.json. This is a functional identity-selection mismatch, not proof of an authorization bypass or compromise.
+
+UIUX14 auth candidate wraps same-origin layout preview documents in PlatformGate, so this matters before its rollout. SDK owner must resolve/test top-level-tab versus same-origin-frame ownership (including duplicate/reload/history behavior) and publish its own fix; this UI task did not modify SDK. Existing UIUX14/candidate preserves opt-in auth; do not bypass its gate or claim all previews work. UIUX pins draft at C:/Users/sunda/AppData/Local/Temp/uiux-auth-candidate-20261120/devkit/uiux is source-only atop published14, only release pins/lock changed, build/typecheck16gallery+4tools passed. It is NOT bumped/tagged/published/deployed as15 while this blocker and human deployment stop remain.

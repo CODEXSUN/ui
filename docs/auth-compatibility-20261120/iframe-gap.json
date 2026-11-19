@@ -1,0 +1,9 @@
+{
+  "sdk": "0.1.10",
+  "sdkCommit": "ef7fe98371ab569fa34a91feca9bfac35c8d201c",
+  "selectorOverwrittenBySameOriginFrame": true,
+  "embeddedPreviewRequiresFreshLogin": true,
+  "parentClientStillAuthenticated": true,
+  "parentCatalogueRejected": true,
+  "scope": "Disposable packed UI/SDK HTTP fixture; reproduces helper/frame interaction, not a live Platform permission test."
+}
