@@ -2,13 +2,26 @@
 
 ## Version State
 
-Current version: 0.1.13
+Current version: 0.1.14
 
-Release tag: v-0.1.13
+Release tag: v-0.1.14
 
-Changelog label: v 0.1.13
+Changelog label: v 0.1.14
 
 Local version baseline; no release or Git tag has been published.
+
+## v-0.1.14
+
+### [v 0.1.14] 2026-11-19 - Publish reusable Comments Thread and scope-safe interactions
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.14.
+- Publish CommentsThread and public types/exports with scope-safe UI state, escaped text, revision snapshots, current capability checks and accessible cancellation/error handling. Verify91 UI tests,7 consuming browser tests, strict packed declarations and ten light/dark viewport checks. No backend/auth/data ownership or runtime dependency changes.
 
 ## v-0.1.13
 

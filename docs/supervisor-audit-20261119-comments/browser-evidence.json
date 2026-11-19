@@ -1,0 +1,118 @@
+{
+  "results": [
+    {
+      "viewport": 360,
+      "document": 360,
+      "thread": 328,
+      "theme": "light",
+      "unsafe": false,
+      "images": 0
+    },
+    {
+      "viewport": 360,
+      "document": 360,
+      "thread": 328,
+      "theme": "dark",
+      "unsafe": false,
+      "images": 0
+    },
+    {
+      "viewport": 768,
+      "document": 768,
+      "thread": 410,
+      "theme": "light",
+      "unsafe": false,
+      "images": 0
+    },
+    {
+      "viewport": 768,
+      "document": 768,
+      "thread": 410,
+      "theme": "dark",
+      "unsafe": false,
+      "images": 0
+    },
+    {
+      "viewport": 1440,
+      "document": 1440,
+      "thread": 1066,
+      "theme": "light",
+      "unsafe": false,
+      "images": 0
+    },
+    {
+      "viewport": 1440,
+      "document": 1440,
+      "thread": 1066,
+      "theme": "dark",
+      "unsafe": false,
+      "images": 0
+    },
+    {
+      "viewport": 1920,
+      "document": 1920,
+      "thread": 1546,
+      "theme": "light",
+      "unsafe": false,
+      "images": 0
+    },
+    {
+      "viewport": 1920,
+      "document": 1920,
+      "thread": 1546,
+      "theme": "dark",
+      "unsafe": false,
+      "images": 0
+    },
+    {
+      "viewport": 2560,
+      "document": 2560,
+      "thread": 2186,
+      "theme": "light",
+      "unsafe": false,
+      "images": 0
+    },
+    {
+      "viewport": 2560,
+      "document": 2560,
+      "thread": 2186,
+      "theme": "dark",
+      "unsafe": false,
+      "images": 0
+    },
+    {
+      "interaction": "scope switch, stale mutation, edit snapshot, Escape cancel, delete cancel/confirm, cursor load",
+      "stats": {
+        "lists": 3,
+        "aborts": 2,
+        "creates": [
+          {
+            "target": {
+              "ownerAppKey": "fixture",
+              "resourceType": "record",
+              "publicId": "record-a"
+            },
+            "text": "Private draft for the old resource"
+          }
+        ],
+        "edits": [
+          {
+            "publicId": "record-b-note1",
+            "expectedRevision": 1,
+            "text": "Confirmed edit"
+          }
+        ],
+        "deletes": [
+          {
+            "publicId": "record-b-note1",
+            "expectedRevision": 2
+          }
+        ]
+      }
+    }
+  ],
+  "pageErrors": [],
+  "retry": true,
+  "readOnly": true,
+  "denial": true
+}

@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "sideEffects": [
     "**/*.css"
   ],
@@ -216,7 +216,11 @@
       "types": "./dist/src/public-controls.d.ts",
       "import": "./dist/src/public-controls.js"
     },
-    "./public-controls.css": "./dist/styles/public-controls.css"
+    "./public-controls.css": "./dist/styles/public-controls.css",
+    "./blocks/comments-thread": {
+      "types": "./dist/src/blocks/comments-thread.d.ts",
+      "import": "./dist/src/blocks/comments-thread.js"
+    }
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

@@ -437,3 +437,5 @@ Released the existing reviewed eight-character password-form correction so Platf
 - 2026-11-19: Audited shared shell/access recovery,71 tests pass, headless Edge360/768/1440/1920/2560 plus HTTP recovery/denial/login/cancellation pass. Prepared immutable0.1.12; no migrations or Docker operation. See docs/supervisor-audit-20261119.md.
 
 - 2026-11-19: Added optional controlled remote Master List mode for heavy lists;80 tests, strict usage compilation and headless HTTP/layout/cancellation audit pass. Prepared additive0.1.13; no app/Docker/database changes. Contract and consumer prerequisites: docs/supervisor-audit-20261119-pagination.md.
+
+- 2026-11-19: Reviewed/published pending CommentsThread presentation contract for0.1.14; added scope-safe lifecycle, current permission/revision/cancel handling.91 shared tests,7 isolated Comments browser tests, packed strict imports and ten actual light/dark width cases pass. No host/auth/database/Docker changes. See docs/supervisor-audit-20261119-comments.md.

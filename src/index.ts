@@ -124,3 +124,6 @@ export * from './blocks/file-upload.js';
 export * from './blocks/detail-table.js';
 export * from './blocks/diagram-editor.js';
 export * from './blocks/schema-fields-editor.js';
+
+export { CommentsThread } from './blocks/comments-thread.js';
+export type { CommentsThreadProps, ThreadComment } from './blocks/comments-thread.js';
