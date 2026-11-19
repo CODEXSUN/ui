@@ -29,3 +29,5 @@ Zetro integration/operating details: ../../../apps/zetro/docs/chat-sidecar.md. T
 ## Shared UI owner review — 2026-11-19
 
 Reviewed for UI0.1.17, preserving public Whiteboard0.1.15/16 and Comments0.1.14. Added demonstrated late-speech/pending-send fixes, default-upload type compatibility, safe iframe schemes, focus return and optional lazy loading.103 tests and installed SDK0.1.7/public API checks pass; actual ten-theme/width sidecar cases pass. Saved AttachmentList ships in the same reviewed release; no standalone service. Exact publication and limitations: supervisor-audit-20261119-capabilities.md.
+
+Published UI0.1.17 / v-0.1.17 exact commit7a6bbfee17b8775b3a5140041e8aa2da0cc37fc0. Use this immutable capability release, not the former local version15 draft. Docker environment subsequently became unavailable; no current app-live claim follows from this library release.

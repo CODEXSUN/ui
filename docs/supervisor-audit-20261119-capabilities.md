@@ -1,6 +1,6 @@
 # Shared capability publication audit — 2026-11-19
 
-Status: release-ready for UI0.1.17. Exact immutable commit will be recorded after GitHub-helper publication. No standalone Docker service or fabricated library CI/image.
+Status: done for shared UI. UI0.1.17 / immutable annotated v-0.1.17 published at7a6bbfee17b8775b3a5140041e8aa2da0cc37fc0 through GitHub helper --release --yes. No standalone Docker service or fabricated library CI/image.
 
 ## Scope and preserved releases
 
@@ -35,8 +35,14 @@ Evidence: docs/supervisor-audit-20261119-capabilities/widgets-browser-evidence.j
 
 ## Consumer and runtime handoff
 
-Zetro and File Manager owners can pin the exact UI0.1.17 commit once published. File Manager's candidate UI peer floor >=0.1.15 wrongly admits public Whiteboard-only releases lacking AttachmentList; raise its minimum capability version to0.1.17 and repeat its immutable-artifact acceptance. Comments users remain compatible on0.1.14; already-correct small apps/remote lists may remain on approved0.1.12/13. App owners retain auth, data, migration and approved deployment responsibilities.
+Zetro and File Manager owners may pin UI0.1.17 exact commit7a6bbfee17b8775b3a5140041e8aa2da0cc37fc0: https://github.com/CODEXSUN/ui/commit/7a6bbfee17b8775b3a5140041e8aa2da0cc37fc0 . File Manager's candidate UI peer floor >=0.1.15 wrongly admits public Whiteboard-only releases lacking AttachmentList; raise its minimum capability version to0.1.17 and repeat its immutable-artifact acceptance. Comments users remain compatible on0.1.14; already-correct small apps/remote lists may remain on approved0.1.12/13. App owners retain auth, data, migration and approved deployment responsibilities.
 
-UIUX approved0.1.11 / a3e8c565bf7bb516c1046f9e395805355525e9df remains healthy at127.0.0.1:14315:4315 with manifest image sha256:146e9e3d2eb533df1fe21b0bcada72ec2f37b9bc67fd2a11b2c8f508a042049f and bundled UI0.1.12. Tagged workflow44432981397 is success. Current direct readiness/frontend/Host/Origin probes passed; a new shared verifier attempt met an existing operation lock, which was preserved. Previous owner adapter verification passed. No unnecessary UIUX replacement/repin was done merely for libraries. New local preview additions remain preserved, not falsely claimed deployed.
+UIUX last verified before the environment hold: approved0.1.11 / a3e8c565bf7bb516c1046f9e395805355525e9df was healthy at127.0.0.1:14315:4315 with manifest image sha256:146e9e3d2eb533df1fe21b0bcada72ec2f37b9bc67fd2a11b2c8f508a042049f and bundled UI0.1.12. Tagged workflow44432981397 is success. Current direct readiness/frontend/Host/Origin probes passed; a new shared verifier attempt met an existing operation lock, which was preserved. Previous owner adapter verification passed. No unnecessary UIUX replacement/repin was done merely for libraries. New local preview additions remain preserved, not falsely claimed deployed.
 
 No database/module changes, applied migrations, resets/seeders, grants/credentials edits, Docker service creation/replacement, sibling/native process restarts, public deployment or whole-stack rollout. Remaining host integration/deployment checks stay with their app owners; pending shared lock coordinates re-verification only, not a failed live health check.
+
+## Latest environment hold — 2026-11-19
+
+Supervisor independently confirmed the Linux Docker engine unavailable and no running WSL distributions. Runtime verification/deployment/load tests are now paused. Earlier UIUX image/health/guard snapshots above are historical, not a current live-health claim. This owner started no replacement or migration, has no partial deployment, did not stop/restart Docker/native apps/siblings, and preserved the existing operation lock. Engine restoration/intent decision is pending with the human in the supervising chat; post-restoration UIUX verification is required. Source/library publication remains complete and unblocked.
+
+Task-owned temporary browser server is no longer running (checked exact helper command); two temporary UIUX fixtures removed. Runner/evidence copies remain in TEMP and the committed audit folder. No forced app repin/rebuild or standalone library service was created.
