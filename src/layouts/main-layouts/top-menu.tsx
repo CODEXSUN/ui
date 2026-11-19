@@ -10,6 +10,7 @@ import { TopMenuUserMenu } from "./top-menu-user.js";
 export type TopMenuProps = {
   addonItems?: TopMenuAppItem[];
   appItems: TopMenuAppItem[];
+  launcherCatalogUrl?: string | undefined;
   applicationName: string;
   companyBrand?: {
     name: string;
@@ -38,6 +39,7 @@ export type TopMenuProps = {
 export function TopMenu({
   addonItems = [],
   appItems,
+  launcherCatalogUrl,
   applicationName,
   companyBrand,
   logoutHref,
@@ -131,7 +133,7 @@ export function TopMenu({
             notifications={notifications}
             {...(onNotificationDismiss ? { onDismiss: onNotificationDismiss } : {})}
           />
-          <TopMenuAppLauncher addonItems={addonItems} items={appItems} />
+          <TopMenuAppLauncher addonItems={addonItems} items={appItems} catalogUrl={launcherCatalogUrl} />
           <TopMenuUserMenu
             {...(logoutHref ? { logoutHref } : {})}
             {...(onLogout ? { onLogout } : {})}

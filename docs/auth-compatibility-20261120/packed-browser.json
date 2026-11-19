@@ -1,0 +1,16 @@
+{
+  "sdkVersion": "0.1.10",
+  "sdkCommit": "ef7fe98371ab569fa34a91feca9bfac35c8d201c",
+  "uiVersion": "0.1.19",
+  "separateTabSelectors": true,
+  "currentTabAccountSwitch": true,
+  "siblingSessionPreserved": true,
+  "parentRouterNotified": true,
+  "successfulLoginReloadPreserved": true,
+  "launcherUsesAuthorizedCatalogue": true,
+  "newAppTabNoOpenerAndFreshLogin": true,
+  "unsupportedSuperAdminNoFormOrOldDesk": true,
+  "httpOnlyFixtureCredentials": true,
+  "pageErrors": [],
+  "scope": "Packed public UI+SDK with disposable HTTP session fixture; not a live Platform permission or privileged-login acceptance test."
+}

@@ -1,0 +1,14 @@
+npm notice run @workspace/ui@0.1.19 test:tools
+npm notice run node --test tools/*.test.mjs
+✔ only numeric three-part patch versions and the reference commit format are accepted (1.8812ms)
+✔ bump preview changes nothing; explicit fixture bump updates only app roots and log (20.8299ms)
+✔ malformed locks and mismatched changelog entries fail before version writes (9.966ms)
+✔ GitHub helper defaults to audit and leaves Git index, refs, package versions and log unchanged (724.0065ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 910.381

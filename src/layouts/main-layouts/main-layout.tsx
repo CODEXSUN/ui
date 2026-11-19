@@ -19,6 +19,7 @@ export type MainLayoutProps = {
   assistant?: AssistantSidecarOptions;
   addonItems?: TopMenuAppItem[];
   appItems: TopMenuAppItem[];
+  launcherCatalogUrl?: string | undefined;
   applicationName: string;
   companyBrand?: TopMenuProps['companyBrand'];
   children?: ReactNode;
@@ -56,6 +57,7 @@ function MainLayoutShell({
   assistant,
   addonItems = [],
   appItems,
+  launcherCatalogUrl,
   applicationName,
   companyBrand,
   children,
@@ -151,6 +153,7 @@ function MainLayoutShell({
         searchLeadingAction={assistant ? <Suspense fallback={<Button variant="ghost" size="icon" disabled aria-label={`Loading ${assistant.name}`}><img src={assistant.logoSrc} alt="" className="size-6"/></Button>}><AssistantSidecar {...assistant}/></Suspense> : undefined}
         addonItems={addonItems}
         appItems={appItems}
+        launcherCatalogUrl={launcherCatalogUrl}
         applicationName={applicationName}
         companyBrand={companyBrand}
         {...(logoutHref ? { logoutHref } : {})}

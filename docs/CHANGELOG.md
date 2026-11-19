@@ -2,13 +2,27 @@
 
 ## Version State
 
-Current version: 0.1.18
+Current version: 0.1.19
 
-Release tag: v-0.1.18
+Release tag: v-0.1.19
 
-Changelog label: v 0.1.18
+Changelog label: v 0.1.19
 
 Published source release; immutable tags identify their reviewed commits. Application deployment is a separate verified stage.
+
+## v-0.1.19
+
+### [v 0.1.19] 2026-11-19 - Tab-aware app launcher and explicit sign-in routes
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Add optional session-authorized launcher catalogue wiring through MainLayout and TopMenu, current SDK tab header, same-origin/URL validation, cancellation and new-tab/no-opener links. Static items and callbacks remain supported.
+- Exact /login prepares a fresh ordinary-app sign-in by delegating current-tab logout to the client; success normalizes the route and notifies parent routers before workspace content mounts. Ordinary /sa/login and /admin/login clearly reject unsupported realms.
+- Preserve published drawing resolutions and all other UI18 features. Verified117UI tests,4release-tool tests, build/type checks and strict packed SDK0.1.10 consumer/browser fixtures; no deployment or DB changes.
 
 ## v-0.1.18
 

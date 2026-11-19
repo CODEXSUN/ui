@@ -1,0 +1,28 @@
+✔ static launcher opens existing URL items safely without fetching a catalogue (570.7503ms)
+✔ authorized catalogue receives only the current tab selector and safe destinations (327.5863ms)
+✔ catalogue URL cannot send a tab selector to another origin (147.26ms)
+✔ unsafe destinations fail closed instead of showing static fallback entries (138.4195ms)
+✔ closing an in-flight catalogue aborts it and reopening reads the new tab selector (630.8192ms)
+✔ remote catalogue fails closed without an initialized SDK tab selector (224.4398ms)
+✔ 503 and network failures recover automatically without showing login (159.2805ms)
+✔ 403 verification denial never displays login or retries (31.693ms)
+✔ 401 alone requests login context (99.5697ms)
+✔ retry budget is bounded and manual retry restarts it (67.1447ms)
+✔ unmount cancels scheduled recovery and ignores late promises (37.5689ms)
+✔ same-tick duplicate form submissions call login once (181.4905ms)
+✔ expired-session events coalesce during a pending session check (47.6055ms)
+✔ explicit app login revokes the current client session before showing a fresh form (29.9513ms)
+✔ unauthenticated explicit login does not issue a logout (33.3854ms)
+✔ explicit login success navigates away before session verification without a logout loop (86.8225ms)
+✔ ordinary app gate rejects privileged sign-in routes without displaying an old session or default-user form (16.5983ms)
+✔ history navigation into app login revokes the selected client session and hides prior children (36.068ms)
+✔ failed explicit-login revocation never exposes a sign-in form over the existing session (5.9811ms)
+✔ late sign-in completion cannot override a newer privileged route or reveal workspace content (50.4084ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 6354.4606
