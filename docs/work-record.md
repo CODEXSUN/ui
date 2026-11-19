@@ -445,3 +445,7 @@ Released the existing reviewed eight-character password-form correction so Platf
 Added public WhiteboardPreview with static PNG thumbnails and safe loading/cleanup. Serialization rejects an editor still hydrating. Codeitz browser audit created and retrieved Excalidraw text scenes as draft/active; card navigation and refresh passed. Build passed. No database changes.
 
 Verification: all 91 UI tests passed with zero skips. Isolated release preserves concurrent UI owner edits.
+
+- 2026-11-19: Reconciled owned UI0.1.12/13/14 releases, separate attachment0.1.15 tag and current UIUX0.1.11 image/health. Preserved in-flight assistant contribution; release awaits final owner report. Shared UIUX reverify deferred by live lock, direct checks pass; no redeploy. See supervisor-audit-20261119.md.
+
+- 2026-11-19: Reviewed frozen assistant and saved AttachmentList contributions atop published UI0.1.16, retained prior Comments/Whiteboard, fixed demonstrated stale speech/pending send and normal-upload adapter compatibility.103 shared tests, strict installed SDK0.1.7/consumer checks and responsive/theme cases pass. Prepared0.1.17; no app/database/Docker changes. See supervisor-audit-20261119-capabilities.md.

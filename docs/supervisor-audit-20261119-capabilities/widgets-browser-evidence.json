@@ -1,0 +1,175 @@
+{
+  "results": [
+    {
+      "mode": "light",
+      "viewport": 360,
+      "document": 360,
+      "frame": {
+        "width": 342,
+        "top": 57,
+        "bottom": 867
+      },
+      "inner": {
+        "width": 342,
+        "scroll": 342,
+        "composer": 656,
+        "height": 810
+      }
+    },
+    {
+      "mode": "dark",
+      "viewport": 360,
+      "document": 360,
+      "frame": {
+        "width": 342,
+        "top": 57,
+        "bottom": 867
+      },
+      "inner": {
+        "width": 342,
+        "scroll": 342,
+        "composer": 656,
+        "height": 810
+      }
+    },
+    {
+      "mode": "light",
+      "viewport": 768,
+      "document": 768,
+      "frame": {
+        "width": 446,
+        "top": 57,
+        "bottom": 867
+      },
+      "inner": {
+        "width": 446,
+        "scroll": 446,
+        "composer": 672.5,
+        "height": 810
+      }
+    },
+    {
+      "mode": "dark",
+      "viewport": 768,
+      "document": 768,
+      "frame": {
+        "width": 446,
+        "top": 57,
+        "bottom": 867
+      },
+      "inner": {
+        "width": 446,
+        "scroll": 446,
+        "composer": 672.5,
+        "height": 810
+      }
+    },
+    {
+      "mode": "light",
+      "viewport": 1440,
+      "document": 1440,
+      "frame": {
+        "width": 446,
+        "top": 57,
+        "bottom": 867
+      },
+      "inner": {
+        "width": 446,
+        "scroll": 446,
+        "composer": 672.5,
+        "height": 810
+      }
+    },
+    {
+      "mode": "dark",
+      "viewport": 1440,
+      "document": 1440,
+      "frame": {
+        "width": 446,
+        "top": 57,
+        "bottom": 867
+      },
+      "inner": {
+        "width": 446,
+        "scroll": 446,
+        "composer": 672.5,
+        "height": 810
+      }
+    },
+    {
+      "mode": "light",
+      "viewport": 1920,
+      "document": 1920,
+      "frame": {
+        "width": 446,
+        "top": 57,
+        "bottom": 867
+      },
+      "inner": {
+        "width": 446,
+        "scroll": 446,
+        "composer": 672.5,
+        "height": 810
+      }
+    },
+    {
+      "mode": "dark",
+      "viewport": 1920,
+      "document": 1920,
+      "frame": {
+        "width": 446,
+        "top": 57,
+        "bottom": 867
+      },
+      "inner": {
+        "width": 446,
+        "scroll": 446,
+        "composer": 672.5,
+        "height": 810
+      }
+    },
+    {
+      "mode": "light",
+      "viewport": 2560,
+      "document": 2560,
+      "frame": {
+        "width": 446,
+        "top": 57,
+        "bottom": 867
+      },
+      "inner": {
+        "width": 446,
+        "scroll": 446,
+        "composer": 672.5,
+        "height": 810
+      }
+    },
+    {
+      "mode": "dark",
+      "viewport": 2560,
+      "document": 2560,
+      "frame": {
+        "width": 446,
+        "top": 57,
+        "bottom": 867
+      },
+      "inner": {
+        "width": 446,
+        "scroll": 446,
+        "composer": 672.5,
+        "height": 810
+      }
+    }
+  ],
+  "closedFeatureLoadsNoChatCode": true,
+  "hostInteractiveWhileDrawerOpen": true,
+  "closeReturnsFocus": true,
+  "voiceReviewAndStaleCancellation": true,
+  "filesSelectedWithoutUpload": true,
+  "attachmentListWidths": [
+    360,
+    768,
+    1920
+  ],
+  "pageErrors": []
+}

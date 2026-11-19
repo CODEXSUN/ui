@@ -8,8 +8,9 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle, DialogTrigger } 
 export const FILE_UPLOAD_DEFAULTS = { accept: 'image/png,image/jpeg,application/pdf', maxFiles: 5, maxSizeBytes: 5 * 1024 * 1024 } as const;
 export type FileUploadResult = { id: string };
 export type FileUploadItem = { id: string; file: File; status: 'queued' | 'uploading' | 'success' | 'error' | 'canceled'; progress?: number; result?: FileUploadResult; error?: string };
-export type FileUploadProps = {
-  onUpload: (file: File, context: { signal: AbortSignal; onProgress: (percent: number) => void }) => Promise<FileUploadResult>;
+export type FileUploadHandler = (file: File, context: { signal: AbortSignal; onProgress: (percent: number) => void }) => Promise<FileUploadResult>;
+type FileUploadCommonProps = {
+  compact?: boolean;
   onFilesChange?: (files: readonly FileUploadItem[]) => void;
   label?: string;
   helper?: ReactNode;
@@ -19,6 +20,10 @@ export type FileUploadProps = {
   multiple?: boolean;
   disabled?: boolean;
 };
+/** Existing normal-upload contract keeps its required persistence callback. */
+export type FileUploadProps = FileUploadCommonProps & { selectionOnly?: false; onUpload: FileUploadHandler };
+/** Local selection does not claim persistence or require a storage callback. */
+export type FileSelectionProps = FileUploadCommonProps & { selectionOnly: true; onUpload?: FileUploadHandler };
 /** Client validation is feedback only; apps validate content/authorization again on the server. */
 export function validateUploadFile(file: Pick<File, 'name' | 'size' | 'type'>, { accept = FILE_UPLOAD_DEFAULTS.accept, maxSizeBytes = FILE_UPLOAD_DEFAULTS.maxSizeBytes }: { accept?: string; maxSizeBytes?: number } = {}): string | undefined {
   if (file.size === 0) return 'The file is empty.';
@@ -30,7 +35,7 @@ export function validateUploadFile(file: Pick<File, 'name' | 'size' | 'type'>, {
 export function formatUploadSize(bytes: number) { return bytes < 1024 ? `${bytes} B` : bytes < 1024 * 1024 ? `${(bytes / 1024).toFixed(1)} KB` : `${(bytes / 1024 / 1024).toFixed(1)} MB`; }
 function fileKey(file: File) { return `${file.name}\u0000${file.size}\u0000${file.lastModified}`; }
 
-export function FileUpload({ onUpload, onFilesChange, label = 'Attachments', helper, accept = FILE_UPLOAD_DEFAULTS.accept, maxFiles = FILE_UPLOAD_DEFAULTS.maxFiles, maxSizeBytes = FILE_UPLOAD_DEFAULTS.maxSizeBytes, multiple = true, disabled = false }: FileUploadProps) {
+export function FileUpload({ selectionOnly = false, compact = false, onUpload, onFilesChange, label = 'Attachments', helper, accept = FILE_UPLOAD_DEFAULTS.accept, maxFiles = FILE_UPLOAD_DEFAULTS.maxFiles, maxSizeBytes = FILE_UPLOAD_DEFAULTS.maxSizeBytes, multiple = true, disabled = false }: FileUploadProps | FileSelectionProps) {
   const id = useId();
   const input = useRef<HTMLInputElement>(null);
   const [items, setItems] = useState<FileUploadItem[]>([]);
@@ -60,7 +65,7 @@ export function FileUpload({ onUpload, onFilesChange, label = 'Attachments', hel
   }
   async function upload(item: FileUploadItem) {
     const queuedItem = current.current.find(value => value.id === item.id);
-    if (disabled || controllers.current.has(item.id) || !queuedItem || !['queued', 'error', 'canceled'].includes(queuedItem.status)) return;
+    if (selectionOnly || !onUpload || disabled || controllers.current.has(item.id) || !queuedItem || !['queued', 'error', 'canceled'].includes(queuedItem.status)) return;
     const controller = new AbortController(); controllers.current.set(item.id, controller);
     const active = () => mounted.current && !controller.signal.aborted && controllers.current.get(item.id) === controller;
     update(item.id, { status: 'uploading', error: undefined, progress: undefined });
@@ -77,30 +82,31 @@ export function FileUpload({ onUpload, onFilesChange, label = 'Attachments', hel
   const acceptLabel = accept === FILE_UPLOAD_DEFAULTS.accept ? 'PNG, JPEG or PDF' : accept || 'all file types';
   const queued = items.filter(item => item.status === 'queued');
   const uploading = items.filter(item => item.status === 'uploading').length;
-  return <section aria-labelledby={id} className="min-w-0 space-y-4">
-    <div><h3 id={id} className="text-base font-semibold">{label}</h3><div id={`${id}-help`} className="mt-1 text-sm text-muted-foreground">{helper ?? `Choose or drop files. Maximum ${limit} file${limit === 1 ? '' : 's'}, ${formatUploadSize(maxSizeBytes)} each. Accepted: ${acceptLabel}.`}</div></div>
-    <div data-dragging={dragging || undefined} className="rounded-lg border-2 border-dashed border-border bg-muted/20 p-6 text-center data-[dragging=true]:border-primary data-[dragging=true]:bg-accent"
+  return <section aria-labelledby={id} className={compact ? "min-w-0 space-y-1" : "min-w-0 space-y-4"}>
+    <div className={compact ? "sr-only" : undefined}><h3 id={id} className="text-base font-semibold">{label}</h3><div id={`${id}-help`} className="mt-1 text-sm text-muted-foreground">{helper ?? `Choose or drop files. Maximum ${limit} file${limit === 1 ? '' : 's'}, ${formatUploadSize(maxSizeBytes)} each. Accepted: ${acceptLabel}.`}</div></div>
+    <div data-dragging={dragging || undefined} className={compact ? "rounded-lg data-[dragging=true]:bg-accent" : "rounded-lg border-2 border-dashed border-border bg-muted/20 p-6 text-center data-[dragging=true]:border-primary data-[dragging=true]:bg-accent"}
       onDragEnter={event => { if (event.dataTransfer.types.includes('Files')) { event.preventDefault(); if (!disabled) { depth.current++; setDragging(true); } } }}
       onDragOver={event => { event.preventDefault(); event.dataTransfer.dropEffect = disabled ? 'none' : 'copy'; }}
       onDragLeave={event => { event.preventDefault(); depth.current = Math.max(0, depth.current - 1); if (!depth.current) setDragging(false); }}
       onDrop={event => { event.preventDefault(); depth.current = 0; setDragging(false); add(Array.from(event.dataTransfer.files)); }}>
-      <UploadCloud aria-hidden="true" className="mx-auto mb-3 size-7 text-muted-foreground"/>
-      <p className="mb-3 text-sm text-muted-foreground">Drop files here or choose from your device</p>
-      <Button type="button" variant="outline" disabled={disabled || items.length >= limit} onClick={() => input.current?.click()}>Choose files</Button>
+      {!compact && <UploadCloud aria-hidden="true" className="mx-auto mb-3 size-7 text-muted-foreground"/>}
+      {!compact && <p className="mb-3 text-sm text-muted-foreground">Drop files here or choose from your device</p>}
+      <Button type="button" variant="outline" disabled={disabled || items.length >= limit} onClick={() => input.current?.click()}>{compact ? "Attach files" : "Choose files"}</Button>
       <input ref={input} type="file" className="hidden" aria-label={`Choose ${label}`} aria-describedby={`${id}-help`} accept={accept} multiple={multiple} disabled={disabled || items.length >= limit} onChange={event => { add(Array.from(event.currentTarget.files ?? [])); event.currentTarget.value = ''; }}/>
     </div>
     {errors.length > 0 && <div role="alert" className="rounded-md border border-destructive/30 p-3 text-sm"><ul className="list-disc space-y-1 break-words pl-4 text-destructive">{errors.map((error, index) => <li key={index}>{error}</li>)}</ul><Button type="button" variant="ghost" size="sm" disabled={disabled} onClick={() => setErrors([])}>Clear validation messages</Button></div>}
-    <div className="flex flex-wrap items-center justify-between gap-3"><p role="status" aria-live="polite" className="text-sm text-muted-foreground">{items.length} selected · {uploading} uploading · {items.filter(item => item.status === 'success').length} complete</p><Button type="button" disabled={disabled || !queued.length} onClick={() => queued.forEach(item => void upload(item))}>Upload files</Button></div>
+    {!selectionOnly && !onUpload && <p role="alert" className="text-sm text-destructive">File upload is unavailable.</p>}
+    {!selectionOnly && <div className="flex flex-wrap items-center justify-between gap-3"><p role="status" aria-live="polite" className="text-sm text-muted-foreground">{items.length} selected · {uploading} uploading · {items.filter(item => item.status === 'success').length} complete</p><Button type="button" disabled={disabled || !onUpload || !queued.length} onClick={() => queued.forEach(item => void upload(item))}>Upload files</Button></div>}
     {items.length > 0 && <ul aria-label="Selected files" className="space-y-3">{items.map(item => <li key={item.id}>
       <Attachment className="w-full items-start sm:flex-nowrap" state={item.status === 'success' ? 'done' : item.status === 'uploading' ? 'uploading' : item.status === 'error' ? 'error' : 'idle'}>
         <LocalFilePreview file={item.file} disabled={disabled}/>
-        <AttachmentContent><AttachmentTitle title={item.file.name}>{item.file.name}</AttachmentTitle><AttachmentDescription>{formatUploadSize(item.file.size)} · {item.status === 'success' ? 'Uploaded' : item.status === 'uploading' ? item.progress == null ? 'Uploading…' : `${Math.round(item.progress)}% uploaded` : item.status === 'canceled' ? 'Canceled' : item.status === 'error' ? 'Failed' : 'Ready to upload'}</AttachmentDescription>
+        <AttachmentContent><AttachmentTitle title={item.file.name}>{item.file.name}</AttachmentTitle><AttachmentDescription>{formatUploadSize(item.file.size)} · {selectionOnly ? 'Selected locally' : item.status === 'success' ? 'Uploaded' : item.status === 'uploading' ? item.progress == null ? 'Uploading…' : `${Math.round(item.progress)}% uploaded` : item.status === 'canceled' ? 'Canceled' : item.status === 'error' ? 'Failed' : 'Ready to upload'}</AttachmentDescription>
           {item.status === 'uploading' && (item.progress == null ? <span role="status" className="mt-2 flex items-center gap-2 text-xs text-muted-foreground"><LoaderCircle aria-hidden="true" className="size-3 animate-spin motion-reduce:animate-none"/>Waiting for progress</span> : <Progress className="mt-3 h-1.5" value={item.progress} aria-label={`Upload progress for ${item.file.name}`}/>)}
           {item.error && <p role="alert" className="mt-2 text-sm text-destructive">{item.error}</p>}
         </AttachmentContent>
         <div className="ml-auto flex shrink-0 items-center gap-1">{item.status === 'success' && <CheckCircle2 aria-label="Upload complete" className="size-4 text-primary"/>}
           {item.status === 'uploading' && <Button type="button" variant="ghost" size="sm" disabled={disabled} onClick={() => cancel(item.id)}>Cancel</Button>}
-          {(item.status === 'error' || item.status === 'canceled') && <Button type="button" variant="outline" size="sm" disabled={disabled} aria-label={`Retry ${item.file.name}`} onClick={() => void upload(item)}>Retry</Button>}
+          {(item.status === 'error' || item.status === 'canceled') && <Button type="button" variant="outline" size="sm" disabled={disabled || !onUpload} aria-label={`Retry ${item.file.name}`} onClick={() => void upload(item)}>Retry</Button>}
           <Button type="button" variant="ghost" size="icon-sm" disabled={disabled} aria-label={`Remove ${item.file.name} from list`} onClick={() => remove(item.id)}><X aria-hidden="true" className="size-4"/></Button>
         </div>
       </Attachment>

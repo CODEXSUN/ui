@@ -1,0 +1,51 @@
+✔ voice drafts need review, attachments stay local, duplicate sends coalesce and unmount aborts speech (85.5013ms)
+✔ unsupported voice is explicit and never dispatches a chat request (19.3327ms)
+✖ new chat ignores speech results delivered after abort (37.6003ms)
+✖ pending submission locks draft and New chat even before the host busy prop updates (21.8109ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 2
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2387.6949
+
+✖ failing tests:
+
+test at tests\assistant-sidecar.test.mjs:158:1
+✖ new chat ignores speech results delivered after abort (37.6003ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+
+  + 'New draft old private transcript'
+  - 'New draft'
+              ^
+
+      at TestContext.<anonymous> (file:///C:/Users/sunda/AppData/Local/Temp/ui-status-20261119/tests/assistant-sidecar.test.mjs:169:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'New draft old private transcript',
+    expected: 'New draft',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at tests\assistant-sidecar.test.mjs:172:1
+✖ pending submission locks draft and New chat even before the host busy prop updates (21.8109ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+
+  false !== true
+
+      at TestContext.<anonymous> (file:///C:/Users/sunda/AppData/Local/Temp/ui-status-20261119/tests/assistant-sidecar.test.mjs:179:12)
+      at async Test.run (node:internal/test_runner/test:1409:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:974:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

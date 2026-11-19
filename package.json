@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "sideEffects": [
     "**/*.css"
   ],
@@ -220,6 +220,14 @@
     "./blocks/comments-thread": {
       "types": "./dist/src/blocks/comments-thread.d.ts",
       "import": "./dist/src/blocks/comments-thread.js"
+    },
+    "./blocks/assistant-sidecar": {
+      "types": "./dist/src/blocks/assistant-sidecar.d.ts",
+      "import": "./dist/src/blocks/assistant-sidecar.js"
+    },
+    "./blocks/attachment-list": {
+      "types": "./dist/src/blocks/attachment-list.d.ts",
+      "import": "./dist/src/blocks/attachment-list.js"
     }
   },
   "dependencies": {

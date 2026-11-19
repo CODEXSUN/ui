@@ -2,13 +2,26 @@
 
 ## Version State
 
-Current version: 0.1.16
+Current version: 0.1.17
 
-Release tag: v-0.1.16
+Release tag: v-0.1.17
 
-Changelog label: v 0.1.16
+Changelog label: v 0.1.17
 
 Local version baseline; no release or Git tag has been published.
+
+## v-0.1.17
+
+### [v 0.1.17] 2026-11-19 - Shared assistant sidecar and saved attachment capabilities
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.17.
+- Add optional lazy assistant sidecar/chat panel and saved AttachmentList with public contracts. Preserve default FileUploadProps normal-upload compatibility; add FileSelectionProps/compact local selection and opt-out Sheet overlay. Fix demonstrated stale dictation/pending-send issues, verify103 tests, strict installed SDK0.1.7/adapter consumption and actual responsive/theme checks. No new runtime dependency or database changes.
 
 ## v-0.1.16
 

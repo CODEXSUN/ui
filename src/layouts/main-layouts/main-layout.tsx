@@ -1,3 +1,7 @@
+import type { AssistantSidecarOptions } from '../../blocks/assistant-sidecar.js';
+import { lazy, Suspense } from 'react';
+import { Button } from '../../components/button.js';
+const AssistantSidecar = lazy(() => import('../../blocks/assistant-sidecar.js').then(module => ({ default: module.AssistantSidecar })));
 import { useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
 import { LayoutDashboardIcon, PanelLeftIcon, PanelsTopLeftIcon, Settings2Icon } from "lucide-react";
 import { AppLayout } from "./app-layout.js";
@@ -12,6 +16,7 @@ import type { MainLayoutNavigationItem, MainLayoutNavigationSection } from "./ty
 import { SidebarProvider, SidebarInset, useSidebar } from "../../components/sidebar.js";
 
 export type MainLayoutProps = {
+  assistant?: AssistantSidecarOptions;
   addonItems?: TopMenuAppItem[];
   appItems: TopMenuAppItem[];
   applicationName: string;
@@ -48,6 +53,7 @@ export function MainLayout(props: MainLayoutProps) {
 }
 
 function MainLayoutShell({
+  assistant,
   addonItems = [],
   appItems,
   applicationName,
@@ -142,6 +148,7 @@ function MainLayoutShell({
   return (
     <AppLayout className={className}>
       <TopMenu
+        searchLeadingAction={assistant ? <Suspense fallback={<Button variant="ghost" size="icon" disabled aria-label={`Loading ${assistant.name}`}><img src={assistant.logoSrc} alt="" className="size-6"/></Button>}><AssistantSidecar {...assistant}/></Suspense> : undefined}
         addonItems={addonItems}
         appItems={appItems}
         applicationName={applicationName}

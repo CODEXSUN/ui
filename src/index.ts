@@ -127,3 +127,6 @@ export * from './blocks/schema-fields-editor.js';
 
 export { CommentsThread } from './blocks/comments-thread.js';
 export type { CommentsThreadProps, ThreadComment } from './blocks/comments-thread.js';
+
+export { AttachmentList } from './blocks/attachment-list.js';
+export type { AttachmentListProps, SavedAttachment } from './blocks/attachment-list.js';
