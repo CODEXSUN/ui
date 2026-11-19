@@ -1,6 +1,6 @@
 # Comments Thread shared UI audit — 2026-11-19
 
-Status: release-ready. Existing pending component reviewed and verified for additive UI0.1.14 / v-0.1.14. Comments add-on must wait the exact published UI SHA; existing0.1.12/0.1.13 consumers need no repin.
+Status: done (shared UI review, verification and immutable publication). UI0.1.14 / v-0.1.14 exact commit9e386a2e8523f17a271f5e44a458f27e4fcecadf is published. Comments add-on must wait the exact published UI SHA; existing0.1.12/0.1.13 consumers need no repin.
 
 ## Public presentation contract
 
@@ -55,6 +55,8 @@ Evidence: docs/supervisor-audit-20261119-comments/browser-evidence.json and comm
 
 ## Release and owner handoff
 
-UI0.1.14 / immutable v-0.1.14 is ready; exact published commit follows after GitHub-helper publication. UI is a library with no standalone image, workflow or Docker deployment. Existing small apps and approved0.1.12/0.1.13 consumers need no repin/rebuild. Comments owner receives this contract/SHA and owns addon publication and actual host integration/auth verification; UI source tests do not certify a live CRM/HRMS deployment. UIUX pending Comments preview remains preserved, not repinned or released by this step.
+UI0.1.14 / immutable annotated v-0.1.14 is published through GitHub helper:9e386a2e8523f17a271f5e44a458f27e4fcecadf. https://github.com/CODEXSUN/ui/commit/9e386a2e8523f17a271f5e44a458f27e4fcecadf . UI is a library with no standalone image, workflow or Docker deployment. Existing small apps and approved0.1.12/0.1.13 consumers need no repin/rebuild. Comments owner receives this contract/SHA and owns addon publication and actual host integration/auth verification; UI source tests do not certify a live CRM/HRMS deployment. UIUX pending Comments preview remains preserved, not repinned or released by this step.
 
 No database/module changes, migrations, reset/reseed, data/grant changes, SDK/Platform/Billing edits or Docker operations in this Comments audit. Root deployment-ownership instruction has since changed: app owners invoke the shared CodeShip tools/lock for their own approved deployments. Any separate UIUX verification is recorded in its own report, not inferred from this library publication.
+
+Task-owned temporary Comments test server stopped and fixture removed from UIUX source. No app repin/rebuild or Docker mutation by this library audit. Comments owner may now use the exact published UI SHA and complete its independently verified addon publication.
