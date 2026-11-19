@@ -1,0 +1,365 @@
+{
+  "widths": [
+    {
+      "viewport": 360,
+      "document": 360,
+      "canvas": 360,
+      "table": 640,
+      "toolbar": 324
+    },
+    {
+      "viewport": 768,
+      "document": 768,
+      "canvas": 458,
+      "table": 640,
+      "toolbar": 412.1875
+    },
+    {
+      "viewport": 1440,
+      "document": 1440,
+      "canvas": 1130,
+      "table": 1015,
+      "toolbar": 1017
+    },
+    {
+      "viewport": 1920,
+      "document": 1920,
+      "canvas": 1610,
+      "table": 1447,
+      "toolbar": 1449
+    },
+    {
+      "viewport": 2560,
+      "document": 2560,
+      "canvas": 2250,
+      "table": 2023,
+      "toolbar": 2025
+    }
+  ],
+  "requests": [
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 100,
+        "search": "",
+        "sort": null,
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 5244,
+      "count": 100,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 100,
+        "search": "",
+        "sort": null,
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 5244,
+      "count": 100,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 100,
+        "search": "",
+        "sort": null,
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 5244,
+      "count": 100,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 100,
+        "search": "",
+        "sort": null,
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 5244,
+      "count": 100,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 100,
+        "search": "",
+        "sort": null,
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 5244,
+      "count": 100,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 100,
+        "search": "",
+        "sort": null,
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 5244,
+      "count": 100,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 1,
+        "pageSize": 100,
+        "search": "",
+        "sort": null,
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 5352,
+      "count": 100,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 25,
+        "search": "",
+        "sort": null,
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 1419,
+      "count": 25,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 25,
+        "search": "",
+        "sort": {
+          "id": "name",
+          "direction": "asc"
+        },
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 1419,
+      "count": 25,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 25,
+        "search": "",
+        "sort": {
+          "id": "name",
+          "direction": "desc"
+        },
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 1476,
+      "count": 25,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 25,
+        "search": "",
+        "sort": {
+          "id": "name",
+          "direction": "desc"
+        },
+        "filters": {},
+        "filterId": "open"
+      },
+      "bytes": 1452,
+      "count": 25,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 25,
+        "search": "",
+        "sort": {
+          "id": "name",
+          "direction": "desc"
+        },
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 1476,
+      "count": 25,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 25,
+        "search": "",
+        "sort": {
+          "id": "name",
+          "direction": "desc"
+        },
+        "filters": {
+          "name": "Record 00001"
+        },
+        "filterId": null
+      },
+      "bytes": 191,
+      "count": 1,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 25,
+        "search": "",
+        "sort": {
+          "id": "name",
+          "direction": "desc"
+        },
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 1476,
+      "count": 25,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 25,
+        "search": "slow",
+        "sort": {
+          "id": "name",
+          "direction": "desc"
+        },
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 141,
+      "count": 0,
+      "aborted": true
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 25,
+        "search": "Record 00001",
+        "sort": {
+          "id": "name",
+          "direction": "desc"
+        },
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 191,
+      "count": 1,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 25,
+        "search": "fail-once",
+        "sort": {
+          "id": "name",
+          "direction": "desc"
+        },
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 0,
+      "count": 0,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 25,
+        "search": "fail-once",
+        "sort": {
+          "id": "name",
+          "direction": "desc"
+        },
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 141,
+      "count": 0,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 100,
+        "search": "",
+        "sort": null,
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 5244,
+      "count": 100,
+      "aborted": false
+    },
+    {
+      "query": {
+        "page": 0,
+        "pageSize": 100,
+        "search": "",
+        "sort": null,
+        "filters": {},
+        "filterId": null
+      },
+      "bytes": 5244,
+      "count": 100,
+      "aborted": false
+    }
+  ],
+  "exports": [
+    {
+      "scope": "page",
+      "rowCount": 1,
+      "query": {
+        "page": 0,
+        "pageSize": 25,
+        "search": "Record 00001",
+        "sort": {
+          "id": "name",
+          "direction": "desc"
+        },
+        "filters": {},
+        "filterId": null
+      }
+    },
+    {
+      "scope": "all-matching",
+      "query": {
+        "page": 0,
+        "pageSize": 100,
+        "search": "",
+        "sort": null,
+        "filters": {},
+        "filterId": null
+      }
+    }
+  ],
+  "maxPageRows": 100,
+  "maxFixtureResponseBytes": 5352,
+  "staleResponseIgnored": true,
+  "debounceCancelledOnUnmount": true
+}

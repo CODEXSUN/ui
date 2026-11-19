@@ -2,13 +2,26 @@
 
 ## Version State
 
-Current version: 0.1.12
+Current version: 0.1.13
 
-Release tag: v-0.1.12
+Release tag: v-0.1.13
 
-Changelog label: v 0.1.12
+Changelog label: v 0.1.13
 
 Local version baseline; no release or Git tag has been published.
+
+## v-0.1.13
+
+### [v 0.1.13] 2026-11-19 - Add controlled server pagination to Master List
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.13.
+- Add optional controlled server pagination/search/sort/filters with server totals/facets, bounded sizes and honest export scopes; retain local mode. Verify80 tests, strict typed usage, actual360–2560px layout and stale-request cancellation in the consumer example. No runtime dependencies or database changes.
 
 ## v-0.1.12
 
