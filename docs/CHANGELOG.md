@@ -2,13 +2,27 @@
 
 ## Version State
 
-Current version: 0.1.15
+Current version: 0.1.16
 
-Release tag: v-0.1.15
+Release tag: v-0.1.16
 
-Changelog label: v 0.1.15
+Changelog label: v 0.1.16
 
 Local version baseline; no release or Git tag has been published.
+
+## v-0.1.16
+
+### [v 0.1.16] 2026-11-19 - Verify whiteboard hydration before serialization
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.16.
+- Add the passing hydration regression: premature saves reject, loaded elements survive, edits trigger dirty state and intentional clear remains allowed.
+- No runtime changes from 0.1.15.
 
 ## v-0.1.15
 
