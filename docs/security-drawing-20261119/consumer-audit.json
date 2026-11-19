@@ -1,0 +1,431 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@chevrotain/cst-dts-gen": {
+      "name": "@chevrotain/cst-dts-gen",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@chevrotain/gast",
+        "lodash-es"
+      ],
+      "effects": [
+        "chevrotain"
+      ],
+      "range": "11.0.0 - 11.2.0",
+      "nodes": [
+        "node_modules/@chevrotain/cst-dts-gen"
+      ],
+      "fixAvailable": false
+    },
+    "@chevrotain/gast": {
+      "name": "@chevrotain/gast",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "lodash-es"
+      ],
+      "effects": [
+        "@chevrotain/cst-dts-gen",
+        "chevrotain"
+      ],
+      "range": "11.0.0 - 11.2.0",
+      "nodes": [
+        "node_modules/@chevrotain/gast"
+      ],
+      "fixAvailable": false
+    },
+    "@excalidraw/excalidraw": {
+      "name": "@excalidraw/excalidraw",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@excalidraw/mermaid-to-excalidraw",
+        "nanoid"
+      ],
+      "effects": [
+        "@workspace/ui"
+      ],
+      "range": "0.5.0-a78d45417 || 0.17.1-08b13f9 - 0.17.1-test || >=0.18.0-699826",
+      "nodes": [
+        "node_modules/@excalidraw/excalidraw"
+      ],
+      "fixAvailable": false
+    },
+    "@excalidraw/mermaid-to-excalidraw": {
+      "name": "@excalidraw/mermaid-to-excalidraw",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@mermaid-js/parser",
+        "mermaid",
+        "nanoid"
+      ],
+      "effects": [
+        "@excalidraw/excalidraw"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@excalidraw/mermaid-to-excalidraw"
+      ],
+      "fixAvailable": false
+    },
+    "@mermaid-js/parser": {
+      "name": "@mermaid-js/parser",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "langium"
+      ],
+      "effects": [
+        "@excalidraw/mermaid-to-excalidraw"
+      ],
+      "range": "<=0.6.3",
+      "nodes": [
+        "node_modules/@mermaid-js/parser"
+      ],
+      "fixAvailable": false
+    },
+    "@workspace/comments": {
+      "name": "@workspace/comments",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "@workspace/ui"
+      ],
+      "effects": [],
+      "range": "",
+      "nodes": [
+        "node_modules/@workspace/comments"
+      ],
+      "fixAvailable": false
+    },
+    "@workspace/ui": {
+      "name": "@workspace/ui",
+      "severity": "moderate",
+      "isDirect": true,
+      "via": [
+        "@excalidraw/excalidraw"
+      ],
+      "effects": [
+        "@workspace/comments"
+      ],
+      "range": "",
+      "nodes": [
+        "node_modules/@workspace/ui"
+      ],
+      "fixAvailable": false
+    },
+    "chevrotain": {
+      "name": "chevrotain",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@chevrotain/cst-dts-gen",
+        "@chevrotain/gast",
+        "lodash-es"
+      ],
+      "effects": [
+        "chevrotain-allstar",
+        "langium"
+      ],
+      "range": "11.0.0 - 11.2.0",
+      "nodes": [
+        "node_modules/chevrotain"
+      ],
+      "fixAvailable": false
+    },
+    "chevrotain-allstar": {
+      "name": "chevrotain-allstar",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "chevrotain"
+      ],
+      "effects": [
+        "langium"
+      ],
+      "range": "0.3.0 - 0.3.1",
+      "nodes": [
+        "node_modules/chevrotain-allstar"
+      ],
+      "fixAvailable": false
+    },
+    "katex": {
+      "name": "katex",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1241206,
+          "name": "katex",
+          "dependency": "katex",
+          "title": "KaTeX: Existing prototype pollution can bypass trust restrictions",
+          "url": "https://github.com/advisories/GHSA-238p-pmpm-9mq7",
+          "severity": "low",
+          "cwe": [
+            "CWE-807"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=0.11.0 <0.18.2"
+        }
+      ],
+      "effects": [
+        "mermaid"
+      ],
+      "range": "0.11.0 - 0.18.1",
+      "nodes": [
+        "node_modules/@excalidraw/mermaid-to-excalidraw/node_modules/katex"
+      ],
+      "fixAvailable": false
+    },
+    "langium": {
+      "name": "langium",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "chevrotain",
+        "chevrotain-allstar"
+      ],
+      "effects": [
+        "@mermaid-js/parser"
+      ],
+      "range": "2.0.0-next.239179f - 4.2.1",
+      "nodes": [
+        "node_modules/langium"
+      ],
+      "fixAvailable": false
+    },
+    "lodash-es": {
+      "name": "lodash-es",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1115805,
+          "name": "lodash-es",
+          "dependency": "lodash-es",
+          "title": "lodash vulnerable to Code Injection via `_.template` imports key names",
+          "url": "https://github.com/advisories/GHSA-r5fr-rjxr-66jc",
+          "severity": "high",
+          "cwe": [
+            "CWE-94"
+          ],
+          "cvss": {
+            "score": 8.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H"
+          },
+          "range": ">=4.0.0 <=4.17.23"
+        },
+        {
+          "source": 1244542,
+          "name": "lodash-es",
+          "dependency": "lodash-es",
+          "title": "Lodash has Prototype Pollution Vulnerability in `_.unset`, `_.omit`, and `_.pullAt` functions",
+          "url": "https://github.com/advisories/GHSA-xxjr-mmjv-4gpg",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 6.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:L"
+          },
+          "range": ">=4.0.0 <4.17.23"
+        }
+      ],
+      "effects": [
+        "@chevrotain/cst-dts-gen",
+        "@chevrotain/gast",
+        "chevrotain"
+      ],
+      "range": "4.0.0 - 4.17.23",
+      "nodes": [
+        "node_modules/lodash-es"
+      ],
+      "fixAvailable": false
+    },
+    "mermaid": {
+      "name": "mermaid",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        "katex"
+      ],
+      "effects": [
+        "@excalidraw/mermaid-to-excalidraw"
+      ],
+      "range": "10.9.0-rc.1 - 12.1.0",
+      "nodes": [
+        "node_modules/@excalidraw/mermaid-to-excalidraw/node_modules/mermaid"
+      ],
+      "fixAvailable": false
+    },
+    "nanoid": {
+      "name": "nanoid",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1109563,
+          "name": "nanoid",
+          "dependency": "nanoid",
+          "title": "Predictable results in nanoid generation when given non-integer values",
+          "url": "https://github.com/advisories/GHSA-mwcw-c2x4-8c55",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-835"
+          ],
+          "cvss": {
+            "score": 4.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N"
+          },
+          "range": "<3.3.8"
+        },
+        {
+          "source": 1109564,
+          "name": "nanoid",
+          "dependency": "nanoid",
+          "title": "Predictable results in nanoid generation when given non-integer values",
+          "url": "https://github.com/advisories/GHSA-mwcw-c2x4-8c55",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-835"
+          ],
+          "cvss": {
+            "score": 4.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:L/A:N"
+          },
+          "range": ">=4.0.0 <5.0.9"
+        },
+        {
+          "source": 1138810,
+          "name": "nanoid",
+          "dependency": "nanoid",
+          "title": "nanoid: non-secure generators can loop indefinitely with negative size",
+          "url": "https://github.com/advisories/GHSA-28wg-ghj8-5hjv",
+          "severity": "high",
+          "cwe": [
+            "CWE-835"
+          ],
+          "cvss": {
+            "score": 5.9,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0 <5.1.16"
+        },
+        {
+          "source": 1138811,
+          "name": "nanoid",
+          "dependency": "nanoid",
+          "title": "nanoid: non-secure generators can loop indefinitely with negative size",
+          "url": "https://github.com/advisories/GHSA-28wg-ghj8-5hjv",
+          "severity": "high",
+          "cwe": [
+            "CWE-835"
+          ],
+          "cvss": {
+            "score": 5.9,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<3.3.16"
+        },
+        {
+          "source": 1139427,
+          "name": "nanoid",
+          "dependency": "nanoid",
+          "title": "nanoid: custom generators can loop indefinitely when size is zero",
+          "url": "https://github.com/advisories/GHSA-2v37-7h3g-55p8",
+          "severity": "high",
+          "cwe": [
+            "CWE-835"
+          ],
+          "cvss": {
+            "score": 5.9,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<3.3.18"
+        },
+        {
+          "source": 1139455,
+          "name": "nanoid",
+          "dependency": "nanoid",
+          "title": "nanoid: custom generators can loop indefinitely when size is zero",
+          "url": "https://github.com/advisories/GHSA-2v37-7h3g-55p8",
+          "severity": "high",
+          "cwe": [
+            "CWE-835"
+          ],
+          "cvss": {
+            "score": 5.9,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0 <5.1.6"
+        },
+        {
+          "source": 1153188,
+          "name": "nanoid",
+          "dependency": "nanoid",
+          "title": "nanoid: Integer Overflow or Wraparound",
+          "url": "https://github.com/advisories/GHSA-xwg4-73v4-xw9w",
+          "severity": "high",
+          "cwe": [
+            "CWE-190"
+          ],
+          "cvss": {
+            "score": 7.4,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N"
+          },
+          "range": ">=4.0.0 <5.1.11"
+        },
+        {
+          "source": 1153189,
+          "name": "nanoid",
+          "dependency": "nanoid",
+          "title": "nanoid: Integer Overflow or Wraparound",
+          "url": "https://github.com/advisories/GHSA-xwg4-73v4-xw9w",
+          "severity": "high",
+          "cwe": [
+            "CWE-190"
+          ],
+          "cvss": {
+            "score": 7.4,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N"
+          },
+          "range": "<3.3.12"
+        }
+      ],
+      "effects": [
+        "@excalidraw/excalidraw",
+        "@excalidraw/mermaid-to-excalidraw"
+      ],
+      "range": "<=3.3.17 || 4.0.0 - 5.1.15",
+      "nodes": [
+        "node_modules/@excalidraw/mermaid-to-excalidraw/node_modules/nanoid",
+        "node_modules/nanoid"
+      ],
+      "fixAvailable": false
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 2,
+      "moderate": 3,
+      "high": 9,
+      "critical": 0,
+      "total": 14
+    },
+    "dependencies": {
+      "prod": 572,
+      "dev": 0,
+      "optional": 24,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 595
+    }
+  }
+}
