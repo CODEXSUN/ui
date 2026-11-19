@@ -2,13 +2,28 @@
 
 ## Version State
 
-Current version: 0.1.14
+Current version: 0.1.15
 
-Release tag: v-0.1.14
+Release tag: v-0.1.15
 
-Changelog label: v 0.1.14
+Changelog label: v 0.1.15
 
 Local version baseline; no release or Git tag has been published.
+
+## v-0.1.15
+
+### [v 0.1.15] 2026-11-19 - Whiteboard scene previews and safe loading
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.15.
+- Export WhiteboardPreview through the existing public whiteboard entry: PNG scene previews, loading/empty/error states and object URL cleanup.
+- Guard serialization until initial scene hydration completes; keep editor and preview lazy-loaded.
+- Verified TypeScript build and browser drawing/draft/status/refresh/card navigation in Codeitz.
 
 ## v-0.1.14
 

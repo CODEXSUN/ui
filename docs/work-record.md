@@ -439,3 +439,9 @@ Released the existing reviewed eight-character password-form correction so Platf
 - 2026-11-19: Added optional controlled remote Master List mode for heavy lists;80 tests, strict usage compilation and headless HTTP/layout/cancellation audit pass. Prepared additive0.1.13; no app/Docker/database changes. Contract and consumer prerequisites: docs/supervisor-audit-20261119-pagination.md.
 
 - 2026-11-19: Reviewed/published pending CommentsThread presentation contract for0.1.14; added scope-safe lifecycle, current permission/revision/cancel handling.91 shared tests,7 isolated Comments browser tests, packed strict imports and ten actual light/dark width cases pass. No host/auth/database/Docker changes. See docs/supervisor-audit-20261119-comments.md.
+
+## 2026-11-19 — Whiteboard preview
+
+Added public WhiteboardPreview with static PNG thumbnails and safe loading/cleanup. Serialization rejects an editor still hydrating. Codeitz browser audit created and retrieved Excalidraw text scenes as draft/active; card navigation and refresh passed. Build passed. No database changes.
+
+Verification: all 91 UI tests passed with zero skips. Isolated release preserves concurrent UI owner edits.
