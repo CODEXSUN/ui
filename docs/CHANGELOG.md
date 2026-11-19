@@ -2,13 +2,26 @@
 
 ## Version State
 
-Current version: 0.1.11
+Current version: 0.1.12
 
-Release tag: v-0.1.11
+Release tag: v-0.1.12
 
-Changelog label: v 0.1.11
+Changelog label: v 0.1.12
 
 Local version baseline; no release or Git tag has been published.
+
+## v-0.1.12
+
+### [v 0.1.12] 2026-11-19 - Recover workspace access and contain responsive shell
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.12.
+- Recover transient workspace access failures with bounded retry/cancellation; distinguish401 and403 and prevent duplicate login submissions. Contain responsive shell widths and truncate long mobile identities. Verified71 tests and actual360–2560px Edge dashboard/recovery fixtures.
 
 ## v-0.1.11
 

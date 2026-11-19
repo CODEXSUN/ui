@@ -433,3 +433,5 @@ Released the existing reviewed eight-character password-form correction so Platf
 - 2026-11-18: Prepared scoped release for shared blocks and new-app template v25; includes latest imports/examples and extraction verification. User authorized GitHub helper publication and UIUX-only CodeShip update to 127.0.0.1:14315:4315. CI/deployment readiness will be recorded from actual outcomes; no database change or excluded-app update.
 
 - Release verification: shared UI build, clean-install dry run and 64 tests passed. Initial parallel test execution had transient local worker/Git-fixture errors; sequential verification passed without source changes.
+
+- 2026-11-19: Audited shared shell/access recovery,71 tests pass, headless Edge360/768/1440/1920/2560 plus HTTP recovery/denial/login/cancellation pass. Prepared immutable0.1.12; no migrations or Docker operation. See docs/supervisor-audit-20261119.md.

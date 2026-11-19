@@ -9,7 +9,7 @@ export type AppLayoutProps = {
 export function AppLayout({ children, className = "" }: AppLayoutProps) {
   return (
     <div
-      className={`flex min-h-0 flex-col overflow-hidden bg-background text-foreground ${className}`}
+      className={`flex min-h-0 min-w-0 w-full flex-col overflow-hidden bg-background text-foreground ${className}`}
     >
       {children}
     </div>

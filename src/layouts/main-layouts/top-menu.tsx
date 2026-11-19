@@ -72,10 +72,10 @@ export function TopMenu({
   return (
     <>
       <header data-slot="top-menu" className="bg-card flex h-12 shrink-0 items-center justify-between border-b">
-        <div className="flex h-full min-w-0 items-center">
+        <div className="flex h-full min-w-0 flex-1 items-center">
           <Button
             aria-label="Toggle application navigation"
-            className="h-full w-12 rounded-none border-r"
+            className="h-full w-12 shrink-0 rounded-none border-r"
             onClick={onToggleSidebar}
             size="icon"
             type="button"
@@ -83,7 +83,7 @@ export function TopMenu({
           >
             <MenuIcon className="size-4" />
           </Button>
-          <div className="flex min-w-0 items-center gap-3 px-5 text-sm font-semibold">
+          <div className="flex min-w-0 items-center gap-2 px-2 text-sm font-semibold sm:gap-3 sm:px-5">
             {companyBrand ? (
               <>
                 <img
@@ -98,20 +98,20 @@ export function TopMenu({
                   src={companyBrand.logoDarkSrc ?? companyBrand.logoSrc ?? "/logo/logo-dark.svg"}
                   onError={fallbackLogo("/logo/logo-dark.svg")}
                 />
-                <span className="truncate" title={companyBrand.name}>
+                <span className="hidden truncate sm:inline" title={companyBrand.name}>
                   {companyBrand.name}
                 </span>
-                <span aria-hidden="true" className="shrink-0 text-muted-foreground">
+                <span aria-hidden="true" className="hidden shrink-0 text-muted-foreground sm:inline">
                   |
                 </span>
               </>
             ) : (
               <CommandIcon className="size-4 shrink-0" />
             )}
-            <span className="shrink-0">{applicationName}</span>
+            <span className="truncate" title={applicationName}>{applicationName}</span>
           </div>
         </div>
-        <div className="flex items-center gap-2 px-4">
+        <div className="flex shrink-0 items-center gap-1 px-2 sm:gap-2 sm:px-4">
           {searchLeadingAction}
           <Button
             className="h-8 gap-2 rounded-full shadow-sm"

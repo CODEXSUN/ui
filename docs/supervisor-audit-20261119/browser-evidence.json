@@ -1,0 +1,61 @@
+[
+  {
+    "width": 360,
+    "documentWidth": 360,
+    "canvas": 360,
+    "content": 360,
+    "topOverflow": false
+  },
+  {
+    "width": 768,
+    "documentWidth": 768,
+    "canvas": 458,
+    "content": 458,
+    "topOverflow": false
+  },
+  {
+    "width": 1440,
+    "documentWidth": 1440,
+    "canvas": 1130,
+    "content": 1130,
+    "topOverflow": false
+  },
+  {
+    "width": 1920,
+    "documentWidth": 1920,
+    "canvas": 1610,
+    "content": 1610,
+    "topOverflow": false
+  },
+  {
+    "width": 2560,
+    "documentWidth": 2560,
+    "canvas": 2250,
+    "content": 2250,
+    "topOverflow": false
+  },
+  {
+    "recoveryMs": 4111,
+    "requests": {
+      "session": 3,
+      "stats": 1
+    }
+  },
+  {
+    "denied": "403 stays denied"
+  },
+  {
+    "signin": {
+      "session": 2,
+      "context": 1,
+      "login": 1,
+      "stats": 1
+    }
+  },
+  {
+    "cancelled": {
+      "session": 1,
+      "stats": 1
+    }
+  }
+]

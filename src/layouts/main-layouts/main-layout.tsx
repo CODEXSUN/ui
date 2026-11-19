@@ -180,7 +180,7 @@ function MainLayoutShell({
             actions={headerActions}
             className={headerClassName}
           />
-          <div ref={canvasRef} aria-label="Workspace canvas" className="min-h-0 flex-1 overflow-y-auto">{children}</div>
+          <div ref={canvasRef} aria-label="Workspace canvas" className="min-h-0 min-w-0 flex-1 overflow-auto">{children}</div>
         </SidebarInset>
       </div>
       <StatusBar status={statusLabel} workspace={selected} versionLabel={versionLabel} />
