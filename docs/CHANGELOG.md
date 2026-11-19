@@ -8,7 +8,7 @@ Release tag: v-0.1.18
 
 Changelog label: v 0.1.18
 
-Local version baseline; no release or Git tag has been published.
+Published source release; immutable tags identify their reviewed commits. Application deployment is a separate verified stage.
 
 ## v-0.1.18
 
