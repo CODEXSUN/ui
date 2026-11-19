@@ -24,3 +24,5 @@ Exact UI files: src/blocks/auth/workspace-access-gate.tsx; src/layouts/main-layo
 UI0.1.12 / immutable v-0.1.12 is prepared. Exact published commit is recorded in the follow-up handoff after publication. UI is a library: no standalone container image/manifest or runtime migration. UIUX must pin the published SHA, not a dirty branch. Framework0.2.0 prerequisite51daaa2a7bee32d0a8eca806a2b0e8a765a3e1ac is published; consumers must wait its workflow as appropriate.
 
 No module/database changes, migrations, reset/reseed, data/grant changes or Docker replacements. Existing CommentsThread and other unrelated work excluded. No SDK/Platform/Billing edits. CodeShip alone deploys approved immutable images with the operation lock; source publication is not a live deployment. Future app-owned max-width wrappers remain their owners' responsibility.
+
+Published UI release: version0.1.12, immutable annotated tag v-0.1.12, exact commit e88945f101313051ded3557e14b0363a0a6ca906. Status: done (library publication and tests); UIUX/application deployments remain separate. No UI standalone workflow/image manifest. Consumers may pin this published SHA now.
