@@ -1,6 +1,6 @@
 # Supervisor audit — 2026-11-19
 
-Status: release-ready (shared UI). UIUX follows after this dependency is published.
+Status: done (shared UI0.1.12 published and verified). UIUX publication and deployment are separate owner stages.
 
 ## Root causes and changes
 
