@@ -2,13 +2,27 @@
 
 ## Version State
 
-Current version: 0.1.17
+Current version: 0.1.18
 
-Release tag: v-0.1.17
+Release tag: v-0.1.18
 
-Changelog label: v 0.1.17
+Changelog label: v 0.1.18
 
 Local version baseline; no release or Git tag has been published.
+
+## v-0.1.18
+
+### [v 0.1.18] 2026-11-19 - Patched drawing dependency resolutions
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Patched producer drawing dependency resolution: Nanoid3.3.20 (editor), Nanoid5.1.16 (converter), lodash-es4.18.1 and KaTeX0.18.10; retain Excalidraw0.18.1, converter2.2.2 and Mermaid11/12 contracts.
+- Added an actual-resolution security regression and documented the required standalone-consumer root override policy.
+- Verified clean install/build, producer and configured packed-consumer audit zero, and production browser drawing/math/conversion/PNG tests. This is scoped dependency remediation, not a general security certification. No app deployment or DB changes.
 
 ## v-0.1.17
 

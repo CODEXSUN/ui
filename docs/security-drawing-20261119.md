@@ -1,5 +1,7 @@
 # Drawing dependency security audit — 2026-11-19
 
+Follow-up: [UI0.1.18 resolution and consumer policy](drawing-dependency-policy.md) records the subsequently tested deliberate overrides. The frozen0.1.17 findings below remain historical evidence; they still apply to unchanged installations.
+
 Status: assessment complete; remediation remains open. This is NOT a browser security certification or a demonstrated exploit. UI0.1.17 and Whiteboard contracts were preserved; no runtime dependency change, version bump, tag move, deployment or app repin was made.
 
 ## Frozen source and counts
