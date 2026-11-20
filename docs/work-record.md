@@ -467,3 +467,7 @@ Published using GitHub helper --release: UI0.1.18 / immutable v-0.1.18 /6bd08d1c
 ## UI0.1.19 tab-session compatibility source — 2026-11-20
 
 Isolated atop published18, only four auth/launcher runtime files plus focused tests/docs/version changed. Current-tab /login preparation, router-safe successful navigation, stale completion suppression and explicit unsupported ordinary-app privileged paths; optional authorized catalogue/current-tab selector/new-tab behavior wired through MainLayout/TopMenu. No role/grant or session implementation in UI.117UI+4tool tests, strict packed SDK10 consumer and two-tab disposable browser fixture pass. Drawing overrides/locks and all18 features retained. Native unrelated work untouched. See auth-compatibility-20261120.md. Local Docker deployment STOP and Ubuntu STOP apply; source publication is separate, no runtime changes made. UIUX auth candidate ownership is resolved separately and its existing source will be preserved for pin preparation.
+
+## 2026-11-20 — Management workspace sign-in
+
+Prepared v-0.1.20 from v-0.1.19. Management workspaces may opt in to administrator and super-admin sign-in routes; ordinary apps continue to reject those routes. Explicit management sign-in keeps an existing session until successful replacement and submits the requested realm. Focused tests cover both realms, failed credentials and stale route changes; typecheck, build, shared-component tests, tool tests and version checks passed. No database or deployment changes.

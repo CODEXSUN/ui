@@ -7,7 +7,7 @@ globalThis.IS_REACT_ACT_ENVIRONMENT=true;
 const React=await import('react');const {act}=React;const {createRoot}=await import('react-dom/client');
 const {WorkspaceAccessGate}=await import('../dist/src/blocks/auth/workspace-access-gate.js');
 const failure=statusCode=>Object.assign(new Error('Service unavailable'),{statusCode});
-async function mount(client,verify){const node=document.createElement('div');document.body.append(node);const root=createRoot(node);await act(async()=>root.render(React.createElement(WorkspaceAccessGate,{client,verify,brandName:'Test'},()=>React.createElement('p',null,'Authorized content'))));return {node,async close(){await act(async()=>root.unmount());node.remove();}};}
+async function mount(client,verify,options={}){const node=document.createElement('div');document.body.append(node);const root=createRoot(node);await act(async()=>root.render(React.createElement(WorkspaceAccessGate,{client,verify,brandName:'Test',...options},()=>React.createElement('p',null,'Authorized content'))));return {node,async close(){await act(async()=>root.unmount());node.remove();}};}
 const clientFor=session=>({session,loginContext:async()=>({mode:'shared',tenantName:null}),login:async()=>{},logout:async()=>{},changePassword:async()=>{}});
 test('503 and network failures recover automatically without showing login',async t=>{
  t.mock.timers.enable({apis:['setTimeout']});let calls=0,contexts=0;
@@ -41,6 +41,20 @@ test('explicit login success navigates away before session verification without 
 });
 test('ordinary app gate rejects privileged sign-in routes without displaying an old session or default-user form',async()=>{
  for(const route of ['/sa/login','/admin/login']){window.history.replaceState(null,'',route);let calls=0;const view=await mount(clientFor(async()=>{calls++;return {passwordChangeRequired:false};}));try{assert.equal(calls,0);assert.equal(view.node.querySelector('form'),null);assert.match(view.node.textContent,/Sign-in route unavailable/);assert.doesNotMatch(view.node.textContent,/Authorized content/);assert.equal(view.node.querySelector('a').getAttribute('href'),'/login');}finally{await view.close();window.history.replaceState(null,'','/');}}
+});
+test('opted-in workspaces submit the requested privileged realm and hide prior content',async()=>{
+ for(const [route,realm] of [['/sa/login','sa'],['/admin/login','admin']]){
+  window.history.replaceState(null,'',route);let submitted;const client=clientFor(async()=>{throw failure(401);});client.login=async input=>{submitted=input;};
+  const view=await mount(client,undefined,{privilegedLogin:true});try{assert.ok(view.node.querySelector('form'));assert.doesNotMatch(view.node.textContent,/Authorized content/);await act(async()=>view.node.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));assert.equal(submitted.realm,realm);}finally{await view.close();window.history.replaceState(null,'','/');}
+ }
+});
+test('opted-in explicit login keeps the previous session until a successful replacement',async()=>{
+ window.history.replaceState(null,'','/sa/login');let sessions=0,logouts=0;const client=clientFor(async()=>{sessions++;return {passwordChangeRequired:false};});client.logout=async()=>{logouts++;};client.login=async()=>{throw failure(401);};
+ const view=await mount(client,undefined,{privilegedLogin:true});try{assert.ok(view.node.querySelector('form'));assert.equal(sessions,0);await act(async()=>view.node.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));assert.equal(logouts,0);assert.doesNotMatch(view.node.textContent,/Authorized content/);}finally{await view.close();window.history.replaceState(null,'','/');}
+});
+test('late privileged sign-in cannot replace a newer privileged route',async()=>{
+ window.history.replaceState(null,'','/sa/login');let finish;const client=clientFor(async()=>{throw failure(401);});client.login=()=>new Promise(resolve=>{finish=resolve;});
+ const view=await mount(client,undefined,{privilegedLogin:true});try{await act(async()=>view.node.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));await act(async()=>{window.history.pushState(null,'','/admin/login');window.dispatchEvent(new Event('popstate'));});await act(async()=>finish());assert.equal(window.location.pathname,'/admin/login');assert.doesNotMatch(view.node.textContent,/Authorized content/);}finally{await view.close();window.history.replaceState(null,'','/');}
 });
 test('history navigation into app login revokes the selected client session and hides prior children',async()=>{
  let logouts=0;const client=clientFor(async()=>({passwordChangeRequired:false}));client.logout=async()=>{logouts++;};const view=await mount(client);try{assert.match(view.node.textContent,/Authorized content/);await act(async()=>{window.history.pushState(null,'','/login');window.dispatchEvent(new Event('popstate'));});assert.equal(logouts,1);assert.ok(view.node.querySelector('form'));assert.doesNotMatch(view.node.textContent,/Authorized content/);}finally{await view.close();window.history.replaceState(null,'','/');}

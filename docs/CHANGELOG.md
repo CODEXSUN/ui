@@ -2,13 +2,26 @@
 
 ## Version State
 
-Current version: 0.1.19
+Current version: 0.1.20
 
-Release tag: v-0.1.19
+Release tag: v-0.1.20
 
-Changelog label: v 0.1.19
+Changelog label: v 0.1.20
 
 Published source release; immutable tags identify their reviewed commits. Application deployment is a separate verified stage.
+
+## v-0.1.20
+
+### [v 0.1.20] 2026-11-20 - Preserve privileged sign-in for management workspaces
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.20.
+- Allow management workspaces to opt in to administrator and super-admin sign-in routes while preserving the default denial for ordinary apps.
 
 ## v-0.1.19
 

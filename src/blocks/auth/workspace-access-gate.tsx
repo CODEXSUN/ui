@@ -7,16 +7,18 @@ import {Button} from '../../components/button.js';
 // UI contract only: the owning SDK/app supplies all authentication and scope checks.
 type SessionView={passwordChangeRequired:boolean};
 type HostView={mode:'shared'|'domain'|'unavailable';tenantName:string|null};
-export function WorkspaceAccessGate<S extends SessionView>({client,brandName,logoSrc,logoDarkSrc,verify,children}:{
- client:{session():Promise<S>;loginContext():Promise<HostView>;login(input:{identifier:string;password:string;corporateId?:string}):Promise<void>;logout():Promise<void>;changePassword(current:string,password:string):Promise<void>};
- brandName:string;logoSrc?:string|undefined;logoDarkSrc?:string|undefined;verify?:(session:S)=>Promise<void>;
+export function WorkspaceAccessGate<S extends SessionView>({client,brandName,logoSrc,logoDarkSrc,verify,children,privilegedLogin=false}:{
+ client:{session():Promise<S>;loginContext():Promise<HostView>;login(input:{identifier:string;password:string;corporateId?:string;realm?:'user'|'admin'|'sa'}):Promise<void>;logout():Promise<void>;changePassword(current:string,password:string):Promise<void>};
+ brandName:string;logoSrc?:string|undefined;logoDarkSrc?:string|undefined;verify?:(session:S)=>Promise<void>;privilegedLogin?:boolean;
  children:(session:S,logout:()=>Promise<void>)=>ReactNode;
 }){
  const [session,setSession]=useState<S>();const [host,setHost]=useState<HostView>();const [corporateId,setCorporateId]=useState('');
  const [loading,setLoading]=useState(true);const [busy,setBusy]=useState(false);const [error,setError]=useState('');const [notice,setNotice]=useState('');
  const pending=useRef<Promise<void>|undefined>(undefined);const verifyRef=useRef(verify);verifyRef.current=verify;
  const [pathname,setPathname]=useState(()=>window.location.pathname.replace(/\/+$/,'')||'/');
- const explicitLogin=pathname==='/login';const unsupportedLogin=pathname==='/sa/login'||pathname==='/admin/login';
+ const privilegedRoute=pathname==='/sa/login'||pathname==='/admin/login';
+ const loginRealm=pathname==='/sa/login'?'sa':pathname==='/admin/login'?'admin':undefined;
+ const explicitLogin=pathname==='/login'||(privilegedLogin&&privilegedRoute);const unsupportedLogin=privilegedRoute&&!privilegedLogin;
  const signInPrepared=useRef(false);
  const generation=useRef(0);const timer=useRef<ReturnType<typeof setTimeout>|undefined>(undefined);
  const attempts=useRef(0);const mounted=useRef(false);const loginPending=useRef(false);
@@ -27,6 +29,7 @@ export function WorkspaceAccessGate<S extends SessionView>({client,brandName,log
   const epoch=generation.current;const active=()=>mounted.current&&generation.current===epoch;
   const run=(async()=>{if(!active())return;setLoading(true);setConnecting(false);setError('');setHost(undefined);
    if(unsupportedLogin){setSession(undefined);return;}
+   if(explicitLogin&&privilegedLogin){setSession(undefined);signInPrepared.current=true;const context=await client.loginContext();if(active()){attempts.current=0;setHost(context);}return;}
    try{const current=await client.session();if(!active())return;
     if(explicitLogin){await client.logout();if(!active())return;signInPrepared.current=true;setSession(undefined);const context=await client.loginContext();if(active()){attempts.current=0;setHost(context);}return;}
     if(!current.passwordChangeRequired)await verifyRef.current?.(current);if(!active())return;attempts.current=0;setSession(current);}
@@ -42,7 +45,7 @@ export function WorkspaceAccessGate<S extends SessionView>({client,brandName,log
    else setError(status===403?'You do not have access to this workspace. Contact your administrator.':cause instanceof Error?cause.message:'Workspace unavailable.');
   }).finally(()=>{if(active()){pending.current=undefined;setLoading(false);}});
   pending.current=run;return run;
- },[client,explicitLogin,unsupportedLogin]);
+ },[client,explicitLogin,unsupportedLogin,loginRealm,privilegedLogin]);
  useEffect(()=>{const changed=()=>setPathname(window.location.pathname.replace(/\/+$/,'')||'/');window.addEventListener('popstate',changed);return()=>window.removeEventListener('popstate',changed);},[]);
  useEffect(()=>{mounted.current=true;attempts.current=0;signInPrepared.current=false;void refresh();const expired=()=>{setSession(undefined);void refresh(true);};window.addEventListener('platform-session-expired',expired);return()=>{mounted.current=false;generation.current++;clearTimeout(timer.current);pending.current=undefined;window.removeEventListener('platform-session-expired',expired);};},[refresh]);
  useEffect(()=>{if(!session||session.passwordChangeRequired)document.title=(session?'Change password':'Sign in')+' · '+brandName;},[session,brandName]);
@@ -58,6 +61,6 @@ export function WorkspaceAccessGate<S extends SessionView>({client,brandName,log
  return <>{notice&&<p role="status" className="p-4 text-center">{notice}</p>}<LoginPage workspace brandName={brandName} logoSrc={logoSrc} logoDarkSrc={logoDarkSrc} description="Access your workspace with your registered credentials." registerHref={null} forgotHref="/login/help" minLength={1} busy={busy} disabled={host.mode==='unavailable'}
   error={host.mode==='unavailable'?'This workspace is unavailable. Contact your administrator.':error}
   tenantContext={host.mode==='shared'?{mode:'shared',corporateId,onCorporateIdChange:setCorporateId}:host.mode==='domain'?{mode:'domain',tenantName:host.tenantName??'Workspace'}:undefined}
-  onSubmit={async(identifier,password)=>{if(loginPending.current)return;const epoch=generation.current;const active=()=>mounted.current&&generation.current===epoch;loginPending.current=true;setBusy(true);setError('');try{await client.login({identifier,password,...(host.mode==='shared'?{corporateId:corporateId.trim()}:{})});if(!active())return;if(explicitLogin){window.history.replaceState(window.history.state,'','/');window.dispatchEvent(new Event('popstate'));setPathname('/');}else await refresh();}catch(cause){if(active())setError(cause instanceof Error?cause.message:'Sign-in failed.');}finally{loginPending.current=false;if(mounted.current)setBusy(false);}}}/>
+  onSubmit={async(identifier,password)=>{if(loginPending.current)return;const epoch=generation.current;const active=()=>mounted.current&&generation.current===epoch;loginPending.current=true;setBusy(true);setError('');try{await client.login({identifier,password,...(host.mode==='shared'?{corporateId:corporateId.trim()}:{}),...(privilegedLogin&&loginRealm?{realm:loginRealm}:{})});if(!active())return;if(explicitLogin){window.history.replaceState(window.history.state,'','/');window.dispatchEvent(new Event('popstate'));setPathname('/');}else await refresh();}catch(cause){if(active())setError(cause instanceof Error?cause.message:'Sign-in failed.');}finally{loginPending.current=false;if(mounted.current)setBusy(false);}}}/>
   <p className="p-4 text-center text-sm text-muted-foreground">For account recovery, contact your workspace administrator. <Button variant="link" disabled={busy} onClick={()=>void refresh(true)}>Retry connection</Button></p></>;
 }
