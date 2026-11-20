@@ -2,13 +2,28 @@
 
 ## Version State
 
-Current version: 0.1.20
+Current version: 0.1.21
 
-Release tag: v-0.1.20
+Release tag: v-0.1.21
 
-Changelog label: v 0.1.20
+Changelog label: v 0.1.21
 
 Published source release; immutable tags identify their reviewed commits. Application deployment is a separate verified stage.
+
+## v-0.1.21
+
+### [v 0.1.21] 2026-11-20 - Keep login portals available after workspace access denial
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.21.
+- Show workspace denial on the login form instead of a blocking full-page error.
+- Keep user, administrator and SA login URLs and aliases public; the server still verifies every role and permission.
+- Prepare only the selected-tab session and ignore late sign-in results after portal changes.
 
 ## v-0.1.20
 
