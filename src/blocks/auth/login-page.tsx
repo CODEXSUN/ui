@@ -1,5 +1,5 @@
 import { AppleIcon, Globe2Icon, LogInIcon, OrbitIcon } from 'lucide-react'
-import { useState, type FormEvent } from 'react'
+import { useState, type FormEvent, type ReactNode } from 'react'
 import { Button } from '../../components/button.js'
 import {
   Field,
@@ -27,7 +27,7 @@ export type LoginPageProps = AuthBrandProps & {
   onProviderLogin?: ((provider: 'apple' | 'google' | 'other') => void) | undefined
   onDevLogin?: (() => void) | undefined
   registerHref?: string | null | undefined
-  title?: string | undefined
+  title?: ReactNode | undefined
   variant?: AuthPageVariant | undefined
 }
 

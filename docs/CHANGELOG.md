@@ -2,13 +2,26 @@
 
 ## Version State
 
-Current version: 0.1.21
+Current version: 0.1.22
 
-Release tag: v-0.1.21
+Release tag: v-0.1.22
 
-Changelog label: v 0.1.21
+Changelog label: v 0.1.22
 
 Published source release; immutable tags identify their reviewed commits. Application deployment is a separate verified stage.
+
+## v-0.1.22
+
+### [v 0.1.22] 2026-11-20 - Support formatted login headings
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.22.
+- Allow LoginPage title to accept ReactNode, preserving string/default headings and enabling app-owned brand typography.
 
 ## v-0.1.21
 
