@@ -2,13 +2,28 @@
 
 ## Version State
 
-Current version: 0.1.23
+Current version: 0.1.24
 
-Release tag: v-0.1.23
+Release tag: v-0.1.24
 
-Changelog label: v 0.1.23
+Changelog label: v 0.1.24
 
 Published source release; immutable tags identify their reviewed commits. Application deployment is a separate verified stage.
+
+## v-0.1.24
+
+### [v 0.1.24] 2026-11-21 - Compact mobile todo row actions
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.24.
+- Move reminder, visibility, edit and delete actions into one accessible three-dot menu per todo row.
+- Add 44px menu targets, wrapping titles and full-width mobile add/edit inputs; reuse the scheduler form in a dialog.
+- Keep API callbacks, persistence, existing popover scheduling, auth and all unrelated UI unchanged.
 
 ## v-0.1.23
 
