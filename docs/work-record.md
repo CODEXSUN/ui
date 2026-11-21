@@ -477,3 +477,9 @@ Prepared v-0.1.20 from v-0.1.19. Management workspaces may opt in to administrat
 ## Formatted login heading — 20 November 2026
 
 LoginPage title accepts ReactNode as well as strings. Rendering/defaults/authentication callbacks remain unchanged. IILabs supplies lowercase ii brand typography; UIUX usage documents an example. Shared build and 11 affected auth/login-context checks passed for the same prop change. The broad Windows suite stalled during parallel module loading and was stopped, not claimed passing. Candidate is based on the newly published0.1.21; no existing tag was moved.
+
+## Login role presentation — local candidate, 2026-11-21
+
+Workspace login supports explicit user, admin and super-admin badge overlays. Admin buttons and shields use blue; super-admin buttons and crowns use green, with white text. User styling remains neutral. The gate maps its existing login realm to the matching presentation; callers without an explicit workspace role retain their existing workspace badge. Authentication and route authorization are unchanged by this patch.
+
+An isolated local browser fixture confirmed the user, admin and super-admin visual distinction, including a navy primary theme. Focused auth and gate tests covered the route mappings. This change has not been deployed. Callers that render LoginPage directly must pass role explicitly; IILabs should map its existing sa realm to super-admin and keep its own client/admin authorization rules. Products pinned to earlier UI versions require their own compatibility validation before upgrading.

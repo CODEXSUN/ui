@@ -15,12 +15,12 @@ export interface AuthBrandProps {
 }
 const roleBadges = {
   user: { label: 'User access', Icon: UserRoundIcon, tone: 'border-primary/30 bg-accent text-accent-foreground' },
-  admin: { label: 'Admin access', Icon: ShieldCheckIcon, tone: 'border-amber-300 bg-amber-50 text-amber-700 dark:border-amber-700 dark:bg-amber-950 dark:text-amber-300' },
-  'super-admin': { label: 'Super admin access', Icon: CrownIcon, tone: 'border-violet-300 bg-violet-50 text-violet-700 dark:border-violet-700 dark:bg-violet-950 dark:text-violet-300' },
+  admin: { label: 'Admin access', Icon: ShieldCheckIcon, tone: 'border-blue-700 bg-blue-700 text-white' },
+  'super-admin': { label: 'Super admin access', Icon: CrownIcon, tone: 'border-green-700 bg-green-700 text-white' },
 } as const;
 
-export function AuthBrand({ name = 'Codexsun', logoSrc = '/logo/logo.svg', logoDarkSrc, logoAlt, role = 'user', workspace = false }: Omit<AuthBrandProps, 'brandName'> & { name?: string | undefined; workspace?: boolean | undefined }) {
-  const badge = workspace ? { label: 'Workspace', Icon: Building2Icon, tone: 'border-primary/30 bg-card text-primary' } : roleBadges[role];
+export function AuthBrand({ name = 'Codexsun', logoSrc = '/logo/logo.svg', logoDarkSrc, logoAlt, role, workspace = false }: Omit<AuthBrandProps, 'brandName'> & { name?: string | undefined; workspace?: boolean | undefined }) {
+  const badge = workspace && !role ? { label: 'Workspace', Icon: Building2Icon, tone: 'border-primary/30 bg-card text-primary' } : roleBadges[role ?? 'user'];
   return <div className="flex flex-col items-center gap-2" aria-label={name}>
     <span className={cn('relative grid place-items-center', workspace ? 'size-13' : 'size-12 rounded-xl border bg-background')}>
       <img src={logoSrc} alt={logoAlt ?? `${name} logo`} width={workspace ? 52 : 32} height={workspace ? 52 : 32} className={cn('object-contain dark:hidden', workspace ? 'size-13' : 'size-8')}/>

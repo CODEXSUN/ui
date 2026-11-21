@@ -2,13 +2,27 @@
 
 ## Version State
 
-Current version: 0.1.22
+Current version: 0.1.23
 
-Release tag: v-0.1.22
+Release tag: v-0.1.23
 
-Changelog label: v 0.1.22
+Changelog label: v 0.1.23
 
 Published source release; immutable tags identify their reviewed commits. Application deployment is a separate verified stage.
+
+## v-0.1.23
+
+### [v 0.1.23] 2026-11-21 - Distinguish login roles
+
+#### Database Changes
+
+- Database update: No (manual).
+
+#### App Codebase Changes
+
+- Bumped @workspace/ui version to 0.1.23.
+- Show distinct user, administrator and super-administrator badges and sign-in icons.
+- Use blue for administrator sign-in and green for super-administrator sign-in, including workspace mode.
 
 ## v-0.1.22
 

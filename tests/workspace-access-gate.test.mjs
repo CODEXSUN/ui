@@ -66,3 +66,11 @@ test('failed explicit-login revocation keeps login available without exposing th
 test('late sign-in completion cannot override a newer privileged route or reveal workspace content',async()=>{
  window.history.replaceState(null,'','/login');let finish;const client=clientFor(async()=>{throw failure(401);});client.login=()=>new Promise(resolve=>{finish=resolve;});const view=await mount(client);try{await act(async()=>view.node.querySelector('form').dispatchEvent(new Event('submit',{bubbles:true,cancelable:true})));await act(async()=>{window.history.pushState(null,'','/sa/login');window.dispatchEvent(new Event('popstate'));});await act(async()=>finish());assert.equal(window.location.pathname,'/sa/login');assert.ok(view.node.querySelector('form'));assert.doesNotMatch(view.node.textContent,/Authorized content/);}finally{await view.close();window.history.replaceState(null,'','/');}
 });
+
+test('login routes show matching role badges and buttons',async()=>{
+ for(const [path,label,color] of [['/login','User access',null],['/admin/login','Admin access','bg-blue-700'],['/sa/login','Super admin access','bg-green-700']]){
+  window.history.replaceState(null,'',path);const view=await mount(clientFor(async()=>{throw failure(401);}));
+  try{assert.ok(view.node.querySelector(`[aria-label="${label}"]`));const button=view.node.querySelector('button[type="submit"]');assert.ok(button);if(color)assert.ok(button.classList.contains(color));else assert.equal(button.classList.contains('bg-blue-700')||button.classList.contains('bg-green-700'),false);}
+  finally{await view.close();window.history.replaceState(null,'','/');}
+ }
+});

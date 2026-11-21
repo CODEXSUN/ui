@@ -1,4 +1,4 @@
-import { AppleIcon, Globe2Icon, LogInIcon, OrbitIcon } from 'lucide-react'
+import { AppleIcon, CrownIcon, Globe2Icon, LogInIcon, OrbitIcon, ShieldCheckIcon, UserRoundIcon } from 'lucide-react'
 import { useState, type FormEvent, type ReactNode } from 'react'
 import { Button } from '../../components/button.js'
 import {
@@ -53,6 +53,8 @@ export function LoginPage({
 }: LoginPageProps) {
   const [identifier, setIdentifier] = useState('')
   const [password, setPassword] = useState('')
+
+  const SignInIcon = role === 'admin' ? ShieldCheckIcon : role === 'super-admin' ? CrownIcon : role === 'user' ? UserRoundIcon : LogInIcon
 
   function submit(event: FormEvent) {
     event.preventDefault()
@@ -112,12 +114,12 @@ export function LoginPage({
           )}
           <Field>
             <Button
-              className={workspace ? 'h-11 w-full' : 'w-full'}
+              className={[workspace ? 'h-11 w-full' : 'w-full', role === 'admin' ? 'bg-blue-700 text-white hover:bg-blue-800 dark:bg-blue-700 dark:text-white dark:hover:bg-blue-800' : role === 'super-admin' ? 'bg-green-700 text-white hover:bg-green-800 dark:bg-green-700 dark:text-white dark:hover:bg-green-800' : ''].filter(Boolean).join(' ')}
               disabled={busy || disabled}
               type="submit"
               variant="default"
             >
-              {variant === 'v1' ? <LogInIcon /> : null}
+              {variant === 'v1' || role ? <SignInIcon aria-hidden="true" /> : null}
               {busy ? 'Signing in…' : variant === 'v2' ? 'Login' : 'Sign in'}
             </Button>
           </Field>

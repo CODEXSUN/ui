@@ -88,3 +88,13 @@ test('auth pages forward app logos and distinct accessible role badges', async (
     }
   }
 });
+
+test('workspace login distinguishes role badges and button colors', () => {
+  for (const [role,label,color,icon] of [['user','User access',null,'lucide-user-round'],['admin','Admin access','bg-blue-700','lucide-shield-check'],['super-admin','Super admin access','bg-green-700','lucide-crown']]) {
+    const html=renderToStaticMarkup(React.createElement(LoginPage,{role,workspace:true,onSubmit(){}}));
+    assert.match(html,new RegExp(`aria-label="${label}"`));
+    assert.match(html,new RegExp(`<button[^>]*>[\\s\\S]*?${icon}`));
+    if(color) assert.match(html,new RegExp(`<button[^>]*class="[^"]*${color}`));
+    else assert.doesNotMatch(html,/<button[^>]*class="[^"]*bg-(?:blue|green)-700/);
+  }
+});
